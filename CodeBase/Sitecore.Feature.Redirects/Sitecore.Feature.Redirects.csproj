@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{AC2DC2CE-FF9C-4F38-841C-96FF7C8DA672}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <AssemblyName>Sitecore.Feature.Redirects</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Sitecore.Feature.Redirects</RootNamespace>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>false</DebugSymbols>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Brightcove.MediaFramework.Brightcove">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Brightcove.MediaFramework.Brightcove.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Azure">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.ContentSearch.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Data, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.ContentSearch.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq.Lucene">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.ContentSearch.Linq.Lucene.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ExperienceEditor.Speak">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.ExperienceEditor.Speak.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.FXM.Speak">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.FXM.Speak.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel">
+      <HintPath>..\Dependencies\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.MediaFramework.Brightcove">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.MediaFramework.Brightcove.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Speak.Client">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.Speak.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Speak.Components.Guidance">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.Speak.Components.Guidance.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Speak.Integration.Services">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.Speak.Integration.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Speak.ItemWebApi">
+      <HintPath>C:\inetpub\wwwroot\sc901Update1.local\bin\Sitecore.Speak.ItemWebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\MediaItemExtensions.cs" />
+    <Compile Include="Extensions\TreeComparer.cs" />
+    <Compile Include="Pipelines.Base\BaseClass.cs" />
+    <Compile Include="Pipelines.HttpRequestBegin\Redirect.cs" />
+    <Compile Include="Pipelines.HttpRequestBegin\SiteLevelRedirectMapping.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Constants.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Templates.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Pipelines.HttpRequest\RedirectType.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Pipelines.HttpRequest\RedirectMapping.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Pipelines.HttpRequestBegin\RedirectItem.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Repositories\RedirectsRepository.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="EventHandlers\RedirectMapCacheClearer.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Pipelines.HttpRequest\RedirectMapResolver.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Config\Include\Feature\Sitecore.Feature.Redirects.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

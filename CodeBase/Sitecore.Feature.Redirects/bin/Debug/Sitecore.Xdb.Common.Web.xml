@@ -1,0 +1,812 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Xdb.Common.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Xdb.Common.Web.CertificateHashStringCollection">
+            <summary>
+            Collection of certificate hash strings.
+            </summary>
+            <remarks>
+            Values are normalized on InsertItem and SetItem operations.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateHashStringCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateHashStringCollection"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateHashStringCollection.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateHashStringCollection"/> class.
+            </summary>
+            <param name="items">The items to add to the new collection.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateHashStringCollection.InsertItem(System.Int32,System.String)">
+            <inheritdoc />
+            <remarks>The item is normalized before insert.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateHashStringCollection.SetItem(System.Int32,System.String)">
+            <inheritdoc />
+            <remarks>The item is normalized before set.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateHashStringCollection.Normalize(System.String)">
+            <summary>
+            Normalizes the specified item by removing special characters and upper cases everything.
+            </summary>
+            <param name="item">The item to normalize.</param>
+            <returns>The result.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.CertificateValidationWebRequestHandlerModifier">
+            <summary>
+            Defines the web request handler modifier which allows to ignore certificate validation for certain certificates.
+            </summary>
+            <seealso cref="T:Sitecore.Xdb.Common.Web.IWebRequestHandlerModifier" />
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateValidationWebRequestHandlerModifier.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateValidationWebRequestHandlerModifier"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateValidationWebRequestHandlerModifier.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateValidationWebRequestHandlerModifier"/> class.
+            </summary>
+            <param name="ignoreThumbprints">The thumbprints to ignore certificate validation for.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateValidationWebRequestHandlerModifier.IgnoreThumbprints">
+            <summary>
+            The thumbprints to ignore certificate validation for.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateValidationWebRequestHandlerModifier.Process(System.Net.Http.HttpClientHandler)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateValidationWebRequestHandlerModifier.ServerCertificateValidationCallback(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            Callback method to validate the server certificate.
+            </summary>
+            <param name="sender">An object that contains state information for this validation.</param>
+            <param name="certificate">The certificate used to authenticate the remote party.</param>
+            <param name="chain">The chain of certificate authorities associated with the remote certificate.</param>
+            <param name="sslPolicyErrors">One or more errors associated with the remote certificate.</param>
+            <returns>A boolean value that determines whether the specified certificate is accepted for authentication.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier">
+            <summary>
+            Defines the web request handler modifier which adds a certificate to the handler, allowing client certificate authentication.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier"/> class.
+            </summary>
+            <param name="configuration">The configuration to read configuration options from.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier"/> class.
+            </summary>
+            <param name="storeName">The name of the X.509 certificate store.</param>
+            <param name="storeLocation">The location of the X.509 certificate store.</param>
+            <param name="findType">The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)"/> method searches for.</param>
+            <param name="findValue">The search criteria as an object.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier"/> class.
+            </summary>
+            <param name="storeName">The name of the X.509 certificate store.</param>
+            <param name="storeLocation">The location of the X.509 certificate store.</param>
+            <param name="findType">The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)"/> method searches for.</param>
+            <param name="findValue">The search criteria as an object.</param>
+            <param name="allowInvalidClientCertificates">Indicates whether not valid certificates are allowed to be returned from the search.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier"/> class.
+            </summary>
+            <param name="certificateConnectionStringName">The name of the connection string containing the certificate information.</param>
+            <remarks>If <paramref name="certificateConnectionStringName"/> cannot be found or is invalid, the modifier will do nothing.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier"/> class.
+            </summary>
+            <param name="certificateConnectionStringName">The name of the connection string containing the certificate information.</param>
+            <param name="allowInvalidClientCertificatesAppSettingKey">The key of the app setting containing the <see cref="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.AllowInvalidClientCertificates"/> value.</param>
+            <remarks>If <paramref name="certificateConnectionStringName"/> cannot be found or is invalid, the modifier will do nothing.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.#ctor(Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier"/> class.
+            </summary>
+            <param name="options">The options to configure the modifier.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.#ctor(System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.X509FindType,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier" /> class.
+            </summary>
+            <param name="storeName">The name of the X.509 certificate store.</param>
+            <param name="storeLocation">The location of the X.509 certificate store.</param>
+            <param name="findType">The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" /> method searches for.</param>
+            <param name="findValue">The search criteria as an object.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.#ctor(System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier" /> class.
+            </summary>
+            <param name="storeName">The name of the X.509 certificate store.</param>
+            <param name="storeLocation">The location of the X.509 certificate store.</param>
+            <param name="findType">The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" /> method searches for.</param>
+            <param name="findValue">The search criteria as an object.</param>
+            <param name="allowInvalidClientCertificates">Indicates whether not valid certificates are allowed to be returned from the search.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.StoreName">
+            <summary>
+            Gets or sets the name of the X.509 certificate store.
+            </summary>
+            <value>
+            The name of the X.509 certificate store.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.StoreLocation">
+            <summary>
+            Gets or sets the location of the X.509 certificate store.
+            </summary>
+            <value>
+            The location of the X.509 certificate store.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.FindType">
+            <summary>
+            Gets or sets the type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)"/> method searches for.
+            </summary>
+            <value>
+            The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)"/> method searches for.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.FindValue">
+            <summary>
+            Gets or sets the search criteria as an object.
+            </summary>
+            <value>
+            The search criteria as an object.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.AllowInvalidClientCertificates">
+            <summary>
+            Indicates whether not valid certificates are allowed to be returned from the search.
+            </summary>
+            <value><c>true</c> if not valid certificates are allowed; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.Process(System.Net.Http.HttpClientHandler)">
+            <summary>
+            Process the headers.
+            </summary>
+            <param name="handler">The handler to modify.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.InitFromOptions(Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions)">
+            <summary>
+            Sets the properties from the provided options, taking priority on connection string and app settings.
+            </summary>
+            <param name="options">The options to set the properties from.</param>
+            <remarks>
+            If <c>options.CertificateConnectionStringName</c> is not empty, options will be parsed from the connection string.
+            If <c>options.AllowInvalidClientCertificatesAppSettingKey</c> is not empty, the value of <see cref="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.AllowInvalidClientCertificates"/> will be taken from app setting.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.InitFromOptionsProperties(Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions)">
+            <summary>
+            Sets the properties from the provided options.
+            </summary>
+            <param name="options">The options to set the properties from.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier.FindClientCertificate(System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)">
+            <summary>
+            Finds the client certificate.
+            </summary>
+            <param name="storeName">The name of the X.509 certificate store.</param>
+            <param name="storeLocation">The location of the X.509 certificate store.</param>
+            <param name="findType">The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)"/> method searches for.</param>
+            <param name="findValue">The search criteria as an object.</param>
+            <param name="allowInvalidClientCertificates">Indicates whether not valid certificates are allowed to be returned from the search.</param>
+            <returns>The client certificate.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions">
+            <summary>
+            Options that are used to configure <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifier"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions"/> class.
+            </summary>
+            <param name="certificateConnectionStringName">The name of the connection string containing the certificate information.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions"/> class.
+            </summary>
+            <param name="certificateConnectionStringName">The name of the connection string containing the certificate information.</param>
+            <param name="allowInvalidClientCertificatesAppSettingKey">The key of the app setting containing the <see cref="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.AllowInvalidClientCertificates"/> value.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions"/> class.
+            </summary>
+            <param name="storeName">The name of the X.509 certificate store.</param>
+            <param name="storeLocation">The location of the X.509 certificate store.</param>
+            <param name="findType">The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)"/> method searches for.</param>
+            <param name="findValue">The search criteria.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions" /> class.
+            </summary>
+            <param name="storeName">The name of the X.509 certificate store.</param>
+            <param name="storeLocation">The location of the X.509 certificate store.</param>
+            <param name="findType">The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" /> method searches for.</param>
+            <param name="findValue">The search criteria.</param>
+            <param name="allowInvalidClientCertificates">Indicates whether not valid certificates are allowed to be returned from the search.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.CertificateConnectionStringName">
+            <summary>
+            The name of the connection string containing the certificate information.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.AllowInvalidClientCertificatesAppSettingKey">
+            <summary>
+            The key of the app setting containing the <see cref="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.AllowInvalidClientCertificates"/> value.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.StoreName">
+            <summary>
+            The name of the X.509 certificate store.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.StoreLocation">
+            <summary>
+            The location of the X.509 certificate store.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.FindType">
+            <summary>
+            The type of value the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)"/> method searches for.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.FindValue">
+            <summary>
+            The search criteria.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.AllowInvalidClientCertificates">
+            <summary>
+            Indicates whether not valid certificates are allowed to be returned from the search.
+            </summary>
+            <value><c>"true"</c> if not valid certificates are allowed; otherwise, <c>"false"</c>.</value>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions.Parse(System.String)">
+            <summary>
+            Parses <see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions"/> from connection string.
+            </summary>
+            <param name="connectionString">The connection string to parse options from.</param>
+            <returns><see cref="T:Sitecore.Xdb.Common.Web.CertificateWebRequestHandlerModifierOptions"/></returns>
+            <remarks>
+            Connection string example:
+            
+            StoreName=My;StoreLocation=LocalMachine;FindType=FindByThumbprint;AllowInvalidClientCertificates=true;FindValue=ffffffffffffffffffffffffffffffffffffffff
+            </remarks>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.ConnectionTimeoutException">
+            <summary>
+            Defines timeout exception that is raised by <see cref="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1"/>.
+            </summary>
+            <seealso cref="T:System.TimeoutException" />
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.ConnectionTimeoutException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.ConnectionTimeoutException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.ConnectionTimeoutException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.ConnectionTimeoutException"/> class with the specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.ConnectionTimeoutException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.ConnectionTimeoutException"/> class with the specified error message and inner exception.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.ConnectionTimeoutException.#ctor(System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.ConnectionTimeoutException"/> class with the specified inner exception.
+            </summary>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.ConnectionTimeoutException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.ConnectionTimeoutException"/> class with serialized data.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains contextual information about the source or destination. 
+            The <paramref name="context" /> parameter is reserved for future use, and can be specified as null.
+            </param>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.CustomHeaderClientModifier">
+            <summary>
+            Defines the client modifier that adds a custom header to the client default headers.
+            </summary>
+            <seealso cref="T:Sitecore.Xdb.Common.Web.IHttpClientModifier" />
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CustomHeaderClientModifier.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CustomHeaderClientModifier"/> class.
+            </summary>
+            <param name="name">The name of the header.</param>
+            <param name="values">The values to set for the header.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CustomHeaderClientModifier.Name">
+            <summary>
+            Gets the name of the header.
+            </summary>
+            <value>
+            The name of the header.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CustomHeaderClientModifier.Values">
+            <summary>
+            Gets the values to set for the header.
+            </summary>
+            <value>
+            The values to set for the header.
+            </value>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CustomHeaderClientModifier.Process(System.Net.Http.HttpClient)">
+            <summary>
+            Process the client and modify as needed.
+            </summary>
+            <param name="client">The client to modify.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.Extensions.ConfigurationExtensions">
+            <summary>
+            Extensions to <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Extensions.ConfigurationExtensions.BindOptions``1(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Creates an instance of <typeparamref name="TOptions" /> and attempts to bind the instance to configuration values
+            by matching property names against configuration keys recursively.
+            </summary>
+            <typeparam name="TOptions">The type of the options.</typeparam>
+            <param name="configuration">The configuration instance to bind.</param>
+            <returns>The instance of <typeparamref name="TOptions"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.IHttpClientModifier">
+            <summary>
+            An interface for types that modify the <see cref="T:System.Net.Http.HttpClient"/> when the client is created.
+            </summary>
+            <remarks>
+            Implementation must be tread safe. <see cref="T:Sitecore.Xdb.Common.Web.IHttpClientModifier"/> is used in <see cref="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1"/>, which is tread safe.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.IHttpClientModifier.Process(System.Net.Http.HttpClient)">
+            <summary>
+            Process the client and modify as needed.
+            </summary>
+            <param name="client">The client to modify.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.IWebRequestHandlerModifier">
+            <summary>
+            An interface for types that modify the web request handler used to create the <see cref="T:System.Net.Http.HttpClient"/>.
+            </summary>
+            <remarks>
+            Implementation must be tread safe. <see cref="T:Sitecore.Xdb.Common.Web.IWebRequestHandlerModifier"/> is used in <see cref="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1"/>, which is tread safe.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.IWebRequestHandlerModifier.Process(System.Net.Http.HttpClientHandler)">
+            <summary>
+            Process the headers.
+            </summary>
+            <param name="handler">The handler to modify.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.Resources.CertificateNotFound">
+            <summary>
+              Looks up a localized string similar to The certificate was not found..
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.Resources.HandlerCanOnlyBeExecutedAsynchronously">
+            <summary>
+              Looks up a localized string similar to This handler can only be executed asynchronously..
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.Resources.HandlerHasNotBeenExecuted">
+            <summary>
+              Looks up a localized string similar to This handler has not been executed..
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.RoutesBase">
+            <summary>
+            Defines an abstract class to get fully qualified URIs for each of a web API controller actions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.RoutesBase.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.RoutesBase"/> class.
+            </summary>
+            <param name="baseAddress">The base address to create the other URIs from. The <paramref name="baseAddress"/> should be an absolute URI.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.RoutesBase.BaseAddress">
+            <summary>
+            The base address to create the other URIs from.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.RoutesBase.CreateFullyQualifiedUri(System.String)">
+            <summary>
+            Creates the fully qualified URI for a relative path.
+            </summary>
+            <param name="relativePath">The relative path.</param>
+            <returns>The fully qualified URI.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1">
+            <summary>
+            Defines an abstract web API client.
+            </summary>
+            <typeparam name="TRoutes">The type of the routes.</typeparam>
+        </member>
+        <member name="F:Sitecore.Xdb.Common.Web.CommonWebApiClient`1._httpClient">
+            <summary>
+            Provides a base class for sending HTTP requests and receiving HTTP responses from a resource identified by a URI.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.#ctor(`0,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1"/> class.
+            </summary>
+            <param name="routes">The routes to the actions to invoke.</param>
+            <param name="configuration">The <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> to read configuraiton from.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1"/> class.
+            </summary>
+            <param name="routes">The routes to the actions to invoke.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.#ctor(`0,System.Collections.Generic.IEnumerable{Sitecore.Xdb.Common.Web.IHttpClientModifier})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1"/> class.
+            </summary>
+            <param name="routes">The routes to the actions to invoke.</param>
+            <param name="clientModifiers">An ordered list of classes which modify the <see cref="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.HttpClient"/> after creation.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.#ctor(`0,System.Collections.Generic.IEnumerable{Sitecore.Xdb.Common.Web.IWebRequestHandlerModifier})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1"/> class.
+            </summary>
+            <param name="routes">The routes to the actions to invoke.</param>
+            <param name="webRequestHandlerModifiers">An ordered list of classes which modify the <see cref="T:System.Net.Http.WebRequestHandler"/> after creation.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.#ctor(`0,System.Collections.Generic.IEnumerable{Sitecore.Xdb.Common.Web.IHttpClientModifier},System.Collections.Generic.IEnumerable{Sitecore.Xdb.Common.Web.IWebRequestHandlerModifier})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.CommonWebApiClient`1"/> class.
+            </summary>
+            <param name="routes">The routes to the actions to invoke.</param>
+            <param name="clientModifiers">An ordered list of classes which modify the <see cref="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.HttpClient"/> after creation.</param>
+            <param name="webRequestHandlerModifiers">An ordered list of classes which modify the <see cref="T:System.Net.Http.WebRequestHandler"/> after creation.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.ServiceBaseAddress">
+            <summary>
+            The base address to create the other URIs from.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.Routes">
+            <summary>
+            The routes to the actions to invoke.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.ClientModifiers">
+            <summary>
+            The classes which modify the <see cref="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.HttpClient"/> after creation.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.WebRequestHandlerModifiers">
+            <summary>
+            The classes which modify the <see cref="T:System.Net.Http.WebRequestHandler"/> after creation, which is used by the <see cref="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.HttpClient"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.HttpClient">
+            <summary>
+            Provides a base class for sending HTTP requests and receiving HTTP responses from a resource identified by a URI.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.CreateRequestHandler">
+            <summary>
+            Creates a new <see cref="T:System.Net.Http.WebRequestHandler"/> to be used during <see cref="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.HttpClient"/> creation.
+            </summary>
+            <returns>The request handler to use during <see cref="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.HttpClient"/> creation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.CreateClient">
+            <summary>
+            Create an instance of an <see cref="P:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.HttpClient"/>.
+            </summary>
+            <returns>The client to use to make requests to the controller.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.CreateRequestContent``1(``0)">
+            <summary>
+            Create the <see cref="T:System.Net.Http.HttpContent"/> for the request, with the provided object in the body.
+            </summary>
+            <typeparam name="T">The type of the object to format into the body of the request.</typeparam>
+            <param name="content">The object to format into the body of the request.</param>
+            <returns>The content to be sent.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.CreateResponseContentAsync``1(System.Net.Http.HttpContent)">
+            <summary>
+            Create the object from the response.
+            </summary>
+            <typeparam name="T">The type of the object to create from the response content.</typeparam>
+            <param name="httpContent">The <see cref="T:System.Net.Http.HttpContent"/> received in response.</param>
+            <returns>The object from the response.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.AppendQueryStringParameters(System.Uri,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Appends query string parameters to the route.
+            </summary>
+            <param name="route">The route to append the query string parameters to.</param>
+            <param name="parameters">Query string parameters to add to the route.</param>
+            <returns>The route.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.AppendQueryStringParameterValues(System.Uri,System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Appends query string parameter values to the route.
+            </summary>
+            <param name="route">The route to append the query string parameter values to.</param>
+            <param name="parameterName">Name of the parameter.</param>
+            <param name="parameterValues">The parameter values.</param>
+            <param name="encodeValues">Specifies if the parameter values have to be encoded.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.ExecuteGetAsync(System.Uri,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Sends the GET request to the server.
+            </summary>
+            <param name="route">The route to send the request to.</param>
+            <param name="keys">Query string parameters to add to the request.</param>
+            <returns>A task encapsulating the outcome of the invocation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.ExecutePostAsync(System.Uri,System.Net.Http.HttpContent)">
+            <summary>
+            Sends the POST request to the server.
+            </summary>
+            <param name="route">The route to send the data to.</param>
+            <param name="content">The content to send.</param>
+            <returns>A task encapsulating the outcome of the invocation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.ExecutePutAsync(System.Uri,System.Net.Http.HttpContent)">
+            <summary>
+            Sends the PUT request to the server.
+            </summary>
+            <param name="route">The route to send the request to.</param>
+            <param name="content">The content to send.</param>
+            <returns>A task encapsulating the outcome of the invocation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.ExecuteDeleteAsync(System.Uri,System.Net.Http.HttpContent)">
+            <summary>
+            Sends the DELETE request to the server.
+            </summary>
+            <param name="route">The route to send the request to.</param>
+            <param name="content">The content to send.</param>
+            <returns>A task encapsulating the outcome of the invocation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.ExecuteAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Sends an HTTP request as an asynchronous operation
+            </summary>
+            <param name="request">The request.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task`1"/></returns>
+            <exception cref="T:Sitecore.Xdb.Common.Web.ConnectionTimeoutException" />
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.CommonWebApiClient`1.ExecuteAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Sends an HTTP request as an asynchronous operation
+            </summary>
+            <param name="request">The request.</param>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+            <returns><see cref="T:System.Threading.Tasks.Task`1"/></returns>
+            <exception cref="T:Sitecore.Xdb.Common.Web.ConnectionTimeoutException" />
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.Synchronous.CurrentThreadTaskScheduler">
+            <summary>
+            A task scheduler that runs tasks synchronously on the thread where it is instantiated.
+            This is not supposed to be used directly and supports the <see cref="M:Sitecore.Xdb.Common.Web.Synchronous.SynchronousExtensions.SuspendContextLock(System.Func{System.Threading.Tasks.Task})"/> method.
+            </summary>
+            <seealso cref="T:System.Threading.Tasks.TaskScheduler" />
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1">
+            <summary>
+            Wrapper of <see cref="T:System.Collections.Generic.IAsyncEnumerable`1"/>.
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+        </member>
+        <member name="F:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1._asyncEnumerator">
+            <summary>
+            The enumerator to be wrapped.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.#ctor(System.Collections.Generic.IAsyncEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1"/> class.
+            </summary>
+            <param name="asyncEnumerator">The asynchronous enumerator to be wrapped.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator">
+            <summary>
+            Enumerator that is used be <see cref="T:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1"/>
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator._enumeratorFactory">
+            <summary>
+            The factory that is used to create an inner enumerator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator._enumerator">
+            <summary>
+            Inner enumerator.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator.#ctor(System.Func{System.Collections.Generic.IAsyncEnumerator{`0}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator"/> class.
+            </summary>
+            <param name="enumeratorFactory">The enumerator factory.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator.Current">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.Synchronous.AsyncEnumerableWrapper`1.Enumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.Synchronous.SynchronousExtensions">
+            <summary>
+            Extension methods to call the async methods from synchronous code without losing context or deadlocking.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.SynchronousExtensions.AsEnumerable``1(System.Collections.Generic.IAsyncEnumerable{``0})">
+            <summary>
+            Returns an <see cref="T:System.Collections.Generic.IEnumerable`1"/> that can enumerate the specified async enumerable from synchronous context.
+            It is suboptimal to use this method from async context, since two threads will be used instead of one.
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <param name="asyncEnumerable">The asynchronous enumerable.</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.SynchronousExtensions.AsEnumerator``1(System.Collections.Generic.IAsyncEnumerable{``0})">
+            <summary>
+            Returns an <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can enumerate the specified async enumerator from synchronous context.
+            It is suboptimal to use this method from async context, since two threads will be used instead of one.
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <param name="asyncEnumerable">The asynchronous enumerable.</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.SynchronousExtensions.SuspendContextLock(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Suspends the lock on HttpContext when invoked from ASP.NET code allowing the specified async method call/task to run in context, and the calling thread to wait without deadlocking.
+            When called outside ASP.NET this just waits for the task to complete.
+            </summary>        
+            <param name="taskFactory">The task factory (async method call).</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.SynchronousExtensions.SuspendContextLock``1(System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Suspends the lock on HttpContext when invoked from ASP.NET code allowing the specified async method call/task to run 
+            synchronously on the current thread without deadlocking.
+            When called outside ASP.NET this just waits for the task to complete.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="taskFactory">The task factory (async method call).</param>
+            <returns>The result of the task invocation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.Synchronous.SynchronousExtensions.WrapVoidTask(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Wraps the void task.
+            </summary>
+            <param name="taskFactory">The task factory.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task`1"/></returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.TimeoutHttpClientModifier">
+            <summary>
+            Defines the client modifier that sets <see cref="P:System.Net.Http.HttpClient.Timeout"/>.
+            </summary>
+            <seealso cref="T:Sitecore.Xdb.Common.Web.IHttpClientModifier" />
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.TimeoutHttpClientModifier.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.TimeoutHttpClientModifier"/> class.
+            </summary>
+            <param name="timeout">The string representation of timeout interval.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.TimeoutHttpClientModifier.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Common.Web.TimeoutHttpClientModifier"/> class.
+            </summary>
+            <param name="timeout">The timeout to set.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Common.Web.TimeoutHttpClientModifier.Timeout">
+            <summary>
+            The timeout to set.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.TimeoutHttpClientModifier.Process(System.Net.Http.HttpClient)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Xdb.Common.Web.WindowsAuthenticationWebRequestHandlerModifier">
+            <summary>
+            Defines the web request handler modifier which sets the <see cref="P:System.Net.Http.HttpClientHandler.UseDefaultCredentials"/> property of the handler. 
+            This allows the client to call services configured to use Windows Authentication.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Common.Web.WindowsAuthenticationWebRequestHandlerModifier.Process(System.Net.Http.HttpClientHandler)">
+            <summary>
+            Process the headers.
+            </summary>
+            <param name="handler">The handler to modify.</param>
+        </member>
+    </members>
+</doc>

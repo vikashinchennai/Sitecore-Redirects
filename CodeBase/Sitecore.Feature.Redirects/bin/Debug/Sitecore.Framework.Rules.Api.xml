@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Framework.Rules.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Framework.Rules.FactSpecificier">
+            <summary>A mechanism to specify an ordered set of fact resolvers.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.FactSpecificier.FactFrom(Sitecore.Framework.Rules.IFactResolver)">
+            <summary>Adds a fact resolver to the end of the specification.</summary>
+            <param name="resolver"></param>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.FactSpecifierExtensions.FactFrom``1(Sitecore.Framework.Rules.FactSpecificier,System.Func{Sitecore.Framework.Rules.IFactProvider,``0},System.String)">
+            <summary>Adds a fact resolver with the specified implementation to the end of the specification.</summary>
+            <typeparam name="TFact">The type of fact that is provided.</typeparam>
+            <param name="specifier">The specifier to add the resolver to.</param>
+            <param name="resolveFunc">The implementation of the fact resolver</param>
+            <param name="role">The role for which the fact resolver is providing the fact.</param>
+            <returns>The current specifier.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.FactSpecifierExtensions.Fact``1(Sitecore.Framework.Rules.FactSpecificier,``0,System.String)">
+            <summary>Adds a fact to the set of currently available facts.</summary>
+            <typeparam name="TFact">The type of fact.</typeparam>
+            <param name="specifier">The specifier to add the fact to.</param>
+            <param name="fact">The fact instance.</param>
+            <param name="role">An optional role of the fact.</param>
+            <returns>The current specifier.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilder.Or``1(System.Action{Sitecore.Framework.Rules.IRuleProperties{``0}})">
+            <summary>
+            Sets the current rule condition to an 'Or' of the previous condition with a new instance of the specified condition.
+            </summary>
+            <typeparam name="TAction">The type of condition specified.</typeparam>
+            <param name="properties">The specification of any properties that are to be initialized when the condition is created.</param>
+            <returns>The current instance of the builder API.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilder.And``1(System.Action{Sitecore.Framework.Rules.IRuleProperties{``0}})">
+            <summary>
+            Sets the current rule condition to an 'And' of the previous condition with a new instance of the specified condition.
+            </summary>
+            <typeparam name="TCondition">The type of condition specified.</typeparam>
+            <param name="properties">The specification of any properties that are to be initialized when the condition is created.</param>
+            <returns>The current instance of the builder API.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilder.AndNot``1(System.Action{Sitecore.Framework.Rules.IRuleProperties{``0}})">
+            <summary>
+            Sets the current rule condition to an 'And' of the previous condition with a negation of a new instance of the specified condition.
+            </summary>
+            <typeparam name="TCondition">The type of condition specified.</typeparam>
+            <param name="properties">The specification of any properties that are to be initialized when the condition is created.</param>
+            <returns>The current instance of the builder API.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilder.Then``1(System.Action{Sitecore.Framework.Rules.IRuleProperties{``0}})">
+            <summary>An action to be performed if the condition evalutes to True.</summary>
+            <typeparam name="TAction">The type of action to be performed.</typeparam>
+            <param name="properties">The specification of any properties that are to be initialized when the condition is created.</param>
+            <returns>The current instance of the builder API.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilder.Else``1(System.Action{Sitecore.Framework.Rules.IRuleProperties{``0}})">
+            <summary>An action to be performed if the condition evalutes to False.</summary>
+            <typeparam name="TAction">The type of action to be performed.</typeparam>
+            <param name="properties">The specification of any properties that are to be initialized when the condition is created.</param>
+            <returns>The current instance of the builder API.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilder.ToRule">
+            <summary>Builds an instance of the rule using the current specification.</summary>
+            <returns>A new rule instance.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IRuleBuilderInit">
+            <summary>The operations available for specifying a new rule.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilderInit.When``1(System.Action{Sitecore.Framework.Rules.IRuleProperties{``0}})">
+            <summary>
+            Adds an initial condition to the rule, specifying the configuration of any property values to
+            to be performed when the condition instance is created.
+            </summary>
+            <typeparam name="TCondition">The type of condition specified.</typeparam>
+            <param name="properties">The specification of any properties that are to be initialized.</param>
+            <returns>The current instance of the builder API.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilderInit.Not``1(System.Action{Sitecore.Framework.Rules.IRuleProperties{``0}})">
+            <summary>
+            Adds an initial negated condition to the rule, specifying the configuration of any property values to
+            to be performed when the condition instance is created.
+            </summary>
+            <typeparam name="TCondition">The type of condition specified.</typeparam>
+            <param name="properties">The specification of any properties that are to be initialized.</param>
+            <returns>The current instance of the builder API.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleBuilderInit.ToRule">
+            <summary>Builds an instance of the rule using the current specification.</summary>
+            <returns>A new rule instance.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IRuleCreator">
+            <summary>A mechanism for creating a rule instance via a strongly typed API.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleCreator.Create">
+            <summary>Begin the creation of a new rule instance.</summary>
+            <returns>A handle on an API to specify the composition of a new rule.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleProperties`1.Set``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},``0)">
+            <summary>Specify a value with which to initialise a publicly settable property on the entity.</summary>
+            <typeparam name="TProperty">The type of property to be initialized.</typeparam>
+            <param name="propertySelector">The property to be initialized.</param>
+            <param name="value">The value to initialize the property with.</param>
+            <returns>The current properties API.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.RuleCreatorExtensions.CreateRule(Sitecore.Framework.Rules.IRuleCreator,System.Action{Sitecore.Framework.Rules.IRuleBuilderInit})">
+            <summary>Creates an instance of a rule with the supplied specification.</summary>
+            <param name="creator">The current rule creator.</param>
+            <param name="ruleSpecification">The specification of the rule to be created.</param>
+            <returns>A new rule instance.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.RuleEngineExtensions.Run(Sitecore.Framework.Rules.IRuleEngine,Sitecore.Framework.Rules.IRule,System.Action{Sitecore.Framework.Rules.FactSpecificier})">
+            <summary>
+            Executes the rule provided and returns the result of it's condition.
+            </summary>
+            <param name="engine">The IRuleEngine instance.</param>
+            <param name="rule">The rule to execute.</param>
+            <param name="scopedFactSpecification">Specify any facts or fact resolvers that are to be used for just
+            this execution.</param>
+            <returns>True if the rule condition evaluated to True, False otherwise.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.RuleEngineExtensions.Run(Sitecore.Framework.Rules.IRuleEngine,System.Collections.Generic.IEnumerable{Sitecore.Framework.Rules.IRule},System.Action{Sitecore.Framework.Rules.FactSpecificier})">
+            <summary>
+            Executes the collection of rules provided and returns the results of the conditions
+            evaluated for each of the rules.
+            </summary>
+            <param name="engine">The IRuleEngine instance.</param>
+            <param name="rules">One or more rules to execute.</param>
+            <param name="scopedFactSpecification">Specify any facts or fact resolvers that are to be used for just
+            this execution.</param>
+            <returns>A collection of condition results corresponding to the order of the rules that were supplied.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.CustomAction">
+            <summary>
+            An action that takes it's implementation from an Action object.  This
+            is not serializable, and so should not be used when authoring a persisted rule.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.CustomFactResolver`1">
+            <summary>A Fact resolver that takes it's implementation from a Func.</summary>
+            <typeparam name="T">The type of fact that will be provided.</typeparam>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.LiteralFactResolver">
+            <summary>A fact resolver that returns the instance given to it as the fact.</summary>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.LiteralFactResolver`1">
+            <summary>A fact resolver that returns the instance given to it as the fact.</summary>
+            <typeparam name="T">The type of fact provided.</typeparam>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Xdb.Configuration</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Xdb.Configuration.DefinitionDatabase">
+            <summary>
+            Provide an access to definition database.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Configuration.DefinitionDatabase.DefinitionDatabaseKey">
+            <summary>
+            Key of the definition database name in Context.Items.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Configuration.DefinitionDatabase.DefinitionDatabaseObjKey">
+            <summary>
+            Key of the definition database object in Context.Items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.DefinitionDatabase.Name">
+            <summary>
+            Gets or sets the definition database name.
+            </summary>
+            <value>
+            The definition database name.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.DefinitionDatabase.Database">
+            <summary>
+            Gets the definition database.
+            </summary>
+            <remarks>
+            Definition database is the content database where analytics definitions
+            are stored - e.g. engagement plans, campaigns, goals.
+            </remarks>
+            <value>
+            The definition database.
+            </value>
+        </member>
+        <member name="T:Sitecore.Xdb.Configuration.Pipelines.Initialize.ShowXdbInfo">
+            <summary>
+            Shows the xDB info.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Configuration.Pipelines.Initialize.ShowXdbInfo.Process(Sitecore.Pipelines.PipelineArgs)">
+            <summary>
+            Runs the processor.
+            </summary>
+            <param name="args">
+            The arguments.
+            </param>
+        </member>
+        <member name="T:Sitecore.Xdb.Configuration.XdbSettings">
+            <summary>
+            Experience database settings.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.Enabled">
+            <summary>
+            Gets a value indicating whether the xDB is enabled.
+            </summary>
+            <value>
+              <c>true</c> if xDB license is valid and xDB is enabled; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.HasValidLicense">
+            <summary>
+            Gets a value indicating whether the license is valid.
+            </summary>
+            <value>
+            <c>true</c> if the license is valid; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.XdbDisabledUrl">
+            <summary>
+            Gets the URL to redirect to, if the Xdb is disabled.
+            </summary>
+            <value>
+             Default value: "/sitecore/service/xdb/disabled.aspx".
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.MaxAcceptedClockDeviation">
+            <summary>
+            Gets the largest acceptable deviation between the current server’s system time and the system time
+            of other Sitecore servers in the same environment.
+            The system uses this setting to compensate for any system time deviation between servers.
+            </summary>
+            <value>
+            A <see cref="T:System.TimeSpan"/> containing the largest system clock deviation between Sitecore servers.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.DefaultDefinitionDatabase">
+            <summary>
+            Gets the definition database.
+            </summary>
+            <value>The definition database.</value>
+        </member>
+        <member name="T:Sitecore.Xdb.Configuration.XdbSettings.Tracking">
+            <summary>
+            The xDB tracking settings.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.Tracking.Enabled">
+            <summary>
+            Gets a value indicating whether the tracking functionality is enabled.
+            </summary>
+            <value>
+              <c>true</c> if the tracking functionality is enabled; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Sitecore.Xdb.Configuration.XdbSettings.Tracking.KeyBehaviorCache">
+            <summary>
+            Key Behavior Cache settings.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.Tracking.KeyBehaviorCache.MaximumCacheEntryCount">
+            <summary>
+            Gets the maximum number of items in the cache for a given category (goals, page events, etc.).
+            </summary>
+            <value>
+            The maximum cache entry count.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.Tracking.KeyBehaviorCache.MaximumInteractionPeriod">
+            <summary>
+            Gets the maximum time period (compared to interaction start date time) for interactions that can be included in cache rebuilds or updates.
+            </summary>
+            <value>
+            The maximum interaction period.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.Tracking.KeyBehaviorCache.MaximumInteractionCount">
+            <summary>
+            Gets the maximum number of interactions to examine during cache rebuilds or updates.
+            </summary>
+            <value>
+            The maximum interaction count.
+            </value>
+        </member>
+        <member name="T:Sitecore.Xdb.Configuration.XdbSettings.GeoIps">
+            <summary>
+            Defines GeoIp lookup related settings.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Configuration.XdbSettings.GeoIps.CacheSize">
+            <summary>
+            Gets the size of the cache.
+            </summary>
+            <value>The size of the cache.</value>
+        </member>
+    </members>
+</doc>

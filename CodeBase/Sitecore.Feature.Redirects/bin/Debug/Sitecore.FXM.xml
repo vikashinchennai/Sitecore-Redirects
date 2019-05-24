@@ -1,0 +1,2941 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.FXM</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.FXM.Abstractions.AbstractHttpHandler">
+            <summary>
+            Http handler using unit testable components.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.AbstractHttpHandler.IsReusable">
+            <summary>
+            Gets a value indicating whether another request can use the <see cref="T:System.Web.IHttpHandler" /> instance.
+            </summary>
+            <returns>true if the <see cref="T:System.Web.IHttpHandler" /> instance is reusable; otherwise, false.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.AbstractHttpHandler.ProcessRequest(System.Web.HttpContext)">
+            <summary>
+            Enables processing of HTTP Web requests by a custom HttpHandler that implements the <see cref="T:System.Web.IHttpHandler" /> interface.
+            </summary>
+            <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.AbstractHttpHandler.ProcessRequest(System.Web.HttpContextBase)">
+            <summary>
+            Processes the request.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.FileUtilWrapper">
+            <summary>
+            The file util wrapper.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.FileUtilWrapper.WriteToFile(System.String,System.String,System.Boolean)">
+            <summary>
+            Writes text to the file even if folder doesn't exist.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.IFileUtil">
+            <summary>
+            The FileUtil interface.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.ISitecoreDatabaseContext">
+            <summary>The SitecoreDatabaseContext interface.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.ISitecoreDatabaseContext.Database">
+            <summary>Gets the database.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.ISitecoreDatabaseContext.ContentDatabase">
+            <summary>Gets the content database.</summary>
+            <value>The content database.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.ISitecoreItemContext">
+            <summary>The SitecoreItemContext interface.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.ISitecoreItemContext.Item">
+            <summary>Gets or sets the item.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.ISitecorePageContext">
+            <summary>
+            The SitecorePageContext interface.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.ISitecorePageContext.Renderings">
+            <summary>Gets the renderings.</summary>
+            <value>The renderings.</value>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.ISitecorePageContext.AddRendering(Sitecore.Layouts.RenderingReference)">
+            <summary>Adds the rendering.</summary>
+            <param name="reference">The reference.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.ISitecorePageContext.Expand(System.Web.UI.Control)">
+            <summary>Expands the control tree for a specified control.</summary>
+            <param name="controlToExpand">The control to expand.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.ISitecoreSiteContext">
+            <summary>The SitecoreSiteContext interface.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.ISitecoreContext">
+            <summary>The SitecoreContext interface.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.ISitecoreContext.Page">
+            <summary>Gets the page.</summary>
+            <value>The page.</value>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.ISitecoreUserContext.GetUserName">
+            <summary>Gets the name of the user.</summary>
+            <returns>Name of the current user.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.ITrackerProvider">
+            <summary>The TrackerProvider interface.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.ITrackerProvider.Current">
+            <summary>Gets the current TrackerProvider.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.ITrackerProvider.Initialize">
+            <summary>Initializes the TrackerProvider.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.PageContextWrapper">
+            <summary>The Page Context wrapper.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.PageContextWrapper.#ctor(Sitecore.Layouts.PageContext)">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.FXM.Abstractions.PageContextWrapper"/> class.</summary>
+            <param name="pageContext">The Page Context.</param>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.PageContextWrapper.Page">
+            <summary>Gets the page context.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.PageContextWrapper.Renderings">
+            <summary>Gets the list of Rendering references.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.PageContextWrapper.AddRendering(Sitecore.Layouts.RenderingReference)">
+            <summary>Adds a rendering reference to the list of renderings.</summary>
+            <param name="reference">The rendering reference.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.PageContextWrapper.Expand(System.Web.UI.Control)">
+            <summary>Expands the control tree for a specified control.</summary>
+            <param name="controlToExpand">The control to expand.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.SitecoreContextWrapper">
+            <summary>The sitecore context wrapper.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Abstractions.SitecoreContextWrapper._sitecoreSettings">
+            <summary>
+            The settings.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.SitecoreContextWrapper.Database">
+            <summary>Gets the database.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.SitecoreContextWrapper.ContentDatabase">
+            <summary>Gets the content database.</summary>
+            <value>The content database.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.SitecoreContextWrapper.Page">
+            <summary>Gets the Sitecore Page Context.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.SitecoreContextWrapper.Item">
+            <summary>Gets or sets the item.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.SitecoreContextWrapper.Language">
+            <summary>Gets the language.</summary>
+            <value>The language.</value>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.SitecoreContextWrapper.GetUserName">
+            <summary>The get user name.</summary>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.SitecoreContextWrapper.SetLanguage(Sitecore.Globalization.Language,System.Boolean)">
+            <summary>Sets the language.</summary>
+            <param name="language">The language.</param>
+            <param name="persistent">If set to <c>true</c> [persistent].</param>
+        </member>
+        <member name="T:Sitecore.FXM.Abstractions.TrackerProviderWrapper">
+            <summary>The tracker wrapper.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Abstractions.TrackerProviderWrapper.Current">
+            <summary>Gets the current TrackerProvider.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Abstractions.TrackerProviderWrapper.Initialize">
+            <summary>Initializes the TrackerProvider.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Bundling.BundleProvider">
+            <summary>The bundle provider.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Bundling.BundleProvider.GetBundleVirtualPath(System.String)">
+            <summary>Formats the given bundle id to full path.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Bundling.IBundleProvider">
+            <summary>The BundleProvider interface.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Configuration.FxmSettings.QueryPageParameter">
+            <summary>The page parameter setting name.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Configuration.FxmSettings.QueryUrlParameter">
+            <summary>The URL parameter setting name.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Configuration.FxmSettings.Protocol">
+            <summary>The beacon protocol setting name.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Configuration.FxmSettings.HostName">
+            <summary>The beacon hostname setting name.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Configuration.FxmSettings.BundledJsFilesPath">
+            <summary>Location of bundled becaon files.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Configuration.FxmSettings.BaseHostDomain">
+            <summary>Defines the common base domain of the Sitecore instance and the externally tracked sites if all are hosted on 
+            a common base domain, but on different sub domains.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Configuration.FxmSettings.ShareSessionsWhenPossible">
+            <summary>
+            The setting name specifying whether or not analytics interactions across the Sitecore site and any external
+            site being tracked, should be shared.  Note that session sharing won't be possible for users on Safari or IE 8 and 9,
+            and in these cases sessions will unique between sites, as is the default behavior.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Configuration.FxmSettings.P3PHeaderValue">
+            <summary>
+            The setting name specifying the P3P header value to use for Tracking Beacon API responses. This allows for 
+            credentials (cookies) to be set by IE 10 and 11 for CORS requests made across domains to the Beacon API.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Bundle.BeaconLoaderProcessor">
+            <summary>
+            Generates the FXM beacon javascript, using the current request host to generate the service
+            end point.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Bundle.BeaconLoaderProcessor._settings">
+            <summary>
+            The settings.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Bundle.BeaconLoaderProcessor._fileUtil">
+            <summary>
+            The file util.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Bundle.BeaconLoaderProcessor.#ctor(Sitecore.Abstractions.BaseSettings,Sitecore.FXM.Abstractions.IFileUtil)">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Bundle.BeaconLoaderProcessor"/> class.</summary>
+            <param name="settings">The settings.</param>
+            <param name="fileUtil">The file util.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Bundle.BeaconLoaderProcessor.Process(Sitecore.FXM.Pipelines.Bundle.BundleGeneratorArgs)">
+            <summary>
+            Generates the FXM beacon, with a service endpoint included that corresponds to the service
+            running on the current host.
+            </summary>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Bundle.BundleCssMinifyProcessor">
+            <summary>The css minify processor.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Bundle.BundleCssMinifyProcessor.Process(Sitecore.FXM.Pipelines.Bundle.BundleGeneratorArgs)">
+            <summary>Adds a <see cref="T:System.Web.Optimization.CssMinify"/> transform to the bundle being processed.</summary>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Bundle.BundleDirectoryProcessor">
+            <summary> The directory processor.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Bundle.BundleDirectoryProcessor.IncludeSubDirectories">
+            <summary>Gets or sets a value indicating whether sub directories should be included.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Bundle.BundleDirectoryProcessor.Process(Sitecore.FXM.Pipelines.Bundle.BundleGeneratorArgs)">
+            <summary>Includes the directory in the bundle being processed.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Bundle.BundleFileProcessor">
+            <summary>The bundle file processor.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Bundle.BundleFileProcessor.Paths">
+            <summary>
+            Gets the paths.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Bundle.BundleFileProcessor.Process(Sitecore.FXM.Pipelines.Bundle.BundleGeneratorArgs)">
+            <summary>Includes a file in the bundle being processed.</summary>
+            <param name="args">The args. </param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Bundle.BundleJsMinifyProcessor">
+            <summary>The js minify processor.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Bundle.BundleJsMinifyProcessor.Process(Sitecore.FXM.Pipelines.Bundle.BundleGeneratorArgs)">
+            <summary>
+            Adds a <see cref="T:System.Web.Optimization.JsMinify"/> transform to the bundle being processed.
+            </summary>
+            <param name="args"> The args.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Bundle.IBundleProcessor">
+            <summary>The BundleProcessor interface.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.GetSessionIdManager.SetFxmSessionIdManager">
+            <summary>
+            If the request is for an FXM beacon request, it chooses the FXM session Id Manager.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.GetSessionIdManager.SetFxmSessionIdManager.Process(Sitecore.Pipelines.GetSessionIdManager.GetSessionIdManagerArgs)">
+            <summary>
+             Executes the choosing logic for an id manager.
+            </summary>
+            <param name="args">Provides the request context for which to choose the id manager.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.BuildRequestPipelineArgs">
+            <summary>
+            The build request pipeline args.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.BuildRequestPipelineArgs.#ctor(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.BuildRequestPipelineArgs"/> class.
+            </summary>
+            <param name="request">
+            The request.
+            </param>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.BuildRequestPipelineArgs.Request">
+            <summary>
+            Gets or sets the request.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.BuildRequestPipelineArgs.RequestFunc">
+            <summary>
+            Gets or sets the request function.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.DefaultBuildRequestProcessor">
+            <summary>
+            The default build request processor.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.DefaultBuildRequestProcessor.Process(Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.BuildRequestPipelineArgs)">
+            <summary>
+            The process.
+            </summary>
+            <param name="args">
+            The args.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.IBuildRequestProcessor`1">
+            <summary>
+            The interface for BuildRequestProcessor.
+            </summary>
+            <typeparam name="T">The type of args to process.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.IBuildRequestProcessor`1.Process(`0)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.BuildRequest.IBuildRequestProcessor">
+            <summary>
+            The interface for BuildRequestProcessor.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor">
+            <summary>
+            The base html tag attribute processor.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor.selector">
+            <summary>
+            The selector.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor.linkBuilder">
+            <summary>
+            The link builder.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor.linkRenderer">
+            <summary>
+            The link renderer.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor.#ctor(Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagSelector,Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagAttributeLinkBuilder,Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagAttributeLinkRenderer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor"/> class.
+            </summary>
+            <param name="selector">
+            The selector.
+            </param>
+            <param name="linkBuilder">
+            The link builder.
+            </param>
+            <param name="linkRenderer">
+            The link renderer.
+            </param>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor.TagName">
+            <summary>
+            Gets or sets the tag name.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor.TagAttribute">
+            <summary>
+            Gets or sets the tag attribute.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.BaseHtmlTagAttributeProcessor.Process(Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs)">
+            <summary>
+            The process.
+            </summary>
+            <param name="args">
+            The args.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlAbsoluteTagAttributeProcessor">
+            <summary>
+            The html absolute tag attribute processor.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlAbsoluteTagAttributeProcessor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlAbsoluteTagAttributeProcessor"/> class.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlProxiedTagAttributeProcessor">
+            <summary>
+            The html proxied tag attribute processor.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlProxiedTagAttributeProcessor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlProxiedTagAttributeProcessor"/> class.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.AbsoluteExternalLinkRenderer">
+            <summary>
+            The absolute external link renderer.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.AbsoluteExternalLinkRenderer.RenderValue(Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs,HtmlAgilityPack.HtmlAttribute,System.String)">
+            <summary>
+            The render value.
+            </summary>
+            <param name="args">
+            The args.
+            </param>
+            <param name="attribute">The attribute.</param>
+            <param name="value">
+            The value.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.DefaultHtmlTagSelector">
+            <summary>
+            The default html tag selector.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.DefaultHtmlTagSelector.GetNodes(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage,HtmlAgilityPack.HtmlDocument,System.String,System.String)">
+            <summary>
+            The get nodes.
+            </summary>
+            <param name="request">
+            The request.
+            </param>
+            <param name="response">
+            The response.
+            </param>
+            <param name="document">
+            The document.
+            </param>
+            <param name="tagName">
+            The tag name.
+            </param>
+            <param name="tagAttribute">
+            The tag attribute.
+            </param>
+            <returns>
+            The <see cref="!:IEnumerable"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.DefaultTagAttributeLinkBuilder">
+            <summary>The default tag attribute link builder.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.DefaultTagAttributeLinkBuilder.UpdateAttribute(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage,HtmlAgilityPack.HtmlAttribute)">
+            <summary>The update attribute.</summary>
+            <param name="request">The request.</param>
+            <param name="response">The response.</param>
+            <param name="attribute">The attribute.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagAttributeLinkBuilder">
+            <summary>
+            The TagAttributeLinkBuilder interface.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagAttributeLinkBuilder.UpdateAttribute(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage,HtmlAgilityPack.HtmlAttribute)">
+            <summary>
+            The update attribute.
+            </summary>
+            <param name="request">
+            The request.
+            </param>
+            <param name="response">
+            The response.
+            </param>
+            <param name="attribute">
+            The attribute.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagAttributeLinkRenderer">
+            <summary>
+            The TagAttributeLinkRenderer interface.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagAttributeLinkRenderer.RenderValue(Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs,HtmlAgilityPack.HtmlAttribute,System.String)">
+            <summary>
+            The render value.
+            </summary>
+            <param name="args">
+            The args.
+            </param>
+            <param name="attribute">
+            The attribute.
+            </param>
+            <param name="value">
+            The value.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagSelector">
+            <summary>
+            The TagSelector interface.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ITagSelector.GetNodes(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage,HtmlAgilityPack.HtmlDocument,System.String,System.String)">
+            <summary>
+            The get nodes.
+            </summary>
+            <param name="request">
+            The request.
+            </param>
+            <param name="response">
+            The response.
+            </param>
+            <param name="document">
+            The document.
+            </param>
+            <param name="tagName">
+            The tag name.
+            </param>
+            <param name="tagAttribute">
+            The tag attribute.
+            </param>
+            <returns>
+            A collection of HtmlNodes.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ProxiedExternalLinkRenderer">
+            <summary>
+            The proxied external link renderer.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.HtmlTagAttributeManipulation.ProxiedExternalLinkRenderer.RenderValue(Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs,HtmlAgilityPack.HtmlAttribute,System.String)">
+            <summary>
+            The render value.
+            </summary>
+            <param name="args">
+            The args.
+            </param>
+            <param name="attribute">
+            The attribute.
+            </param>
+            <param name="value">
+            The value.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.IProcessHtmlResponseProcessor`1">
+            <summary>
+            The interface for ProcessHtmlResponseProcessor.
+            </summary>
+            <typeparam name="T">The type of args to process.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.IProcessHtmlResponseProcessor`1.Process(`0)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.IProcessHtmlResponseProcessor">
+            <summary>
+            The interface for ProcessHtmlResponseProcessor.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs">
+            <summary>
+            The process html response args.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs.#ctor(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage,HtmlAgilityPack.HtmlDocument,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs"/> class.
+            </summary>
+            <param name="request">
+            The request.
+            </param>
+            <param name="response">
+            The response.
+            </param>
+            <param name="htmlDocument">
+            The html document.
+            </param>
+            <param name="serviceAddressTemplate">
+            The service address template.
+            </param>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs.HtmlDocument">
+            <summary>
+            Gets or sets the html document.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs.Request">
+            <summary>
+            Gets or sets the request.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs.Response">
+            <summary>
+            Gets or sets the response.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessHtmlResponse.ProcessHtmlResponseArgs.ServiceAddressTemplate">
+            <summary>
+            Gets or sets the service address template.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.IProcessResponseProcessor`1">
+            <summary>
+            The interface for ProcessResponseProcessor.
+            </summary>
+            <typeparam name="T">The type of args to process.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.IProcessResponseProcessor`1.Process(`0)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.IProcessResponseProcessor">
+            <summary>
+            The interface for ProcessResponseProcessor.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessHtmlResponseProcessor">
+            <summary>
+            The process html response processor.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessHtmlResponseProcessor._corePipeline">
+            <summary>
+            The core pipeline.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessHtmlResponseProcessor.#ctor(Sitecore.Abstractions.BaseCorePipelineManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessHtmlResponseProcessor"/> class.
+            </summary>
+            <param name="corePipeline">
+            The core pipeline.
+            </param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessHtmlResponseProcessor.Process(Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessResponsePipelineArgs)">
+            <summary>
+            The process.
+            </summary>
+            <param name="args">
+            The args.
+            </param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessHtmlResponseProcessor.RewriteHtmlResponse(System.String,System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage)">
+            <summary>
+            The rewrite html response.
+            </summary>
+            <param name="serviceAddress">
+            The service address.
+            </param>
+            <param name="request">
+            The request.
+            </param>
+            <param name="response">
+            The response.
+            </param>
+            <returns>
+            The <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessResponsePipelineArgs">
+            <summary>
+            The process response pipeline args.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessResponsePipelineArgs.#ctor(System.String,System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessResponsePipelineArgs"/> class.
+            </summary>
+            <param name="serviceAddressTemplate">
+            The service address template.
+            </param>
+            <param name="request">
+            The request.
+            </param>
+            <param name="response">
+            The response.
+            </param>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessResponsePipelineArgs.Request">
+            <summary>
+            Gets or sets the request.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessResponsePipelineArgs.Response">
+            <summary>
+            Gets or sets the response.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.ExternalSiteProxy.ProcessResponse.ProcessResponsePipelineArgs.ServiceAddressTemplate">
+            <summary>
+            Gets or sets the service address template.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.FxmPipelines.GetItemRenderedContent(Sitecore.FXM.Pipelines.Rendering.ItemContentRendererArgs)">
+            <summary>
+            The item rendered content pipeline - calculates the output from processing the renderings for an item based on a selected device and placeholder key.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Rendering.ItemContentRendererArgs">
+            <summary>
+            Arguments required by the <see cref="T:Sitecore.FXM.Pipelines.Rendering.ItemContentRenderingProcessor"/> class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Rendering.ItemContentRendererArgs.Item">
+            <summary>
+            Gets the Item to obtain the renderings from.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Rendering.ItemContentRendererArgs.PlaceholderKey">
+            <summary>
+            Gets or sets the Placeholder Key to use when filtering the list of renderings for the Item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Rendering.ItemContentRendererArgs.EnablePersonalization">
+            <summary>
+            Gets or sets a value indicating whether to process personalization rules for the set of renderings.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Rendering.ItemContentRendererArgs.RenderedOutput">
+            <summary>
+            Gets or sets the output from processing the renderings for the specified item, device and placeholder combination.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Rendering.ItemContentRenderingProcessor">
+            <summary>The item content rendering pipeline processor.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Rendering.ItemContentRenderingProcessor._context">
+            <summary>The context.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Rendering.ItemContentRenderingProcessor._log">
+            <summary>The logger.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Rendering.ItemContentRenderingProcessor.#ctor(Sitecore.FXM.Abstractions.ISitecoreContext,Sitecore.FXM.Abstractions.IFxmLog,Sitecore.Abstractions.BaseCorePipelineManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Rendering.ItemContentRenderingProcessor" /> class.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="log">The log.</param>
+            <param name="pipeline">The Sitecore pipeline.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Rendering.ItemContentRenderingProcessor.Process(Sitecore.FXM.Pipelines.Rendering.ItemContentRendererArgs)">
+            <summary>Calculates the rendered output for an item.</summary>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Rendering.EnableExternalPagePlaceholdersProcessor">
+            <summary>The external page placeholder enabler pipeline processor.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Rendering.EnableExternalPagePlaceholdersProcessor._sitecoreItemContext">
+            <summary>The Sitecore Context.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Rendering.EnableExternalPagePlaceholdersProcessor.#ctor(Sitecore.FXM.Abstractions.ISitecoreItemContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Rendering.EnableExternalPagePlaceholdersProcessor" /> class.
+            </summary>
+            <param name="itemContext">The Sitecore context.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Rendering.EnableExternalPagePlaceholdersProcessor.Process(Sitecore.Pipelines.GetPlaceholderRenderings.GetPlaceholderRenderingsArgs)">
+            <summary>
+            Ensures that the 'HasPlaceholderSettings' flag is enabled for FXM Template types.
+            </summary>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Mvc.RenderPlaceholder.EnterFxmPlaceholderContext">
+            <summary>Defines the EnterFxmPlaceholderContext type.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Mvc.RenderPlaceholder.EnterFxmPlaceholderContext._databaseContext">
+            <summary>The Sitecore Context.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Mvc.RenderPlaceholder.EnterFxmPlaceholderContext.#ctor(Sitecore.FXM.Abstractions.ISitecoreDatabaseContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Mvc.RenderPlaceholder.EnterFxmPlaceholderContext"/> class.
+            </summary>
+            <param name="databaseContext">The Sitecore database context.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Mvc.RenderPlaceholder.EnterFxmPlaceholderContext.Process(Sitecore.Mvc.Pipelines.Response.RenderPlaceholder.RenderPlaceholderArgs)">
+            <summary>
+            Processes the pipeline arguments.
+            </summary>
+            <param name="args">The pipeline processor arguments.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Mvc.RenderPlaceholder.EnterFxmPlaceholderContext.IsRenderingAttachedToElementReplacer(Sitecore.Mvc.Presentation.Rendering)">
+            <summary>
+            Determines whether the placeholder is attached to an Element Replacer.
+            </summary>
+            <param name="ownerRendering">The owner rendering.</param>
+            <returns>True if the parent placeholder is an Element replacer, otherwise false.</returns>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.ResolveMatchingElements.ResolveMatchingElementsArgs.ElementMatches">
+            <summary>Gets the element matches.</summary>
+            <value>The element matches.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TriggerPageMatchers.RegisterEventsForMatchedPagesProcessor">
+            <summary>
+            All pages matched for the current request are "processed" by the analytics system to trigger any goals, events, campaigns or profile cards.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TriggerPageEvent.ResolveCurrentPageContext">
+            <summary>
+            Ensures that the page of the current request is found in the current session history, in order for a 
+            page event to be registered against it.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TriggerPageEvent.ResolveCurrentPageContext.Process(Sitecore.FXM.Pipelines.Tracking.TriggerPageEvent.TriggerPageEventArgs)">
+            <summary>
+            The process.
+            </summary>
+            <param name="args">The args.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TriggerPageEvent.ResolveCurrentPageContext.GetCurrentPageInInteraction(Sitecore.Analytics.Tracking.CurrentInteraction,System.Uri)">
+            <summary>
+            Finds the page in the specified interaction that matches the supplied Url.
+            The page can either be the 'current' page of the interaction, or in its history.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TriggerPageEvent.ITriggerPageEventProcessor">
+            <summary>
+            The interface for TriggerPageEventProcessors.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TriggerPageEvent.TriggerPageEventArgs">
+            <summary>
+            The args for the trigger page event pipeline.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TriggerPageEvent.TriggerPageEventArgs.#ctor(Sitecore.FXM.Abstractions.ITrackerProvider,System.Web.HttpRequestBase,System.Web.HttpResponseBase,System.Web.HttpRequestBase,System.String,Sitecore.FXM.Tracking.EventDescriptors.ITrackDescriptor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Tracking.TriggerPageEvent.TriggerPageEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.InitializeContext.InitializeTrackingCookieProcessor">
+            <summary>
+            Initializes the cookies.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.InitializeContext.InitializeTrackingCookieProcessor.Process(Sitecore.FXM.Pipelines.Tracking.InitializeContext.TrackingInitializeContextArgs)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.InitializeContext.InitializeTrackingCookieProcessor.CreateContactCookieInRequest(System.Web.HttpRequestBase,System.String)">
+            <summary>
+            The create contact cookie in request.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.InitializeContext.TrackingInitializeContextArgs.CurrentRequest">
+            <summary>Gets the current request.</summary>
+            <value>The current request.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.InitializeContext.TrackingInitializeContextArgs.TrackerProvider">
+            <summary>Gets the tracker provider.</summary>
+            <value>The tracker provider.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.InitializeContext.TrackingInitializeContextArgs.DomainMatcher">
+            <summary>Gets the domain matcher.</summary>
+            <value>The domain matcher.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.InitializeContext.InitializeExternalTrackingProcessor">
+            <summary>
+            Initializes the TrackingProvider.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.InitializeContext.InitializeExternalTrackingProcessor.Process(Sitecore.FXM.Pipelines.Tracking.InitializeContext.TrackingInitializeContextArgs)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.InitializeContext.InitializeContextSiteProcessor">
+            <summary>
+            Initializes the context site used in a tracking request.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.InitializeContext.InitializeContextSiteProcessor.Process(Sitecore.FXM.Pipelines.Tracking.InitializeContext.TrackingInitializeContextArgs)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.BaseTrackingResultArgs">
+            <summary>The base tracking result args.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.BaseTrackingResultArgs.PipelineResult">
+            <summary>Gets or sets the pipeline result.</summary>
+            <value>The pipeline result.</value>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.BaseTrackingResultArgs.AbortAndFailPipeline(Sitecore.FXM.Tracking.TrackingResultCode,System.String)">
+            <summary>Aborts and sets a fail result for the pipeline.</summary>
+            <param name="message">The message.</param>
+            <param name="failCode">The fail result.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SaveDurationProcessor">
+            <summary>
+            Fixes the request used in a tracking request.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SaveDurationProcessor.Process(Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitArgs)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SetInteractionLanguageProcessor">
+            <summary>
+            Runs the rule defined in the 'tracking rule' field of the domain matcher for the current request.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SetInteractionLanguageProcessor._languageContext">
+            <summary>The context.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SetInteractionLanguageProcessor.#ctor(Sitecore.FXM.Abstractions.ISitecoreLanguageContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SetInteractionLanguageProcessor"/> class.
+            </summary>
+            <param name="languageContext">The language context.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SetInteractionLanguageProcessor.Process(Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitArgs)">
+            <summary>Runs the tracking rules defined for the domain matcher.</summary>
+            <param name="args">The page visit args.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.TrafficTypeProcessor">
+            <summary>
+            Represents the "TrafficTypeProcessor" processor.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.TrafficTypeProcessor.Process(Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitArgs)">
+            <summary>
+            Processes the request.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitProcessor`1">
+            <summary>
+            The interface for TrackPageVisitProcessors.
+            </summary>
+            <typeparam name="T">The type of args to process.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitProcessor`1.Process(`0)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitProcessor">
+            <summary>
+            The interface for TrackPageVisitProcessors.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitArgs">
+            <summary>
+            The interface for TrackPageVisitArgs.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitArgs.DomainMatcher">
+            <summary>Gets the domain matcher.</summary>
+            <value>The domain matcher.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.TrackPageVisitArgs">
+            <summary>
+            The args used when tracking page visits.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.TrackPageVisitArgs.#ctor(Sitecore.FXM.Abstractions.ITrackerProvider,System.Web.HttpRequestBase,System.Web.HttpResponseBase,System.Web.HttpRequestBase,System.String,Sitecore.FXM.Matchers.IDomainMatcher)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.TrackPageVisitArgs"/> class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.TrackPageVisitArgs.DomainMatcher">
+            <summary>Gets the domain matcher.</summary>
+            <value>The domain matcher.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.TrackPageVisitProcessor">
+            <summary>
+            Starts tracking for the current page visit.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.TrackPageVisitProcessor.Process(Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitArgs)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SwitchUriForReferrerProcessor">
+            <summary>
+            Fixes the referrer used in a tracking request.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SwitchUriForReferrerProcessor._log">
+            <summary>The logger.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SwitchUriForReferrerProcessor._pipeline">
+            <summary>The pipeline.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SwitchUriForReferrerProcessor.#ctor(Sitecore.FXM.Abstractions.IFxmLog,Sitecore.Abstractions.BaseCorePipelineManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SwitchUriForReferrerProcessor" /> class.
+            </summary>
+            <param name="log">The log.</param>
+            <param name="pipeline">The pipeline.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SwitchUriForReferrerProcessor.Process(Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitArgs)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.SwitchUriForReferrerProcessor.ParseReferrer(System.Web.HttpRequestBase,Sitecore.Analytics.Tracking.CurrentInteraction)">
+            <summary>
+            Copied from the Andes code base, with the Type of the 'request' parameter adjusted to be HttpRequestBase.
+            </summary>
+            <param name="request">
+            The request from which the referrer is determined.
+            </param>
+            <param name="visit">
+            The interaction to which the referrer is assigned.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.FixRequestUrlProcessor">
+            <summary>
+            Fixes the request used in a tracking request.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.FixRequestUrlProcessor.Process(Sitecore.FXM.Pipelines.Tracking.TrackPageVisit.ITrackPageVisitArgs)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.AfterEvent.CleanupAnalyticsCookieInResponseProcessor">
+            <summary>
+            Cleans up modified analytics cookies.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Pipelines.Tracking.AfterEvent.CleanupAnalyticsCookieInResponseProcessor._baseDomainExtractor">
+            <summary>
+            The implementation to determine a common base domain between the Sitecore and the external site domain.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.AfterEvent.CleanupAnalyticsCookieInResponseProcessor.#ctor(Sitecore.FXM.Tracking.IBaseDomainExtractor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.Tracking.AfterEvent.CleanupAnalyticsCookieInResponseProcessor"/> class.
+            </summary>
+            <param name="baseDomainExtractor">
+            The base Domain Extractor.
+            </param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.AfterEvent.CleanupAnalyticsCookieInResponseProcessor.Process(Sitecore.FXM.Pipelines.Tracking.ITrackingArgs)">
+            <summary>Processes the specified arguments.</summary>
+            <param name="args">The arguments.</param>
+            <exception cref="T:System.Exception">An analytics contact Id has not been assigned by the analytics system.</exception>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.TrackingPipelineResult">
+            <summary>
+            The result of running a tracking pipeline.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.ITrackingArgs">
+            <summary>The TrackingArgs interface.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.ITrackingArgs.TrackerProvider">
+            <summary>Gets the tracker provider.</summary>
+            <value>The tracker provider.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.ITrackingArgs.CurrentRequest">
+            <summary>Gets the current request.</summary>
+            <value>The current request.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.ITrackingArgs.CurrentResponse">
+            <summary>Gets the current response.</summary>
+            <value>The current response.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.ITrackingArgs.TrackingRequest">
+            <summary>Gets or sets the tracking request.</summary>
+            <value>The tracking request.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.ITrackingArgs.CurrentPageContext">
+            <summary>Gets or sets the current page visit.</summary>
+            <value>The current page visit.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Pipelines.Tracking.ITrackingArgs.PipelineResult">
+            <summary>Gets the pipeline result.</summary>
+            <value>The pipeline result.</value>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.Tracking.ITrackingArgs.AbortAndFailPipeline(Sitecore.FXM.Tracking.TrackingResultCode,System.String)">
+            <summary>Aborts and sets a fail result for the pipeline.</summary>
+            <param name="failResult">The fail result.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.Tracking.ITrackingProcessor">
+            <summary>
+            A component processor for a tracking pipeline.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Pipelines.SaveUI.ExcludeUpdatedElementReplacersFromSaveList">
+            <summary>
+            Excludes the element replacers which needed to be updated from the save list.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.SaveUI.ExcludeUpdatedElementReplacersFromSaveList.#ctor(Sitecore.FXM.Abstractions.ISitecoreContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Pipelines.SaveUI.ExcludeUpdatedElementReplacersFromSaveList"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.SaveUI.ExcludeUpdatedElementReplacersFromSaveList.Process(Sitecore.Pipelines.Save.SaveArgs)">
+            <summary>
+            Runs the processor.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Pipelines.SaveUI.AddElementReplacersProcessor.FilterLayoutXmlByRenderingPlaceholder(System.String,System.String)">
+            <summary>
+            Removes all renderings from a specified layout XML string that do not match the given placeholder name.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Extensions.FxmItemExtensions">
+            <summary>Extensions for the <see cref="T:Sitecore.Data.Items.Item"/> class that deal with FXM Item types.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.FxmItemExtensions.GetExistingFieldAsserted(Sitecore.Data.Items.Item,Sitecore.Data.ID)">
+            <summary>
+            Get field if it exists in template. Otherwise, exception is thrown.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.FxmItemExtensions.GetElementReplacerPlaceholderKey(Sitecore.Data.Items.Item)">
+            <summary>Gets the Placeholder Key used for an Element Replacer Item.</summary>
+            <param name="elementReplacerItem">The Element Replacer Item.</param>
+            <returns>The Placeholder Key.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.FxmItemExtensions.IsFxmVisualItem(Sitecore.Data.Items.Item)">
+            <summary>Determines whether an item is an FXM item type that can be edited in the Experience Editor.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.FxmItemExtensions.IsFxmVisualItem(Sitecore.Data.ItemDefinition)">
+            <summary>Determines whether an item is an FXM item type that can be edited in the Experience Editor.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Extensions.GuidExtensions">
+            <summary>
+            Guid extensions for FXM.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.GuidExtensions.ToSitecoreString(System.Guid)">
+            <summary>
+            Formats the guid surrounded by braces and in upper case.  There are places in Sitecore that
+            don't parse IDs/Guids unless they are in this format (!).
+            </summary>
+            <param name="guid">The guid instance to format.</param>
+            <returns>A string of the guid, with braces in upper case.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.GuidExtensions.ToSitecoreString(Sitecore.Data.ID)">
+            <summary>
+            Formats the ID surrounded by braces and in upper case.  There are places in Sitecore that
+            don't parse IDs/Guids unless they are in this format (!).
+            </summary>
+            <param name="id">The id instance to format.</param>
+            <returns>A string of the id, with braces in upper case.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Extensions.HttpCookieCollectionExtensions">
+            <summary>
+            The http cookie collection extensions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.HttpCookieCollectionExtensions.GetSafely(System.Web.HttpCookieCollection,System.String)">
+            <summary>
+            Gets a cookie from the collection if one exists, otherwise returns false.  As opposed to the 'get with consequences' provided
+            by the cookie collection class.  No thanks.
+            </summary>
+            <param name="collection">The cookie collection to search in.</param>
+            <param name="cookieName">The name of the cookie to find.</param>
+            <returns>The cookie if there is one, null otherwise.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Extensions.ItemLayoutExtensions">
+            <summary>The item layout extensions.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.ItemLayoutExtensions.MergeItemLayoutsXml(Sitecore.Data.Items.Item,System.Collections.Generic.List{Sitecore.Data.Items.Item})">
+            <summary>Merges the item layout XML.</summary>
+            <param name="item">The item.</param>
+            <param name="mergeItems">The element replacer list.</param>
+            <returns>The merged layout XML.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.ItemLayoutExtensions.GetLayoutXml(Sitecore.Data.Items.Item)">
+            <summary>Gets the layout XML for an item.</summary>
+            <param name="item">The item.</param>
+            <returns>Xml for the item layout.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Extensions.RenderingItemExtensions">
+            <summary>Extensions to the RenderingItem class.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.RenderingItemExtensions.IsMvcRendering(Sitecore.Data.Items.RenderingItem)">
+            <summary>Determines whether or not a <see cref="T:Sitecore.Data.Items.RenderingItem"/> is a Sitecore MVC rendering.</summary>
+            <param name="renderingItem">The rendering item.</param>
+            <returns>True if the rendering item is a Sitecore MVC rendering, otherwise false.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Extensions.RenderingReferenceExtensions">
+            <summary>Extensions to the RenderingReference class.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.RenderingReferenceExtensions.IsMvcRendering(Sitecore.Layouts.RenderingReference)">
+            <summary>Determines whether or not a <see cref="T:Sitecore.Layouts.RenderingReference"/> is a Sitecore MVC rendering.</summary>
+            <param name="reference">The rendering reference.</param>
+            <returns>True if the rendering reference is a Sitecore MVC rendering, otherwise false.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Extensions.PageExtensions">
+            <summary>
+            Extension methods for the <see cref="T:System.Web.UI.Page"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Extensions.PageExtensions.ExecutePage(System.Web.UI.Page,System.Web.HttpContextBase,System.Boolean)">
+            <summary>
+            Requests the output for a given ASP .Net page.
+            </summary>
+            <param name="page">The page to render.</param>
+            <param name="httpContext">The Http context.</param>
+            <param name="isMvc">Is Mvc rendering type.</param>
+            <returns>The output from rendering the page.</returns>
+            <remarks>This method uses Server.Execute to perform the rendering operation in order to trigger the ASP .Net page lifecycle.</remarks>
+        </member>
+        <member name="T:Sitecore.FXM.Fields.BaseFxmRulesField">
+            <summary>The base fxm rules field.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.BaseFxmRulesField.FieldXml">
+            <summary>Gets the Xml data for the field.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.BaseFxmRulesField.Rules">
+            <summary>
+            Gets the rules definition.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Fields.DomainMatcherRuleField">
+            <summary>The MatcherRule field.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.DomainMatcherRuleField.#ctor(Sitecore.Data.Fields.Field,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.FXM.Fields.DomainMatcherRuleField"/> class.</summary>
+            <param name="innerField">Inner field.</param>
+            <param name="domainList">A list of domains to initialize the field with.</param>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.DomainMatcherRuleField.Domains">
+            <summary>Gets a list of the Domains.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.DomainMatcherRuleField.Paths">
+            <summary>Gets a list of the Paths (should only validly be one).</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.DomainMatcherRuleField.AddDomain(System.String)">
+            <summary>
+            Add a domain to the list of Domain Matcher rules.
+            </summary>
+            <param name="domain">The domain.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.DomainMatcherRuleField.RemoveDomain(System.String)">
+            <summary>
+            Remove a domain from the list of Domain Matcher rules.
+            </summary>
+            <param name="domain">The domain.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Fields.PageMatcherBasicRuleType">
+            <summary>Enums for matching rule types in a PageFilter Entity.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Fields.PageMatcherBasicRuleType.MatchPage">
+            <summary>Match only the given page.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Fields.PageMatcherBasicRuleType.MatchPageWithChildren">
+            <summary>Match the given page and children.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Fields.PageMatcherBasicRuleType.Custom">
+            <summary>A custom rule match.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Fields.PageMatcherRuleField">
+            <summary>The Page Matcher Rule field.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.PageMatcherRuleField.#ctor(Sitecore.Data.Fields.Field)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Fields.PageMatcherRuleField"/> class.
+            </summary>
+            <param name="innerField">The inner field.</param>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.PageMatcherRuleField.PathExactMatchRule">
+            <summary>Gets the 'Path exact match' rule.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.PageMatcherRuleField.PathStartsWithRules">
+            <summary>Gets a list of the 'Path starts with' rules.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.PageMatcherRuleField.AddPathRule(System.String,System.String)">
+            <summary>
+            Adds a new Page Path rule.
+            </summary>
+            <param name="path">The page path.</param>
+            <param name="operatorId">The rule operator Id.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.PageMatcherRuleField.DetermineRuleType">
+            <summary>Determines the type of the rule.</summary>
+            <returns>The rule match type.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.PageMatcherRuleField.DetermineRuleTemplateValue">
+            <summary>Determines the rule template value.</summary>
+            <returns>The rule template value.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Fields.TrackingFieldUtility">
+            <summary>Wraps TrackingField with additional read/write logic.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Fields.TrackingFieldUtility._analyticsDefinitions">
+            <summary>
+            The analytics items definitions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.TrackingFieldUtility.#ctor(Sitecore.Data.Items.Item,Sitecore.FXM.Tracking.IAnalyticsDefinitionsRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Fields.TrackingFieldUtility"/> class.
+            </summary>
+            <param name="item">
+            The item.
+            </param>
+            <param name="analyticsDefinitions">
+            The analytics Definitions.
+            </param>
+            <para name="analyticsDefinitions">
+            Analytics items definitions.
+            </para>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.TrackingFieldUtility.Events">
+            <summary>Gets the events.</summary>
+            <value>The events.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.TrackingFieldUtility.Goals">
+            <summary>Gets the goals.</summary>
+            <value>The goals.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.TrackingFieldUtility.Campaigns">
+            <summary>Gets the campaigns.</summary>
+            <value>The campaigns.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Fields.TrackingFieldUtility.ProfileCards">
+            <summary>Gets the profile cards.</summary>
+            <value>The profile cards.</value>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.TrackingFieldUtility.WriteChanges">
+            <summary>Writes the changes.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.TrackingFieldUtility.ClearAll">
+            <summary>Clears all tracking data.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.TrackingFieldUtility.AddCampaign(System.Guid,System.String)">
+            <summary>Adds the campaign.</summary>
+            <param name="id">The identifier.</param>
+            <param name="title">The title.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.TrackingFieldUtility.AddGoals(System.Guid[])">
+            <summary>Adds the goals.</summary>
+            <param name="ids">The ids.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.TrackingFieldUtility.AddEvents(System.Guid[])">
+            <summary>Adds the events.</summary>
+            <param name="ids">The ids.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.TrackingFieldUtility.AddCampaigns(System.Guid[])">
+            <summary>Adds the campaigns.</summary>
+            <param name="ids">The ids.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Fields.TrackingFieldUtility.AddEvent(System.Guid,System.String)">
+            <summary>Adds the event.</summary>
+            <param name="id">The identifier.</param>
+            <param name="name">The name.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Hooks.FxmSiteProviderInitializerHook">
+            <summary>
+            Represents the FxmSiteProviderInitializer hook. 
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Hooks.FxmSiteProviderInitializerHook.Initialize">
+            <summary>
+            The initialization.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Hooks.BundleRegistrarHook">
+            <summary>The bundle registry hook.  Will generate and register any bundles on initialization (i.e. at start up).</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.AbstractEventElementMatcher">
+            <summary>The abstract element matcher.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.AbstractElementMatchModel">
+            <summary>
+            The abstract model representing and element match.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.ContentElementMatcher">
+            <summary>
+            The content element matcher.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Matchers.Element.ContentElementMatcher.Generate(Sitecore.Data.Items.Item)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.ContentElementMatchModel">
+            <summary>The content element match model.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.FragmentEventElementMatcher">
+            <summary>The submit element matcher.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.CustomMatchModel">
+            <summary>The item match model.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.SubmitEventElementMatcher">
+            <summary>The submit element matcher.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.ElementMatcherFactory">
+            <summary>The element matcher factory.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Matchers.Element.ElementMatcherFactory._log">
+            <summary>The log.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Matchers.Element.ElementMatcherFactory._cache">
+            <summary>The cache.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Matchers.Element.ElementMatcherFactory.Resolve(Sitecore.Data.Items.Item)">
+            <summary>Resolves the element match data for the specified item.</summary>
+            <exception cref="T:Sitecore.Exceptions.RequiredObjectIsNullException">Could not resolve element match type. </exception>
+            <exception cref="T:Sitecore.Exceptions.InvalidTypeException">Match type  must implement typeof(IElementMatcher). </exception>
+            <exception cref="T:System.MissingMethodException">No parameterless constructor defined. </exception>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.IElementMatcher">
+            <summary>The ElementMatcher interface.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Matchers.Element.IElementMatcher.Generate(Sitecore.Data.Items.Item)">
+            <summary>Generates the element match data from the specified item.</summary>
+            <param name="item">The item.</param>
+            <returns>An <see cref="T:Sitecore.FXM.Matchers.Element.AbstractElementMatchModel"/> with the data for binding client side.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.IElementMatcherFactory">
+            <summary>
+            The IElementMatcherFactory.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Matchers.Element.IElementMatcherFactory.Resolve(Sitecore.Data.Items.Item)">
+            <summary>Resolves the element match data for the specified item.</summary>
+            <param name="item">The item.</param>
+            <returns>An <see cref="T:Sitecore.FXM.Matchers.Element.AbstractElementMatchModel"/> with the data for binding client side.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.Element.EventElementMatchModel">
+            <summary>The simple element event match model.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.DomainMatcher">
+            <summary>
+            Represents a matched domain.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Matchers.IDomainMatcher.Item">
+            <summary>
+            Gets the original sitecore item representing the domain matcher.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Matchers.IDomainMatcher.Path">
+            <summary>
+            Gets the optional path that defines the site.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Matchers.IDomainMatcher.MatchRuleField">
+            <summary>
+            Field that store rules to check whether current request matches this Domain matcher.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Matchers.IDomainMatcher.LanguageRuleField">
+            <summary>
+            Field that stores language rules configured for the current Domain matcher.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Matchers.DomainMatcherRepository.GetAllDomainMatchers(Sitecore.Data.Database)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.FXM.Matchers.IDomainMatcherRepository">
+            <summary>
+            A repository for <see cref="T:Sitecore.FXM.Matchers.IDomainMatcher"/>s.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Matchers.IDomainMatcherRepository.GetAllDomainMatchers(Sitecore.Data.Database)">
+            <summary>
+            Gets all domain matchers.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Rendering.ItemContentRenderer">
+            <summary>The item renderer.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rendering.ItemContentRenderer._context">
+            <summary>The Sitecore context.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rendering.ItemContentRenderer._httpContext">
+            <summary>The Http Context.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.#ctor(Sitecore.FXM.Abstractions.ISitecoreContext,Sitecore.Abstractions.BaseCorePipelineManager)">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.FXM.Rendering.ItemContentRenderer"/> class.</summary>
+            <param name="context">The context.</param>
+            <param name="pipeline">The Sitecore pipeline.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.#ctor(Sitecore.FXM.Abstractions.ISitecoreContext,Sitecore.Abstractions.BaseCorePipelineManager,System.Web.HttpContextBase)">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.FXM.Rendering.ItemContentRenderer"/> class.</summary>
+            <param name="context">The context.</param>
+            <param name="pipeline">The Sitecore pipeline.</param>
+            <param name="httpContext">The Http Context.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.GetRenderedOutput(System.String,System.String)">
+            <summary>Gets the rendered output.</summary>
+            <param name="itemIdOrPath">The item identifier or path.</param>
+            <param name="placeholderKey">The placeholder key.</param>
+            <returns>The rendered <see cref="T:System.String"/> output.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.GetRenderedOutput(System.String,System.String,System.Boolean)">
+            <summary>Gets the rendered output.</summary>
+            <param name="itemIdOrPath">The item identifier or path.</param>
+            <param name="placeholderKey">The placeholder key.</param>
+            <param name="enablePersonalization">If set to <c>true</c> [enable personalization].</param>
+            <returns>The rendered <see cref="T:System.String"/> output.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.GetRenderedOutput(System.String,Sitecore.Data.ID,System.String)">
+            <summary>Gets the rendered output.</summary>
+            <param name="itemIdOrPath">The item identifier or path.</param>
+            <param name="deviceId">The device identifier.</param>
+            <param name="placeholderKey">The placeholder key.</param>
+            <returns>The rendered <see cref="T:System.String"/> output.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.GetRenderedOutput(System.String,Sitecore.Data.ID,System.String,System.Boolean)">
+            <summary>Gets the rendered output.</summary>
+            <param name="itemIdOrPath">The item identifier or path.</param>
+            <param name="deviceId">The device identifier.</param>
+            <param name="placeholderKey">The placeholder key.</param>
+            <param name="enablePersonalization">If set to <c>true</c> [enable personalization].</param>
+            <returns>The rendered <see cref="T:System.String"/> output.</returns>
+            <exception cref="T:Sitecore.Exceptions.ItemNotFoundException"> If the item cannot be resolved.</exception>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.GetDeviceItem(Sitecore.Data.ID)">
+            <summary>Gets the device item.</summary>
+            <param name="deviceId">The device identifier.</param>
+            <returns>The resolved <see cref="T:Sitecore.Data.Items.DeviceItem"/>.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.RunPersonalizationRules(Sitecore.Data.Items.DeviceItem,Sitecore.Data.Items.Item,System.Collections.Generic.List{Sitecore.Layouts.RenderingReference})">
+            <summary>Runs the personalization rules.</summary>
+            <param name="currentDevice">The current device.</param>
+            <param name="itemToProcess">The item to process.</param>
+            <param name="renderingList">The rendering list.</param>
+            <returns>The <see cref="T:System.Collections.Generic.List`1"/>.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.GetRenderings(Sitecore.Data.Items.Item)">
+            <summary>Gets a list of renderings for a given content item.</summary>
+            <param name="contentItem">The content item.</param>
+            <returns>The list of renderings.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.FilterRenderingsByPlaceholder(System.Collections.Generic.List{Sitecore.Layouts.RenderingReference},System.String)">
+            <summary>Filters a given list of renderings by a specified placeholder key.</summary>
+            <param name="renderings">The list of renderings to filter.</param>
+            <param name="placeholderKey">The placeholder key to use.</param>
+            <returns>A list of renderings that have a matching placeholder key.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Rendering.ItemContentRenderer.BuildPlaceholderControlTree(Sitecore.Web.UI.WebControls.Placeholder,System.Collections.Generic.List{Sitecore.Layouts.RenderingReference})">
+            <summary>Construct the control tree for the Element Replacer placeholder.</summary>
+            <param name="elementReplacerPlaceholder">The Element Replacer placeholder.</param>
+            <param name="renderingList">The list of renderings.</param>
+            <returns>A new instance of the <see cref="T:System.Web.UI.Page"/>class, with the placeholder control attached.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Controls.MvcRenderingControl">
+            <summary>A web control wrapper for a Sitecore MVC Rendering.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Controls.MvcRenderingControl._rendering">
+            <summary>The MVC Rendering.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Controls.MvcRenderingControl._pipeline">
+            <summary>The Sitecore Pipeline.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Controls.MvcRenderingControl._context">
+            <summary>The Sitecore MVC Page Context.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Controls.MvcRenderingControl.#ctor(Sitecore.Mvc.Presentation.Rendering,Sitecore.Mvc.Presentation.PageContext,Sitecore.Abstractions.BaseCorePipelineManager)">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.FXM.Controls.MvcRenderingControl"/> class.</summary>
+            <param name="rendering">The Sitecore MVC Rendering.</param>
+            <param name="context">The Sitecore MVC Page Context.</param>
+            <param name="pipeline">The Sitecore Pipeline.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Controls.MvcRenderingControl.DoRender(System.Web.UI.HtmlTextWriter)">
+            <summary>Renders the MVC Rendering control.</summary>
+            <param name="output">The output stream to render the control to.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Controls.MvcRenderingControlBuilder">
+            <summary>Builds an MVC Rendering control.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Controls.MvcRenderingControlBuilder._httpcontext">
+            <summary>The Http context.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Controls.MvcRenderingControlBuilder._sitecoreContext">
+            <summary>The Sitecore context.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Controls.MvcRenderingControlBuilder._pageContext">
+            <summary>The Sitecore MVC page context.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Controls.MvcRenderingControlBuilder.#ctor(System.Web.HttpContextBase,Sitecore.FXM.Abstractions.ISitecoreContext,Sitecore.Abstractions.BaseCorePipelineManager)">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.FXM.Controls.MvcRenderingControlBuilder"/> class.</summary>
+            <param name="context">The Http context.</param>
+            <param name="sitecore">The Sitecore context.</param>
+            <param name="pipeline">The Sitecore pipeline.</param>
+        </member>
+        <member name="P:Sitecore.FXM.Controls.MvcRenderingControlBuilder.PageContext">
+            <summary>Gets the Sitecore MVC page context.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Controls.MvcRenderingControlBuilder.Create(Sitecore.Mvc.Presentation.Rendering)">
+            <summary>Creates an MVC Rendering control from a Sitecore MVC rendering.</summary>
+            <param name="rendering">The Sitecore MVC rendering.</param>
+            <returns>An instance of the <see cref="T:Sitecore.FXM.Controls.MvcRenderingControl"/> class.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Controls.MvcRenderingControlBuilder.CreatePageContext">
+            <summary>Builds a Sitecore MVC Page context.</summary>
+            <returns>A Sitecore MVC Page context.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Controls.MvcRenderingControlBuilder.CreateRequestContext">
+            <summary>Builds an MVC request context.</summary>
+            <returns>An instance of the <see cref="T:System.Web.Routing.RequestContext"/> class.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Controls.MvcRenderingControlBuilder.CreateRouteData">
+            <summary>Builds MVC route data.</summary>
+            <returns>An instance of the <see cref="T:System.Web.Routing.RouteData"/> class.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Actions.AssignDefaultLanguageCodeAction`1">
+            <summary>
+            Sets the language code on the current analytics interaction.
+            </summary>
+            <typeparam name="T">The rule context.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Actions.AssignDefaultLanguageCodeAction`1.Apply(`0)">
+            <summary>Applies the specified rule context.</summary>
+            <param name="ruleContext">The rule context.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Actions.AssignDefaultLanguageCodeAction`1.SetLanguage(Sitecore.Globalization.Language,`0)">
+            <summary>Sets the language.</summary>
+            <param name="language">The language.</param>
+            <param name="ruleContext">The rule context.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Actions.AssignSelectedLanguageCodeAction`1">
+            <summary>
+            Sets the language code on the current analytics interaction.
+            </summary>
+            <typeparam name="T">The rule context.</typeparam>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.Actions.AssignSelectedLanguageCodeAction`1._databaseContext">
+            <summary>The context.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Actions.AssignSelectedLanguageCodeAction`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Rules.Actions.AssignSelectedLanguageCodeAction`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Actions.AssignSelectedLanguageCodeAction`1.#ctor(Sitecore.FXM.Abstractions.ISitecoreDatabaseContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Rules.Actions.AssignSelectedLanguageCodeAction`1"/> class.
+            </summary>
+            <param name="databaseContext">The context.</param>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Actions.AssignSelectedLanguageCodeAction`1.LanguageItem">
+            <summary>Gets or sets the language item.</summary>
+            <value>The language item.</value>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Actions.AssignSelectedLanguageCodeAction`1.Apply(`0)">
+            <summary>Applies the specified rule context.</summary>
+            <param name="ruleContext">The rule context.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.AbstractNameValueCollectionCondition`1">
+            <summary>The abstract name value collection condition.</summary>
+            <typeparam name="T">T must be a type of <see cref="T:Sitecore.FXM.Rules.Contexts.RequestRuleContext"/>.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.AbstractNameValueCollectionCondition`1.GetValidateCollection(`0)">
+            <summary>Gets the collection validate against.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.AbstractNameValueCollectionCondition`1.Execute(`0)">
+            <summary>Executes this condition.</summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.CheckRequestReferrerForPageFilterCondition`1">
+            <summary>
+            Represents the rule definition that checks a referrer value for page filters.
+            </summary>
+            <typeparam name="T">Rule context.</typeparam>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Conditions.CheckRequestReferrerForPageFilterCondition`1.Referrer">
+            <summary>Gets or sets the value to match.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.CheckRequestReferrerForPageFilterCondition`1.Execute(`0)">
+            <summary>
+            Executes the condition.
+            </summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.ValidateAnyRequestDomainCondition`1">
+            <summary>
+            The check request path condition.
+            </summary>
+            <typeparam name="T">Rule Context.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.ValidateAnyRequestDomainCondition`1.Execute(`0)">
+            <summary>
+            Executes the specified rule context.
+            </summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>Validity of rule.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.CheckRequestPathCondition`1">
+            <summary>
+            The check request path condition.
+            </summary>
+            <typeparam name="T">Rule Context.</typeparam>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Conditions.CheckRequestPathCondition`1.Path">
+            <summary>
+            Gets or sets the path.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.CheckRequestPathCondition`1.Execute(`0)">
+            <summary>
+            Executes the specified rule context.
+            </summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>Validity of rule.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.CheckRequestPathForDomainCondition`1">
+            <summary>The check request path for matching a 'domain matching item' condition.</summary>
+            <typeparam name="T">The type of rule context.</typeparam>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Conditions.CheckRequestPathForDomainCondition`1.Path">
+            <summary>Gets or sets the domain.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.CheckRequestPathForDomainCondition`1.Execute(`0)">
+            <summary>Executes this condition.</summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.CheckRequestQueryStringCondition`1">
+            <summary>The check query string condition.</summary>
+            <typeparam name="T">The type of rule context.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.CheckRequestQueryStringCondition`1.GetValidateCollection(`0)">
+            <summary>Gets the collection validate against.</summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>The <see cref="T:System.Collections.Specialized.NameValueCollection"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.CheckRequestReferrerCondition`1">
+            <summary>
+            Checks the request referrer.
+            </summary>
+            <typeparam name="T">Rule context.</typeparam>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Conditions.CheckRequestReferrerCondition`1.Referrer">
+            <summary>Gets or sets the domain.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.CheckRequestReferrerCondition`1.Execute(`0)">
+            <summary>Executes this condition.</summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.CheckRequestTypeCondition`1">
+            <summary>
+            Checks the request type.
+            </summary>
+            <typeparam name="T">Rule context.</typeparam>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Conditions.CheckRequestTypeCondition`1.RequestType">
+            <summary>Gets or sets the domain.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.CheckRequestTypeCondition`1.Execute(`0)">
+            <summary>Executes this condition.</summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.MatchRequestDomainCondition`1">
+            <summary>Matches the domain of the current request to a complete value.</summary>
+            <typeparam name="T">The type of rule context.</typeparam>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Conditions.MatchRequestDomainCondition`1.Domain">
+            <summary>Gets or sets the domain use for comparison.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.MatchRequestDomainCondition`1.Execute(`0)">
+            <summary>Executes this condition.</summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.CheckRequestDomainCondition`1">
+            <summary>
+            The check request path condition.
+            </summary>
+            <typeparam name="T">Rule Context.</typeparam>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Conditions.CheckRequestDomainCondition`1.Domain">
+            <summary>
+            Gets or sets the path.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.CheckRequestDomainCondition`1.Execute(`0)">
+            <summary>
+            Executes the specified rule context.
+            </summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>Validity of rule.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Conditions.CheckRequestHeadersCondition`1">
+            <summary>The check headers condition.</summary>
+            <typeparam name="T">The type of rule context.</typeparam>
+        </member>
+        <member name="M:Sitecore.FXM.Rules.Conditions.CheckRequestHeadersCondition`1.GetValidateCollection(`0)">
+            <summary>Gets the collection validate against.</summary>
+            <param name="ruleContext">The rule context.</param>
+            <returns>The <see cref="T:System.Collections.Specialized.NameValueCollection"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.Contexts.RequestRuleContext">
+            <summary>The rule context for a http request.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Contexts.RequestRuleContext.Request">
+            <summary>Gets or sets the request.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Contexts.RequestRuleContext.Url">
+            <summary>Gets the URL.</summary>
+            <value>The URL.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Contexts.RequestRuleContext.Referrer">
+            <summary>
+            Gets a referrer for the request.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Rules.Contexts.RequestRuleContext.Language">
+            <summary>Gets or sets the language.</summary>
+            <value>The language.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Rules.RulesOperatorHelper">
+            <summary>
+            The rules operator helper.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.UnknownOperator">
+            <summary>
+            The unknown operator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.EqualsOperator">
+            <summary>
+            The equals operator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.CaseInsensitivelyEqualsOperator">
+            <summary>
+            The case insensitively equals operator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.ContainsOperator">
+            <summary>
+            The contains operator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.MatchesRegularExpressionOperator">
+            <summary>
+            The matches regular expression operator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.NotEqualOperator">
+            <summary>
+            The not equal operator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.NotCaseInsensitivelyEqualsOperator">
+            <summary>
+            The not case insensitively equals operator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.EndsWithOperator">
+            <summary>
+            The ends with operator.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Rules.RulesOperatorHelper.StartsWithOperator">
+            <summary>
+            The starts with operator.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.SessionManagement.FxmSessionIdManager">
+            <summary>
+            Manages the session ID when the request is for an FXM API call.  The request query string is inspected
+            to determine if this manager pertains to the current request.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.SessionManagement.FxmSessionIdManager.baseDomainExtractor">
+            <summary>
+            The base domain extractor.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.SessionManagement.FxmSessionIdManager.shareSessions">
+            <summary>
+            The share sessions.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.SessionManagement.FxmSessionIdManager.aspNetStandardIdManager">
+            <summary>
+            The ASP net standard identifier manager.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.SessionManagement.FxmSessionIdManager.sitecoreSettings">
+            <summary>
+            The settings.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.SessionManagement.FxmSessionIdManager"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.#ctor(System.Web.SessionState.SessionIDManager,Sitecore.Abstractions.BaseSettings,Sitecore.FXM.Tracking.IBaseDomainExtractor,Sitecore.FXM.Abstractions.IFxmLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.SessionManagement.FxmSessionIdManager"/> class.
+            </summary>
+            <param name="manager">
+            The manager.
+            </param>
+            <param name="settings">
+            The settings.
+            </param>
+            <param name="baseDomainExtractor">
+            The base domain extractor.
+            </param>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.InitializeRequest(System.Web.HttpContext,System.Boolean,System.Boolean@)">
+            <summary>
+            Performs per-request initialization of the SessionIDManager object.
+            </summary>
+            <param name="context">The HttpContext object that contains information about the current request.</param>
+            <param name="suppressAutoDetectRedirect">
+            True if the session-ID manager should redirect to determine cookie support; otherwise, false to suppress automatic redirection to determine cookie support.
+            </param>
+            <param name="supportSessionIdReissue">
+            When this method returns, contains a Boolean that indicates whether the ISessionIDManager object supports issuing new session IDs when the original ID is out of date. This parameter is passed uninitialized.
+            </param>
+            <returns>True to indicate that the initialization performed a redirect; otherwise, false.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.GetSessionID(System.Web.HttpContext)">
+            <summary>
+            Gets the session identifier from the context of the current HTTP request.
+            </summary>
+            <param name="context">The current HttpContext object that references server objects used to process HTTP requests (for example, the Request and Response properties).</param>
+            <returns>The current session identifier sent with the HTTP request.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.CreateSessionID(System.Web.HttpContext)">
+            <summary>
+            Creates a unique session identifier.
+            </summary>
+            <param name="context">The current HttpContext object that references server objects used to process HTTP requests (for example, the Request and Response properties).</param>
+            <returns>A unique session identifier.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.SaveSessionID(System.Web.HttpContext,System.String,System.Boolean@,System.Boolean@)">
+            <summary>
+            Session ID is preserved in the session state object and doesn't need to be saved to the response, as FXM does that on
+            the client in the external domain.
+            </summary>
+            <param name="context">The current context.</param>
+            <param name="id">The session identifier.</param>
+            <param name="redirected">When this method returns, contains a Boolean value that is true if the response is redirected to the current URL with the session identifier added to the URL; otherwise, false.</param>
+            <param name="cookieAdded">When this method returns, contains a Boolean value that is true if a cookie has been added to the HTTP response; otherwise, false.</param>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.RemoveSessionID(System.Web.HttpContext)">
+            <summary>
+            Deletes the session identifier from the cookie or from the URL.
+            </summary>
+            <param name="context">The current context.</param>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.Validate(System.String)">
+            <summary>
+            Confirms that the supplied session identifier is valid.
+            </summary>
+            <param name="id">The session identifier to validate.</param>
+            <returns>true if the session identifier is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.SessionManagement.FxmSessionIdManager.Initialize">
+            <summary>
+            Initializes the SessionIDManager object.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.CachingDomainMatcherSiteFactory.CreateSite(Sitecore.FXM.Matchers.IDomainMatcher,System.String)">
+            <summary>Creates a site based on the specified domain matcher.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.CachingDomainMatcherSiteFactory.CreateSiteInfo(Sitecore.FXM.Matchers.IDomainMatcher,System.String)">
+            <summary>Creates a site info based on the specified domain matcher.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Sites.FxmSiteProvider">
+            <summary>
+            The site provider for FXM.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Sites.FxmSiteProvider.FxmSites">
+            <summary>Gets the FXM sites.</summary>
+            <value>The FXM sites.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Sites.FxmSiteProvider.WebDatabase">
+            <summary>
+            Gets the web database.
+            </summary>
+            <value>
+            The web database.
+            </value>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.FxmSiteProvider.GetSite(System.String)">
+            <summary>Gets the site.</summary>
+            <param name="siteName">Name of the site.</param>
+            <returns>An instance of <see cref="T:Sitecore.Sites.Site"/>.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.FxmSiteProvider.GetSites">
+            <summary>Gets the sites.</summary>
+            <returns>An instance of <see cref="T:Sitecore.Sites.SiteCollection"/>.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.FxmSiteProvider.Initialize(Sitecore.Abstractions.BaseSiteManager)">
+            <summary>
+            Initializes the provider instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.FxmSiteProvider.GetFxmSites">
+            <summary>Gets the FXM sites.</summary>
+            <returns>A dictionary of external sites.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.FxmSiteProvider.InitializeDatabase(Sitecore.Abstractions.BaseSiteManager)">
+            <summary>
+            Initializes the database.
+            </summary>
+            <param name="siteManager"></param>
+        </member>
+        <member name="P:Sitecore.FXM.Sites.IFxmSiteProvider.RepositoryDatabaseName">
+            <summary>
+            Returns the Web database used as a source of Site definitions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.IFxmSiteProvider.Initialize(Sitecore.Abstractions.BaseSiteManager)">
+            <summary>
+            Initializes the provider instance.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Sites.IDomainMatcherSiteFactory">
+            <summary>
+            The interface for DomainMatcherSiteFactories.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Sites.IDomainMatcherSiteFactory.CreateSite(Sitecore.FXM.Matchers.IDomainMatcher,System.String)">
+            <summary>Creates a <see cref="T:Sitecore.Sites.Site"/> for the specified domain matcher.</summary>
+            <param name="domainMatcher">The domain matcher.</param>
+            <param name="database">The database name.</param>
+            <returns>The instance of <see cref="T:Sitecore.Sites.Site"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.AnalyticsDefinitionsRepository">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.AnalyticsDefinitionsRepository.GetProfileCards">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.AnalyticsDefinitionsRepository.GetProfiles">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.AnalyticsDefinitionsRepository.GetGoals">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.AnalyticsDefinitionsRepository.GetEvents">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.AnalyticsDefinitionsRepository.GetCampaigns">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.AnalyticsDefinitionsRepository.GetOutcomes">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.BaseDomainExtractor">
+            <summary>
+            An implementation of determining the common base domain between two host names - a sitecore host name
+            and an external site host name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.BaseDomainExtractor._configuredBaseDomain">
+            <summary>
+            The optional manually configured common base host name between the Sitecore hosting domain and external sites being tracked.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.BaseDomainExtractor.#ctor(Sitecore.Abstractions.BaseSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Tracking.BaseDomainExtractor"/> class.
+            </summary>
+            <param name="settings">
+            The settings.
+            </param>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.BaseDomainExtractor.Extract(System.String,System.String)">
+            <summary>
+            Determines the common base domain between two host names - a Sitecore host name and an external site host name.
+            Honors a manually configured override to help determine the edge cases when its very difficult to determine a common
+            base domain.
+            </summary>
+            <param name="beaconDomain">The domain of the Sitecore site.</param>
+            <param name="trackedDomain">The domain of the external site.</param>
+            <returns>A common base domain of the two host names supplied.  If no commonality found, the Sitecore domain is preferred.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.IAnalyticsDefinitionsRepository">
+            <summary>
+            A proxy to the core analytics mechanism for retrieving analytics definition items
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.IAnalyticsDefinitionsRepository.GetProfiles">
+            <summary>
+            The get profiles.
+            </summary>
+            <returns>
+            The list of profiles.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.IAnalyticsDefinitionsRepository.GetProfileCards">
+            <summary>
+            The get profile cards.
+            </summary>
+            <returns>
+            The list of profile cards.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.IAnalyticsDefinitionsRepository.GetGoals">
+            <summary>
+            The get goals.
+            </summary>
+            <returns>
+            The list of goals.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.IAnalyticsDefinitionsRepository.GetEvents">
+            <summary>
+            The get events.
+            </summary>
+            <returns>
+            The list of page events.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.IAnalyticsDefinitionsRepository.GetCampaigns">
+            <summary>
+            The get campaigns.
+            </summary>
+            <returns>
+            The list of campaigns.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.IAnalyticsDefinitionsRepository.GetOutcomes">
+            <summary>
+            The get outcomes.
+            </summary>
+            <returns>The list of outcomes.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.IBaseDomainExtractor">
+            <summary>
+            Defines the behavior for determining the common base domain between two host names - a sitecore host name
+            and an external site host name.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.IBaseDomainExtractor.Extract(System.String,System.String)">
+            <summary>
+            Determines the common base domain between two host names - a Sitecore host name and an external site host name.
+            </summary>
+            <param name="beaconDomain">
+            The beacon Domain.
+            </param>
+            <param name="trackedDomain">
+            The tracked Domain.
+            </param>
+            <returns>
+            A common base domain of the two host names supplied.  If no commonality found, the Sitecore domain is preferred.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.ITrackingManager">
+            <summary>
+            The TrackingManager interface.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.ITrackingManager.TrackPageVisit(System.Web.HttpRequestBase,Sitecore.FXM.Tracking.SpoofedHttpRequestBase,System.Web.HttpResponseBase,System.String)">
+            <summary>
+            Track a page visit in the current session according to the analytics contact id supplied.
+            </summary>
+            <param name="currentRequest">The current Http request.  The request object is prepared before running the core analytics pipelines.  Note however
+            that this instance is not injected into the core pipelines - they directly reference the static ASP.NET request properties.</param>
+            <param name="spoofedRequest">The spoofed request.</param>
+            <param name="currentResponse">The current Http response.  The response object is modified after running the core analytics pipelines.  Note however
+            that this instance is not injected into the core pipelines - they directly reference the static ASP.NET request properties.</param>
+            <param name="contactId">Contact identifier passed to request.</param>
+            <returns>
+            The <see cref="T:Sitecore.FXM.Tracking.TrackingResult" /> of the operation.  An exception is thrown for truly unexpected errors.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.ITrackingManager.TrackPageEvent(Sitecore.FXM.Tracking.EventDescriptors.ITrackDescriptor,System.String,System.Web.HttpRequestBase,Sitecore.FXM.Tracking.SpoofedHttpRequestBase,System.Web.HttpResponseBase)">
+            <summary>
+            Track an event on the current page.  If the current page is not the last tracked or current page in the session then the operation
+            will fail - an event must be registered for an existing page visit.
+            </summary>
+            <param name="trackDescriptor">Descriptor with metadata for the event that should tracked.</param>
+            <param name="contactId">Contact identifier passed to request.</param>
+            <param name="currentRequest">The current Http request.  The request object is prepared before running the core analytics pipelines.  Note however
+            that this instance is not injected into the core pipelines - they directly reference the static ASP.NET request properties.</param>
+            <param name="spoofedRequest">The spoofed request.</param>
+            <param name="currentResponse">The current Http response.  The response object is modified after running the core analytics pipelines.  Note however
+            that this instance is not injected into the core pipelines - they directly reference the static ASP.NET request properties.</param>
+            <returns>
+            The <see cref="T:Sitecore.FXM.Tracking.TrackingResult" /> of the operation.  An exception is thrown for truly unexpected errors.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.ITrackingManager.ResolveFxmRequestContext(System.Web.HttpRequestBase)">
+            <summary>
+            Try to resolve FxmContext for the specified request. Returns null if page doesn't belong to a configured website.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.MatcherPersonalizationVisibilityProcessor">
+            <summary>
+            Ensures that if the current item is either a page matcher or a domain matcher item, the profile
+            card UI option will be displayed.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.MatcherPersonalizationVisibilityProcessor.Process(Sitecore.Analytics.Pipelines.GetItemPersonalizationVisibility.GetItemPersonalizationVisibilityArgs)">
+            <summary>
+            Processes the specified arguments.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.MatcherPersonalizationVisibilityProcessor.IsBasedOn(Sitecore.Data.Items.Item,Sitecore.Data.ID[])">
+            <summary>
+            Determines if the item is based on a specified template.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="templateIds">The template Id to check for.</param>
+            <returns>True if the item is based on the template, false otherwise.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.SpoofedHttpRequestBase">
+            <summary>
+            Provides for a modifiable HttpRequestBase object, based on an existing HttpRequestBase object.
+            The wrapped request is deferred to if a given method or property is not overridden in the spoofed
+            wrapping request.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._request">
+            <summary>
+            The original request that is being wrapped.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getQueryString">
+            <summary>
+            If set, the delegate that yields the overridden query string.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getUrl">
+            <summary>
+            If set, the delegate that yields the overridden url.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getUrlReferrer">
+            <summary>
+            If set, the delegate that yields the overridden referrer.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getPath">
+            <summary>
+            If set, the delegate that yields the overridden path.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getFilePath">
+            <summary>
+            If set, the delegate that yields the overridden file path.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getIsLocal">
+            <summary>
+            If set, the delegate that yields the overridden IsLocal flag.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getPathInfo">
+            <summary>
+            If set, the delegate that yields the overridden path info.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getPhysicalPath">
+            <summary>
+            If set, the delegate that yields the overridden physical path.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.SpoofedHttpRequestBase._getRawUrl">
+            <summary>
+            If set, the delegate that yields the overridden raw url.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.#ctor(System.Web.HttpRequestBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Tracking.SpoofedHttpRequestBase"/> class.  In its initial state,
+            no properties of the wrapped request are overridden.
+            </summary>
+            <param name="request">The request.</param>
+            <exception cref="T:System.ArgumentNullException">If the request is null.</exception>
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Browser">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Params">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Path">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.FilePath">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Headers">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.QueryString">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.AcceptTypes">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.ApplicationPath">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.AnonymousID">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.AppRelativeCurrentExecutionFilePath">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.HttpChannelBinding">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.ClientCertificate">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.ContentEncoding">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.ContentLength">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.ContentType">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Cookies">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.CurrentExecutionFilePath">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Filter">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Form">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.HttpMethod">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.InputStream">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.IsAuthenticated">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.IsLocal">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.IsSecureConnection">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.LogonUserIdentity">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.PathInfo">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.PhysicalApplicationPath">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.PhysicalPath">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.RawUrl">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.RequestContext">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.RequestType">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.ServerVariables">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.TotalBytes">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Url">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.UrlReferrer">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.UserAgent">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.UserLanguages">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.UserHostAddress">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.UserHostName">
+            <inheritdoc />
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.Item(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.BinaryRead(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.MapImageCoordinates(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.MapPath(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.MapPath(System.String,System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.ValidateInput">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.SaveAs(System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.SetUrl(System.Uri)">
+            <summary>
+            Overrides the Url of the wrapped request object.  All the properties derived from the url
+            are also overridden accordingly.
+            </summary>
+            <param name="value">The new Url of the wrapped request.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.SpoofedHttpRequestBase.SetUrlReferrer(System.Uri)">
+            <summary>
+            Overrides the Url Referrer of the wrapped request object.
+            </summary>
+            <param name="value">The new Url Referrer of the wrapped request.</param>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.TrackingManager">
+            <summary>
+            Handles tracking events.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.TrackingManager.#ctor(Sitecore.Abstractions.BaseCorePipelineManager,Sitecore.FXM.Abstractions.ITrackerProvider,Sitecore.FXM.Abstractions.ISitecoreContext,Sitecore.FXM.Abstractions.IFxmLog)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Tracking.TrackingManager"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.TrackingManager.TrackPageVisit(System.Web.HttpRequestBase,Sitecore.FXM.Tracking.SpoofedHttpRequestBase,System.Web.HttpResponseBase,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.TrackingManager.TrackPageEvent(Sitecore.FXM.Tracking.EventDescriptors.ITrackDescriptor,System.String,System.Web.HttpRequestBase,Sitecore.FXM.Tracking.SpoofedHttpRequestBase,System.Web.HttpResponseBase)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.TrackingManager.ResolveFxmRequestContext(System.Web.HttpRequestBase)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.TrackingManager.CurrentContactExpiry">
+            <summary>
+            The current contact expiry.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.TrackingResult">
+            <summary>
+            Represents the result of a tracking process.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.TrackingResult.contactIdExpiry">
+            <summary>
+            The contact identifier expiry.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Tracking.TrackingResult.#ctor(System.String,System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Tracking.TrackingResult"/> class.
+            </summary>
+            <param name="contactId">The contact identifier.</param>
+            <param name="contactIdExpiry">The contact identifier expiry.</param>
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.TrackingResult.ContactId">
+            <summary>Gets or sets the contact identifier.</summary>
+            <value>The contact identifier.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.TrackingResult.SessionPath">
+            <summary>Gets or sets the optional path that identifies the current site.</summary>
+            <value>The session path.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.TrackingResult.ContactIdExpiry">
+            <summary>Gets the contact identifier expiry.</summary>
+            <value>The contact identifier expiry.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.TrackingResult.ElementMatches">
+            <summary>Gets or sets the element matches.</summary>
+            <value>The element matches.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.TrackingResult.DoNotTrack">
+            <summary>
+            Gets or sets a value indicating whether [do not track].
+            </summary>
+            <value><c>true</c> if [do not track]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Tracking.TrackingResult.Language">
+            <summary>Gets or sets the language.</summary>
+            <value>The language.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Tracking.TrackingResultCode">
+            <summary>
+            The defines the success and error result states of a tracking operation.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.TrackingResultCode.Success">
+            <summary>
+            Tracking was completed without errors.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.TrackingResultCode.DomainInvalid">
+            <summary>
+            Tracking failed. No domain matcher item matches request domain.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.TrackingResultCode.CurrentPageMustBeTracked">
+            <summary>
+            Tracking failed. TrackGoal is called before trackPage.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.TrackingResultCode.TrackingEntityDoesNotExist">
+            <summary>
+            Tracking failed. Goal/event/campaign Id specified does not exist.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Tracking.TrackingResultCode.CustomError">
+            <summary>
+            Tracking failed.
+            The tracking request could not be completed successfully due to an error raised in custom code.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings">
+            <summary>
+            Class to maintain any string or setting constants used throughout the application.
+            Note, not all the configuration keys/names are present here. After the further refactorings some values became hardcoded in the separate files.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.FxmSiteProviderName">
+            <summary>
+            The name of the FXM site provider.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Diagnostics">
+            <summary>
+            Settings for diagnostics.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Diagnostics.Tag">
+            <summary>The tag to use when logging.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Diagnostics.Logger">
+            <summary>The name of the configured logger.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Beacon">
+            <summary>The beacon.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Beacon.BeaconServicePath">
+            <summary>The beacon service end point location.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Pipelines">
+            <summary>The pipelines.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Pipelines.GroupName">
+            <summary>The group name.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Pipelines.ExternalSiteProxy">
+            <summary>
+            The external site proxy.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Pipelines.ExternalSiteProxy.BuildRequest">
+            <summary>
+            The build request.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Pipelines.ExternalSiteProxy.ProcessResponse">
+            <summary>
+            The process response.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Pipelines.ExternalSiteProxy.ProcessHtmlResponse">
+            <summary>
+            The process html response.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Pipelines.Content">
+            <summary>
+            The content.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Pipelines.Content.ExternalPageExperienceEditor">
+            <summary>The external page experience editor pipeline name.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.TemplateIds">
+            <summary>The templates.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.TemplateIds.DomainMatcher">
+            <summary>The domain matcher. Item path: /sitecore/templates/System/Analytics/Federated Experience Manager/Domain Matcher</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.TemplateIds.PageFilter">
+            <summary>The page matcher. Item path: /sitecore/templates/System/Analytics/Federated Experience Manager/Filters and Actions/Page Filter</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.TemplateIds.ElementMatcher">
+            <summary>The element matcher. Item path: /sitecore/templates/System/Analytics/Federated Experience Manager/Filters and Actions/Client Action</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.TemplateIds.ElementReplacer">
+            <summary>The element replacer. Item path: /sitecore/templates/System/Analytics/Federated Experience Manager/Filters and Actions/Element Placeholder</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.TemplateIds.SpeakPageSettings">
+            <summary>The element replacer. Item path (core db): /sitecore/client/Speak/Templates/Pages/PageSettings</summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.ItemIds">
+            <summary>The items.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.ItemIds.DefaultDevice">
+            <summary> The Sitecore Default Device item. Item path: /sitecore/layout/Devices/Default </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.ItemIds.PublishingTargets">
+            <summary>The publishing targets root. Item path: /sitecore/system/Publishing targets</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.ItemIds.ExperienceEditorLayout">
+            <summary>The FXM Experience Editor Layout Item ID. Item path: /sitecore/layout/Layouts/System/FXM/ExperienceEditor</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.ItemIds.FxmHome">
+            <summary>The FXM home. Item path: /sitecore/system/Marketing Control Panel/FXM</summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Fields">
+            <summary>The fields.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Fields.ElementMatcherSelectorField">
+            <summary> The element matcher selector field. </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Fields.TargetDatabaseField">
+            <summary> The publishing target database name field. </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Fields.ReplacerPositionField">
+            <summary>The replacer position field.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Fields.SelectorField">
+            <summary>
+            The selector field identifier.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Fields.PlaceholderPositionField">
+            <summary>
+            The placeholder position field identifier.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.FieldIds.ElementMatcherSelector">
+            <summary>The Element matcher selector field.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.FieldIds.ElementMatcherType">
+            <summary>The Element matcher type field.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.FieldIds.PrimaryDomainField">
+            <summary>The domain rules field.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.FieldIds.PageRulesField">
+            <summary> The page rules field. </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.FieldIds.DomainLanguageRulesField">
+            <summary> The rule field that applies language actions for tracked requests.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.FieldIds.DomainMatchRulesField">
+            <summary>The domain rules field.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Tracking">
+            <summary>
+            The tracking.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Tracking.AnalyticsGlobalCookieName">
+            <summary>
+            The analytics global cookie name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Tracking.SitecoreSessionCookieName">
+            <summary>
+            The native sitecore session cookie name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Tracking.AnalyticsCookieSlidingExpiryInDays">
+            <summary>
+            The number of days the expiry date of the analytics cookie is extended by on each visit.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Tracking.AnalyticsSessionIdParameterName">
+            <summary>
+            The analytics session id parameter name.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Tracking.FxmCustomValueKey">
+            <summary>
+            The key used to store the FXM specific custom value in WebTracker API.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Rules">
+            <summary>
+            The rules.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Rules.Conditions">
+            <summary>The conditions.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Rules.Conditions.CheckRequestHostCondition">
+            <summary>The check request host condition.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Rules.Conditions.CheckRequestPathForDomainCondition">
+            <summary>The CheckRequestPathForDomainCondition id.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Rules.Conditions.CheckRequestPathCondition">
+            <summary>The CheckRequestPathCondition id.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.Search">
+            <summary>
+            The search.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Search.DomainMatcherMasterIndex">
+            <summary>
+            The domain matcher master index.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.Search.DomainMatcherWebIndex">
+            <summary>
+            The domain matcher web index.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.ExperienceEditor">
+            <summary>
+            The experience editor.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.ComponentSettings.ExperienceEditor.Ribbon">
+            <summary>
+            The ribbon.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.ComponentSettings.ExperienceEditor.Ribbon.ItemPath">
+            <summary>
+            The ribbon item path.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.TranslatableText">
+            <summary>
+            The translatable text.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.NameIsRequired">
+            <summary>
+            "Name is required"
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.DomainMatcherDomainIsRequired">
+            <summary>
+            "Website domain is required"
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.ParentIsRequired">
+            <summary>
+            "A parent must be selected"
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.TheFxmFunctionYouHavePlacedOnThisPageHasBeenSaved">
+            <summary>
+            "The FXM function you have placed on this page has been saved." Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.YouCannotSelectParentItMayContainOtherControls">
+            <summary>
+            "You cannot select parent. It may contain other controls." Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.AddAClickActionToThisComponent">
+            <summary>
+            "Add a click action to this component" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.AddANewAction">
+            <summary>
+            "Add a new action" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.AddANewPlaceholderAfterTheElement">
+            <summary>
+            "Add a new placeholder after the element" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.AddANewPlaceholderBeforeTheElement">
+            <summary>
+            "Add a new placeholder before the element" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.AddANewPlaceholderInsteadOfTheElement">
+            <summary>
+            "Add a new placeholder instead of the element" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.AddAfter">
+            <summary>
+            "Add after" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.AddBefore">
+            <summary>
+            "Add before" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.Replace">
+            <summary>
+            "Replace" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.ChangeLanguageTo0">
+            <summary>
+            "Change language to '{0}'" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.ThisPageIsIn0YouAreCurrentlyCreatingItemsIn1">
+            <summary>
+            "This page is in {0}.  You are currently creating items in {1}." Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.TranslatableText.UnableToLocateJavaScriptBeaconOnExternalWebsite">
+            <summary>
+            "Unable to locate JavaScript beacon on external website" Used by [TranslationUtil.js].
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Utilities.FxmUtility">
+            <summary>
+            The fxm utility.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Utilities.FxmUtility.IsFxmEnabled">
+            <summary>
+            The is fxm enabled.
+            </summary>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Utilities.FxmUtility.MasterDatabaseName">
+            <summary>
+            Gets the "master" database name.
+            </summary>
+            <returns>The database name string.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Utilities.FxmUtility.GetWebDatabaseName(Sitecore.Abstractions.BaseSiteManager,Sitecore.Abstractions.BaseSettings)">
+            <summary>
+            Gets the "web" database name.
+            </summary>
+            <returns>The database name string.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Utilities.FxmUtility.GetUriHost(System.Uri)">
+            <summary>
+            Gets the FXM host.
+            </summary>
+            <param name="uri">The URI.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.FXM.Utilities.FxmUtility.GetBeaconBundlePath(Sitecore.Abstractions.BaseSettings)">
+            <summary>Gets the path to the Beacon bundle.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Utilities.FxmUtility.GetBeaconBundleAddress(System.String,Sitecore.Abstractions.BaseSettings)">
+            <summary>Gets the address of the Beacon bundle.</summary>
+            <param name="host">The DNS host name to include in the Beacon address.</param>
+            <param name="settings">Sitecore Settings.</param>
+            <returns>The Beacon bundle address.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Utilities.OutcomeUtility">
+            <summary>
+            Represents the outcome utility.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Utilities.OutcomeUtility.ClickActionOutcomeFieldId">
+            <summary>
+            The click action outcome field identifier.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Utilities.OutcomeUtility.SaveOutcomesToItem(Sitecore.Data.Items.Item,System.Collections.Generic.IEnumerable{Sitecore.Data.ID})">
+            <summary>
+            Saves an outcomes to item.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="outcomeIds">The outcomes list.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Utilities.OutcomeUtility.GetItemOutcomeIds(Sitecore.Data.Items.Item)">
+            <summary>
+            Gets an assigned outcomes to the item.
+            </summary>
+            <param name="item">The item.</param>
+            <returns>The list of the <see cref="T:Sitecore.Data.ID"/>.</returns>
+        </member>
+        <member name="T:Sitecore.ItemCanBeNullAttribute">
+            <summary>
+            Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+            and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+            or of the Lazy.Value property can be null.
+            </summary>
+        </member>
+        <member name="T:Sitecore.ContractAnnotationAttribute">
+            <summary>
+            Describes dependency between method input and output.
+            </summary>
+            <syntax>
+            <p>Function Definition Table syntax:</p>
+            <list>
+            <item>FDT      ::= FDTRow [;FDTRow]*</item>
+            <item>FDTRow   ::= Input =&gt; Output | Output &lt;= Input</item>
+            <item>Input    ::= ParameterName: Value [, Input]*</item>
+            <item>Output   ::= [ParameterName: Value]* {halt|stop|void|nothing|Value}</item>
+            <item>Value    ::= true | false | null | notnull | canbenull</item>
+            </list>
+            If method has single input parameter, it's name could be omitted.<br/>
+            Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same) for method output
+            means that the methos doesn't return normally (throws or terminates the process).<br/>
+            Value <c>canbenull</c> is only applicable for output parameters.<br/>
+            You can use multiple <c>[ContractAnnotation]</c> for each FDT row, or use single attribute
+            with rows separated by semicolon. There is no notion of order rows, all rows are checked
+            for applicability and applied per each program state tracked by R# analysis.<br/>
+            </syntax>
+            <examples><list>
+            <item><code>
+            [ContractAnnotation("=&gt; halt")]
+            public void TerminationMethod()
+            </code></item>
+            <item><code>
+            [ContractAnnotation("halt &lt;= condition: false")]
+            public void Assert(bool condition, string text) // regular assertion method
+            </code></item>
+            <item><code>
+            [ContractAnnotation("s:null =&gt; true")]
+            public bool IsNullOrEmpty(string s) // string.IsNullOrEmpty()
+            </code></item>
+            <item><code>
+            // A method that returns null if the parameter is null,
+            // and not null if the parameter is not null
+            [ContractAnnotation("null =&gt; null; notnull =&gt; notnull")]
+            public object Transform(object data) 
+            </code></item>
+            <item><code>
+            [ContractAnnotation("=&gt; true, result: notnull; =&gt; false, result: null")]
+            public bool TryParse(string s, out Person result)
+            </code></item>
+            </list></examples>
+        </member>
+    </members>
+</doc>

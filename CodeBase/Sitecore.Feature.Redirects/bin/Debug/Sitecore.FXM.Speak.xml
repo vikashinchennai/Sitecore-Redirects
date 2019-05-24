@@ -1,0 +1,762 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.FXM.Speak</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.FXM.Speak.Controls.Common.Buttons.ControlsExtension">
+            <summary>
+            The controls extension.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Common.Buttons.ControlsExtension.Button(Sitecore.Mvc.Controls,System.String,System.String,System.Object)">
+            <summary>
+            The button.
+            </summary>
+            <param name="controls">
+            The controls.
+            </param>
+            <param name="controlId">
+            The control id.
+            </param>
+            <param name="dataSource">
+            The data source.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.HtmlString"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Common.Labels.ControlsExtension">
+            <summary>
+            The controls extension.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Common.Labels.ControlsExtension.Label(Sitecore.Mvc.Controls,System.String,System.String,System.Object)">
+            <summary>
+            The label.
+            </summary>
+            <param name="controls">
+            The controls.
+            </param>
+            <param name="controlId">
+            The control id.
+            </param>
+            <param name="dataSource">
+            The data source.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.HtmlString"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Edit.ControlsExtension">
+            <summary>
+            The controls extension.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.ControlsExtension.EditClientActionControl(Sitecore.Mvc.Controls,Sitecore.Mvc.Presentation.Rendering)">
+            <summary>
+            The edit client action control.
+            </summary>
+            <param name="controls">
+            The controls.
+            </param>
+            <param name="rendering">
+            The rendering.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.HtmlString"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.ControlsExtension.EditClientActionControl(Sitecore.Mvc.Controls,System.String,System.Object)">
+            <summary>
+            The edit client action control.
+            </summary>
+            <param name="controls">
+            The controls.
+            </param>
+            <param name="tabControlId">
+            The tab control id.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.HtmlString"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.ControlsExtension.EditElementReplacerControl(Sitecore.Mvc.Controls,Sitecore.Mvc.Presentation.Rendering)">
+            <summary>
+            The edit element replacer control.
+            </summary>
+            <param name="controls">
+            The controls.
+            </param>
+            <param name="rendering">
+            The rendering.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.HtmlString"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.ControlsExtension.EditElementReplacerControl(Sitecore.Mvc.Controls,System.Object)">
+            <summary>
+            The edit element replacer control.
+            </summary>
+            <param name="controls">
+            The controls.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.HtmlString"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.ControlsExtension.EditPageMatcherControl(Sitecore.Mvc.Controls,Sitecore.Mvc.Presentation.Rendering)">
+            <summary>
+            The edit page matcher control.
+            </summary>
+            <param name="controls">
+            The controls.
+            </param>
+            <param name="rendering">
+            The rendering.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.HtmlString"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.ControlsExtension.EditPageMatcherControl(Sitecore.Mvc.Controls,System.String,System.Object)">
+            <summary>
+            The edit page matcher control.
+            </summary>
+            <param name="controls">
+            The controls.
+            </param>
+            <param name="tabControlId">
+            The tab control id.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.HtmlString"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl">
+            <summary>
+            The edit page matcher control.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.#ctor(Sitecore.Mvc.Presentation.RenderingParametersResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl"/> class.
+            </summary>
+            <param name="parametersResolver">
+            The parameters resolver.
+            </param>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.TabControl">
+            <summary>
+            Gets or sets the tab control.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.Item">
+            <summary>
+            Gets or sets the item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.IsInExperienceEditorRendering">
+            <summary>
+            Gets or sets the value indicates whether the rendering is being rendered in the Experience Editor application.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.NameControlId">
+            <summary>
+            Gets or sets the name control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.UrlControlId">
+            <summary>
+            Gets or sets the url control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.CampaignsPickerControlId">
+            <summary>
+            Gets or sets the campaigns picker control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.EventsPickerControlId">
+            <summary>
+            Gets or sets the events picker control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.GoalsPickerControlId">
+            <summary>
+            Gets or sets the goals picker control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.OutcomesPickerControlId">
+            <summary>
+            Gets or sets the outcomes picker control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.ProfilesPickerControlId">
+            <summary>
+            Gets or sets the profiles picker control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.ThisPageOnlyRadioButtonControlId">
+            <summary>
+            Gets or sets the this page only radio button control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.ThisPageWithChildrenRadioButtonControlId">
+            <summary>
+            Gets or sets the this page with children radio button control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.CustomRadioButtonControlId">
+            <summary>
+            Gets or sets the custom radio button control id.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditPageMatcherControl.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            The render.
+            </summary>
+            <param name="output">
+            The output.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl">
+            <summary>
+            The edit element replacer control.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl.#ctor(Sitecore.Mvc.Presentation.RenderingParametersResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl"/> class.
+            </summary>
+            <param name="parametersResolver">
+            The parameters resolver.
+            </param>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl.Item">
+            <summary>
+            Gets or sets the item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl.NameControlId">
+            <summary>
+            Gets or sets the name control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl.SelectorControlId">
+            <summary>
+            Gets or sets the selector control id.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditElementReplacerControl.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            The render.
+            </summary>
+            <param name="output">
+            The output.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl">
+            <summary>
+            The edit client action control.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.#ctor(Sitecore.Mvc.Presentation.RenderingParametersResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl"/> class.
+            </summary>
+            <param name="parametersResolver">
+            The parameters resolver.
+            </param>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.TabControl">
+            <summary>
+            Gets or sets the tab control.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.Item">
+            <summary>
+            Gets or sets the item.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.NameControlId">
+            <summary>
+            Gets or sets the name control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.CampaignsPickerControlId">
+            <summary>
+            Gets or sets the campaigns picker control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.EventsPickerControlId">
+            <summary>
+            Gets or sets the events picker control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.GoalsPickerControlId">
+            <summary>
+            Gets or sets the goals picker control id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.OutcomesPickerControlId">
+            <summary>
+            Gets or sets the outcomes picker control id.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Edit.EditClientActionControl.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            The render.
+            </summary>
+            <param name="output">
+            The output.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuBuilder">
+            <summary>
+            The dashboard menu builder.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuBuilder._databaseContext">
+            <summary>
+            The sitecore context.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuBuilder.#ctor(Sitecore.FXM.Abstractions.ISitecoreDatabaseContext)">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuBuilder"/> class.</summary>
+            <param name="databaseContext">The Sitecore Context.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuBuilder.BuildMenu(Sitecore.Data.ID,System.String)">
+            <summary>
+            The build menu.
+            </summary>
+            <param name="rootItemId">
+            The root item id.
+            </param>
+            <param name="userProfileValue">
+            The user profile value.
+            </param>
+            <returns>
+            The <see cref="T:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuBuilder.BuildMenu(Sitecore.Data.Items.Item,Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem,System.String)">
+            <summary>
+            The build menu.
+            </summary>
+            <param name="parentContentItem">
+            The parent content item.
+            </param>
+            <param name="parentMenuItem">
+            The parent menu item.
+            </param>
+            <param name="userProfileValue">
+            The user profile value.
+            </param>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuHelper">
+            <summary>
+            The dashboard menu helper.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuHelper.RenderExtendedMenu(System.Web.Mvc.HtmlHelper,System.String,System.Boolean,System.String)">
+            <summary>
+            The render extended menu.
+            </summary>
+            <param name="helper">
+            The helper.
+            </param>
+            <param name="rootItemId">
+            The root item id.
+            </param>
+            <param name="isRootHidden">
+            The is root hidden.
+            </param>
+            <param name="userProfileValue">
+            The user profile value.
+            </param>
+            <returns>
+            The <see cref="T:System.Web.Mvc.MvcHtmlString"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuHelper.GetUserProfileKey(System.String)">
+            <summary>
+            The get user profile key.
+            </summary>
+            <param name="rootItemUrl">
+            The root item url.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuHelper.RenderHtml(Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem,System.Boolean)">
+            <summary>
+            The render html.
+            </summary>
+            <param name="menuItem">
+            The menu item.
+            </param>
+            <param name="isRootHidden">
+            The is root hidden.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuHelper.RenderItemHtml(Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem,System.Boolean)">
+            <summary>
+            The render item html.
+            </summary>
+            <param name="menuItem">
+            The menu item.
+            </param>
+            <param name="isRootHidden">
+            The is root hidden.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuHelper.GetRootItemHtml(Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem)">
+            <summary>
+            The get root item html.
+            </summary>
+            <param name="rootItem">
+            The root item.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuHelper.GetHeaderItemHtml(Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem)">
+            <summary>
+            The get header item html.
+            </summary>
+            <param name="headerItem">
+            The header item.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuHelper.GetLinkItemHtml(Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem)">
+            <summary>
+            The get link item html.
+            </summary>
+            <param name="menuItem">
+            The menu item.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem">
+            <summary>The Extended Menu Item class.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.Children">
+            <summary>Gets or sets the child items of the Menu Item.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.Icon">
+            <summary>Gets or sets the Menu Item Icon.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.Id">
+            <summary>Gets or sets the unique ID.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.Parent">
+            <summary>Gets or sets the parent Menu Item.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.Name">
+            <summary>Gets or sets the display text.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.Url">
+            <summary>Gets or sets the Menu Item URL.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.Click">
+            <summary>Gets or sets the Click action script.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.IsOpen">
+            <summary>Gets or sets a value indicating whether or not the Menu Item is displayed as open.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.IsHighlighted">
+            <summary>Gets or sets a value indicating whether or not the Menu Item is highlighted.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.IsSelected">
+            <summary>Gets or sets a value indicating whether or not the Menu Item is selected.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem.Depth">
+            <summary>Gets or sets the depth of the Menu Item in the Menu tree.</summary>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Controls.Navigation.Menus.ItemExtensions">
+            <summary>
+            The item extensions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Controls.Navigation.Menus.ItemExtensions.ConvertToExtendedMenuItem(Sitecore.Data.Items.Item)">
+            <summary>
+            The convert to extended menu item.
+            </summary>
+            <param name="item">
+            The item.
+            </param>
+            <returns>
+            The <see cref="T:Sitecore.FXM.Speak.Controls.Navigation.Menus.DashboardMenuItem"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.PageCode.BaseRequireAnalyticsPage">
+            <summary>
+            The base require analytics page.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.PageCode.BaseRequireAnalyticsPage.OnPageCodeLoad">
+            <summary>
+            The on page code load.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.PageCode.BaseRequireAnalyticsPage.Initialize">
+            <summary>
+            The initialize.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.PageCode.DomainDashboard">
+            <summary>
+            The domain dashboard.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.PageCode.DomainDashboard.OnPageCodeLoad">
+            <summary>
+            The on page code load.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.PageCode.DomainMatcherRulesTab">
+            <summary>
+            The domain matcher rules tab.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.PageCode.DomainMatcherRulesTab.RulesTabTreeview">
+            <summary>
+            Gets or sets the rules tab tree view.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.PageCode.DomainMatcherRulesTab.RulesTabAccordionWrapper">
+            <summary>
+            Gets or sets the rules tab accordion wrapper.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.PageCode.DomainMatcherRulesTab.OnPageCodeLoad">
+            <summary>
+            The on page code load.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.PageCode.DomainMatcherRulesTab.ItemHasChildren(System.String)">
+            <summary>
+            The item has children.
+            </summary>
+            <param name="itemId">
+            The item id.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.PageCode.ManageRulesDialog">
+            <summary>
+            The manage rules dialog.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.PageCode.ManageRulesDialog.RuleTreeView">
+            <summary>
+            Gets or sets the rule tree view.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.PageCode.ManageRulesDialog.Initialize">
+            <summary>
+            The initialize.
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.FxmRibbonWebControl">
+            <summary>
+            The fxm ribbon web control.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.FxmRibbonWebControl.Mode">
+            <summary>
+            Gets the current control mode (always returns "edit").
+            </summary>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.GetExperienceEditorRibbon.AddFxmEditRibbon">
+            <summary>Adds the FXM ribbon to the experience editor.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Ribbon.GetExperienceEditorRibbon.AddFxmEditRibbon.AddControl(Sitecore.ExperienceEditor.Pipelines.GetExperienceEditorRibbon.GetExperienceEditorRibbonArgs)">
+            <summary>Adds the control.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Ribbon.GetExperienceEditorRibbon.AddFxmEditRibbon.IsValid">
+            <summary>Checks the validity of the current item for FXM.</summary>
+            <returns>True if the state is correct for FXM.</returns>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.Common.GetComponentSettings.SitecoreSettings">
+            <summary>
+            Gets the sitecore settings.
+            </summary>
+            <value>
+            The sitecore settings.
+            </value>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Ribbon.Requests.Common.GetComponentSettings.ProcessRequest">
+            <summary>
+            The process request.
+            </summary>
+            <returns>
+            The <see cref="T:Sitecore.ExperienceEditor.Speak.Server.Responses.PipelineProcessorResponseValue"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext">
+            <summary>
+            The context used when opening editing an item field.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext.itemInstance">
+            <summary>The itemInstance.</summary>
+        </member>
+        <member name="F:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext.fieldInstance">
+            <summary>
+            The rules field instance.
+            </summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext.ItemId">
+            <summary>Gets or sets the itemInstance identifier.</summary>
+            <value>The itemInstance identifier.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext.Database">
+            <summary>Gets or sets the database.</summary>
+            <value>The database.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext.Field">
+            <summary>Gets or sets the field.</summary>
+            <value>The field.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext.InitValue">
+            <summary>Gets or sets the initialize value.</summary>
+            <value>The initialize value.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext.ItemInstance">
+            <summary>Gets the itemInstance.</summary>
+            <value>The itemInstance.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.ItemFieldRequestContext.FieldInstance">
+            <summary>Gets the rule field instance.</summary>
+            <value>The rule field instance.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.GetElementReplacersData">
+            <summary>Gets the element replacers data.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.GetElementReplacersData.GetPlaceHolderHtml">
+            <summary>Gets the place holder HTML.</summary>
+            <returns>Data object containing placeholder information.</returns>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.GetElementReplacersData.GetElementReplacerJson(Sitecore.Data.ID)">
+            <summary>Gets the element replacer json.</summary>
+            <param name="id">The identifier.</param>
+            <returns>Object data to be serialized.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.GetClientActionsData">
+            <summary>Gets the client actions data.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.GetClientActionsData.ProcessRequest">
+            <summary>The process request.</summary>
+            <returns>The <see cref="T:Sitecore.ExperienceEditor.Speak.Server.Responses.PipelineProcessorResponseValue"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.ElementReplacerRequestContext">
+            <summary>
+            The context when requesting element replacer data.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.ElementReplacerRequestContext.itemInstance">
+            <summary>The itemInstance.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.ElementReplacerRequestContext.ItemId">
+            <summary>Gets or sets the item id.</summary>
+            <value>The id.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.ElementReplacerRequestContext.ItemInstance">
+            <summary>Gets the itemInstance.</summary>
+            <value>The itemInstance.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.MatchersRequestContext">
+            <summary>
+            The context used when requesting matcher data.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.MatchersRequestContext.databaseInstance">
+            <summary>The database instance.</summary>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.MatchersRequestContext.Ids">
+            <summary>Gets or sets the ids.</summary>
+            <value>The ids.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.MatchersRequestContext.Database">
+            <summary>Gets or sets the database.</summary>
+            <value>The database.</value>
+        </member>
+        <member name="P:Sitecore.FXM.Speak.Ribbon.Requests.Matchers.MatchersRequestContext.DatabaseInstance">
+            <summary>Gets the database instance.</summary>
+            <value>The database instance.</value>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.Requests.Rules.GetRulesEditorUrl">
+            <summary>The get rules dialog url.</summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Ribbon.Requests.Rules.GetRulesEditorUrl.ProcessRequest">
+            <summary>The process request.</summary>
+            <returns>The <see cref="T:Sitecore.ExperienceEditor.Speak.Server.Responses.PipelineProcessorResponseValue"/>.</returns>
+        </member>
+        <member name="T:Sitecore.FXM.Speak.Ribbon.Requests.FxmToggleRegistryKey">
+            <summary>
+            The toggle registry key.
+            </summary>
+        </member>
+        <member name="F:Sitecore.FXM.Speak.Ribbon.Requests.FxmToggleRegistryKey.registryKeys">
+            <summary>
+            The registry keys.
+            </summary>
+        </member>
+        <member name="M:Sitecore.FXM.Speak.Ribbon.Requests.FxmToggleRegistryKey.ProcessRequest">
+            <summary>
+            The process request.
+            </summary>
+            <returns>
+            The <see cref="T:Sitecore.ExperienceEditor.Speak.Server.Responses.PipelineProcessorResponseValue"/>.
+            </returns>
+        </member>
+    </members>
+</doc>

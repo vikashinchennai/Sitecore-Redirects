@@ -1,0 +1,2636 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Analytics.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Analytics.Core.Agent">
+            <summary>
+            Defines a abstract base class for an agent.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Agent.Execute">
+            <summary>
+            Executes the agent.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Agent.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously executes the agent.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Agent.ExecuteCoreAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously executes the agent.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ApiKeyHttpTransportFactory">
+            <summary>
+            The HTTP transport Factory, which adds Reporting Api key to authenticate request.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ApiKeyHttpTransportFactory.#ctor(System.String,System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance using the given URL.
+            </summary>
+            <param name="serviceHostUrl">Service host URL to use as a base for all requests.</param>
+            <param name="requireHttps">If set true and schema in <paramref name="serviceHostUrl"/> is not HTTPS, it will be overwritten to HTTPS</param>
+            <param name="connectionStringName">Name of the connection string to get api key from.</param>
+            <param name="headerName">Name of the header, which is used to send api key.</param>
+            <param name="minimalApiKeyLength">Minimal length required for API Key.</param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ApiKeyHttpTransportFactory.CreateWebRequest(System.String)">
+            <summary>
+            Creates an <see cref="T:System.Net.HttpWebRequest"/> to connect with Sitecore's cloud services.
+            </summary>
+            <param name="path">
+            The path.
+            </param>
+            <returns>
+            The <see cref="T:System.Net.WebRequest"/>.
+            </returns>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.ApiKeyHttpTransportFactory.MinimalApiKeyLength">
+            <summary>
+            Gets minimal length required for API Key.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ApiKeyHttpTransportFactory.GetApiKey">
+            <summary>
+            Gets the API key
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.AspNetConfiguration">
+            <summary>
+              Wraps ASP.NET settings in an easily accessible way.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.AspNetConfiguration.SessionTimeout">
+            <summary>
+              Gets ASP.NET session timeout in minutes.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.AsyncBackgroundService">
+            <summary>
+            Represents a generic background service that asynchronosly executes <see cref="T:Sitecore.Analytics.Core.IAsyncAgent"/> instances using <see cref="T:System.Threading.ThreadPool"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.#ctor(Sitecore.Abstractions.BaseLog,System.String,System.TimeSpan,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.AsyncBackgroundService"/> class.
+            </summary>
+            <param name="logger">
+            The logger to log activity of the agents.
+            </param>
+            <param name="agentPath">
+            The configuration path to the agent.
+            </param>
+            <param name="interval">
+            The interval (in seconds) between executions of one agent.
+            </param>
+            <param name="agentsCount">
+            The number of agents to spawn.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.#ctor(Sitecore.Abstractions.BaseLog,System.String,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.BackgroundService"/> class. 
+            The agent count will be resolved by reading the number of processors
+            </summary>
+            <param name="logger">
+            The logger to log activity of the agents.
+            </param>
+            <param name="agentPath">
+            The configuration path to the agent.
+            </param>
+            <param name="interval">
+            The interval (in seconds) between executions of one agent.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:Sitecore.Analytics.Core.AsyncBackgroundService"/> class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.AsyncBackgroundService.Interval">
+            <summary>
+            Gets the interval (in seconds) between executions of one agent.
+            </summary>
+            <value>
+            The interval (in seconds) between executions of one agent.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.AsyncBackgroundService.IsRunning">
+            <summary>
+            Gets a value indicating whether this background service is running.
+            </summary>
+            <value>
+            <c>true</c> if this background service is running; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.AsyncBackgroundService.MaxAgents">
+            <summary>
+            Gets the max active running agents.
+            </summary>
+            <value>
+            The max active running agents.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.Start">
+            <summary>
+            Spawns necessary amount of agents and starts ther execution.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.StopAgents(System.Int32)">
+            <summary>
+            Stops the execution of all started agents.
+            </summary>
+            <param name="terminateAgentTimeoutSeconds">
+            The number of seconds to wait for the agent to finish.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.Stop">
+            <summary>
+            Stops the execution of all started agents.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.ExecuteAgentAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously creates and executes an <see cref="T:Sitecore.Analytics.Core.IAsyncAgent"/>.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.CreateAgent">
+            <summary>
+            Creates a new agent instance using the object factory.
+            </summary>
+            <returns>The created agent instance.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.ResolveDefaultThreadCount">
+            <summary>
+            Resolves the default thread count by taking the number of processors in 
+            the system into account.   
+            </summary>
+            <returns>The resolved thread count.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.AsyncBackgroundService.RunAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously executes an agent on each iteration.
+            This method is being called by the <see cref="T:System.Threading.ThreadPool"/> threads using <see cref="M:System.Threading.Tasks.Task.Run(System.Action)"/>.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ConditionValidatorExtensions">
+            <summary>
+            Contains extension methods to provide additional functionality to for <see cref="T:Sitecore.Framework.Conditions.ConditionValidator`1"/>. 
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConditionValidatorExtensions.IsDefinedInEnum``1(Sitecore.Framework.Conditions.ConditionValidator{``0})">
+            <summary>
+            Checks whether the value is defined in the enumeration.
+            </summary>
+            <typeparam name="TEnum">The type of the enumeration to check.</typeparam>
+            <param name="validator">The validator which contains value to check.</param>
+            <returns>The validator with the checked value.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="validator"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">The value in <paramref name="validator.Value.Value"/> is not defined in the <typeparamref name="TEnum"/> enumeration.</exception>
+            <remarks>The method uses <see cref="M:System.Enum.IsDefined(System.Type,System.Object)"/> method for check. It means that if 
+            TEnum is an enumeration that is defined by using the FlagsAttribute attribute, the method returns false 
+            if multiple bit fields in value are set but value does not correspond to a composite enumeration value, 
+            or if value is a string concatenation of the names of multiple bit flags.
+            </remarks>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.IAsyncAgent">
+            <summary>
+            Defines a set of operations, a work agent must implement to be executed by <see cref="T:Sitecore.Analytics.Core.AsyncBackgroundService"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.IAsyncAgent.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously executes the agent.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.IAsyncWorkScheduler`1">
+            <summary>
+              Allows a class to implement an asynchronous work scheduler that returns work items of type <typeparamref name="TItem"/>.
+            </summary>
+            <typeparam name="TItem">
+              The type of the work items the work scheduler returns.
+            </typeparam>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.IAsyncWorkScheduler`1.TryGetNextAsync">
+            <summary>
+              Tries to obtain a piece of work asynchronously.
+            </summary>
+            <returns>
+              A <see cref="T:System.Threading.Tasks.Task`1"/> object that represents the asynchronous operation. When the task completes, the
+              <see cref="P:System.Threading.Tasks.Task`1.Result"/> property contains the work item obtained; or <b>null</b> if a work
+              item could not be obtained.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.IAsyncWorkScheduler`1.MarkProcessedAsync(`0)">
+            <summary>
+              Asynchronously marks the specified work item processed.
+            </summary>
+            <param name="item">
+              The work item to mark as processed.
+            </param>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.IBackgroundService">
+            <summary>
+            Defines a set of operations for a generic background service that executes agent(s).
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IBackgroundService.Interval">
+            <summary>
+            Gets the interval (in seconds) between executions of one agent.
+            </summary>
+            <value>
+            The interval (in seconds) between executions of one agent.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IBackgroundService.MaxAgents">
+            <summary>
+            Gets the max active running agents.
+            </summary>
+            <value>
+            The max active running agents.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IBackgroundService.IsRunning">
+            <summary>
+            Gets a value indicating whether this background service is running.
+            </summary>
+            <value>
+            <c>true</c> if this background service is running; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.IBackgroundService.Start">
+            <summary>
+            Spawns necessary amount of agents and starts ther execution.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.IBackgroundService.StopAgents(System.Int32)">
+            <summary>
+            Stops the execution of all started agents.
+            </summary>
+            <param name="terminateAgentTimeoutSeconds">
+            The number of seconds to wait for the agent to finish.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Metadata.UsesContactFacetsAttribute">
+            <summary>
+              Specifies the list of contact facets the aggregation pipeline processor uses.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Metadata.UsesContactFacetsAttribute.FacetNames">
+            <summary>
+              Gets names of the contact facets the current pipeline processor uses.
+            </summary>
+            <returns>
+              A <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> of <see cref="T:System.String"/> values that contains the names of the
+              contact facets the current pipeline processor uses.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Metadata.UsesContactFacetsAttribute.#ctor(System.String[])">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Metadata.UsesContactFacetsAttribute"/> class.
+            </summary>
+            <param name="facetNames">
+              A <see cref="T:System.String"/> array that contains zero or more facet names to load.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Metadata.UsesInteractionFacetsAttribute">
+            <summary>
+              Specifies the list of interaction facets the aggregation pipeline processor uses.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Metadata.UsesInteractionFacetsAttribute.FacetNames">
+            <summary>
+              Gets names of the interaction facets the current pipeline processor uses.
+            </summary>
+            <returns>
+              A <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> of <see cref="T:System.String"/> values that contains the names of the
+              interaction facets the current pipeline processor uses.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Metadata.UsesInteractionFacetsAttribute.#ctor(System.String[])">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Metadata.UsesInteractionFacetsAttribute"/> class.
+            </summary>
+            <param name="facetNames">
+              A <see cref="T:System.String"/> array that contains zero or more facet names to load.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.BackgroundService">
+            <summary>
+            Represents a generic background service that asynchronosly executes <see cref="T:Sitecore.Analytics.Core.IAgent"/> instances by creating its own <see cref="T:System.Threading.Thread"/> instances.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.#ctor(Sitecore.Abstractions.BaseLog,System.String,System.TimeSpan,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.BackgroundService"/> class.
+            </summary>
+            <param name="logger">
+            The logger to log activity of the agents.
+            </param>
+            <param name="agentPath">
+            The configuration path to the agent.
+            </param>
+            <param name="interval">
+            The interval (in seconds) between executions of one agent.
+            </param>
+            <param name="agentsCount">
+            The number of agents to spawn. 
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.#ctor(Sitecore.Abstractions.BaseLog,System.String,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.BackgroundService"/> class. 
+            The agent count will be resolved by reading the number of processors
+            </summary>
+            <param name="logger">
+            The logger to log activity of the agents.
+            </param>
+            <param name="agentPath">
+            The configuration path to the agent.
+            </param>
+            <param name="interval">
+            The interval (in seconds) between executions of one agent.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:Sitecore.Analytics.Core.BackgroundService"/> class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.BackgroundService.Interval">
+            <summary>
+            Gets the interval (in seconds) between executions of one agent.
+            </summary>
+            <value>
+            The interval (in seconds) between executions of one agent.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.BackgroundService.IsRunning">
+            <summary>
+            Gets a value indicating whether this background service is running.
+            </summary>
+            <value>
+            <c>true</c> if this background service is running; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.BackgroundService.MaxAgents">
+            <summary>
+            Gets the max active running agents.
+            </summary>
+            <value>
+            The max active running agents.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.BackgroundService.ThreadsAreInitiated">
+            <summary>
+            Gets a value indicating whether the threads are initiated.
+            </summary>
+            <value>
+            <c>true</c> if this threads are initiated; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.Start">
+            <summary>
+            Spawns necessary amount of agents and starts ther execution.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.StopAgents(System.Int32)">
+            <summary>
+            Stops the execution of all started agents.
+            </summary>
+            <param name="terminateAgentTimeoutSeconds">
+            The number of seconds to wait for the agent to finish.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.Stop">
+            <summary>
+            Stops the execution of all started agents.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.ExecuteAgent">
+            <summary>
+            Creates and executes an agent.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.CreateAgent">
+            <summary>
+            Creates a new agent instance using the object factory.
+            </summary>
+            <returns>The created agent instance.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.InitializeThreads">
+            <summary>
+            Initializes the threads.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.ResolveDefaultThreadCount">
+            <summary>
+            Resolves the default thread count by taking the number of processors in 
+            the system into account.   
+            </summary>
+            <returns>The resolved thread count.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.BackgroundService.Run">
+            <summary>
+            Execute an agent on each iteration.
+            This method is being called by the hosted threads.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException">
+            <summary>
+              Implements an exception type that is thrown when an opration failes because the target entity modified by a
+              concurrent operation.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException.#ctor(System.String,System.Exception)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+            <param name="inner">
+              The exception that is the cause of the current exception, or a <b>null</b> if the current exception is
+              the original exception.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.ConcurrentlyModifiedException"/> class with serialized data.
+            </summary>
+            <param name="info">
+              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="info"/> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Data.DataProviderException">
+            <summary>
+              Base class for general exceptions thrown by data providers.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.DataProviderException.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.DataProviderException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.DataProviderException.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.DataProviderException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.DataProviderException.#ctor(System.String,System.Exception)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.DataProviderException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+            <param name="inner">
+              The exception that is the cause of the current exception, or a <b>null</b> if the current exception is
+              the original exception.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.DataProviderException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.DataProviderException"/> class with serialized data.
+            </summary>
+            <param name="info">
+              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="info"/> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException">
+            <summary>
+              Implements an exception type that is thrown when an operation fails because the entity already exists.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+            <param name="inner">
+              The exception that is the cause of the current exception, or a <b>null</b> if the current exception is
+              the original exception.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.EntityAlreadyExistsException"/> class with serialized data.
+            </summary>
+            <param name="info">
+              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="info"/> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Data.EntityDoesNotExistException">
+            <summary>
+              Implements an exception type that is thrown when an operation fails because the entity does not exists.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.EntityDoesNotExistException.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.EntityDoesNotExistException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.EntityDoesNotExistException.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.EntityDoesNotExistException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.EntityDoesNotExistException.#ctor(System.String,System.Exception)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.EntityDoesNotExistException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+            <param name="inner">
+              The exception that is the cause of the current exception, or a <b>null</b> if the current exception is
+              the original exception.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.EntityDoesNotExistException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.EntityDoesNotExistException"/> class with serialized data.
+            </summary>
+            <param name="info">
+              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="info"/> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Data.InputValidationException">
+            <summary>
+              Implements an exception type that is thrown when the validation of the input parameters fail.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.InputValidationException.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.InputValidationException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.InputValidationException.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.InputValidationException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.InputValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.InputValidationException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+            <param name="inner">
+              The exception that is the cause of the current exception, or a <b>null</b> if the current exception is
+              the original exception.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.InputValidationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.InputValidationException"/> class with serialized data.
+            </summary>
+            <param name="info">
+              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="info"/> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Data.NotInTransactionException">
+            <summary>
+            Represents an exception type which is thrown when an operation detected no transactional context when one was expected.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.NotInTransactionException.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.NotInTransactionException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.NotInTransactionException.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.NotInTransactionException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.NotInTransactionException.#ctor(System.String,System.Exception)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.NotInTransactionException"/> class.
+            </summary>
+            <param name="message">
+              The message that describes the error.
+            </param>
+            <param name="inner">
+              The exception that is the cause of the current exception, or a <b>null</b> if the current exception is
+              the original exception.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Data.NotInTransactionException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Data.NotInTransactionException"/> class with serialized data.
+            </summary>
+            <param name="info">
+              The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+              The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="info"/> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.NullPerformanceCounters">
+            <summary>
+              Implements a performance counters provider that does not update any performance counters.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.NullPerformanceCounters.Instance">
+            <summary>
+              Gets the performance counter instance the current provider manipulates.
+            </summary>
+            <value>
+              This property returns <b>null</b>.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.NullPerformanceCounters.IncrementCounter(System.Int16)">
+            <summary>
+              Increments a performance counter by one.
+            </summary>
+            <param name="counter">
+              The unique identifier of the counter to update.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.NullPerformanceCounters.IncrementCounterBy(System.Int16,System.Int64)">
+            <summary>
+              Increments a performance counter by the specified value.
+            </summary>
+            <param name="counter">
+              The unique identifier of the counter to update.
+            </param>
+            <param name="value">
+              The amount by which to increment the counter.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.NullPerformanceCounters.DecrementCounter(System.Int16)">
+            <summary>
+              Decrements a performance counter by one.
+            </summary>
+            <param name="counter">
+              The unique identifier of the counter to update.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.NullPerformanceCounters.SetCounter(System.Int16,System.Int64)">
+            <summary>
+              Decrements a performance counter by the specified value.
+            </summary>
+            <param name="counter">
+              The unique identifier of the counter to update.
+            </param>
+            <param name="value">
+              The amount by which to decrement the counter.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ConfigurationHelper">
+            <summary>
+              Provides static helper methods used from the configuration files.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConfigurationHelper.ResolveConnectionString(System.String)">
+            <summary>
+              Returns the connection string with the specified name.
+            </summary>
+            <param name="connectionStringName">
+              The name of the connection string to return.
+            </param>
+            <returns>
+              The connection string with the specified name.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConfigurationHelper.ToShort(System.String)">
+            <summary>
+              Parses a string value as a <see cref="T:System.Int16"/>.
+            </summary>
+            <param name="value">
+              The string value to parse.
+            </param>
+            <returns>
+              Returns the <see cref="T:System.Int16"/> value parsed from the specified string value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConfigurationHelper.ToInt(System.String)">
+            <summary>
+              Parses a string value as a <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="value">
+              The string value to parse.
+            </param>
+            <returns>
+              Returns the <see cref="T:System.Int32"/> value parsed from the specified string value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConfigurationHelper.ToLong(System.String)">
+            <summary>
+              Parses a string value as a <see cref="T:System.Int64"/>.
+            </summary>
+            <param name="value">
+              The string value to parse.
+            </param>
+            <returns>
+              Returns the <see cref="T:System.Int64"/> value parsed from the specified string value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConfigurationHelper.ToTimeSpan(System.String)">
+            <summary>
+              Parses a string value as a <see cref="T:System.TimeSpan"/>.
+            </summary>
+            <param name="value">
+              The string value to parse.
+            </param>
+            <returns>
+              Returns the <see cref="T:System.TimeSpan"/> value parsed from the specified string value.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Checksum">
+            <summary>
+              Provides static methods to compute a CRC32 checksum for a set of values.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Checksum.HashAlgorithm">
+            <summary>
+              Gets the hash algorithm to use to compute checksum values.
+            </summary>
+            <value>
+              The <see cref="P:Sitecore.Analytics.Core.Checksum.HashAlgorithm"/> object to use to compute checksum values.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Checksum.ComputeByteArray(System.String)">
+            <summary>
+              Returns a CRC32 checksum computed for the specified string.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.String"/> to compute a checksum for.
+            </param>
+            <returns>
+              A <see cref="T:System.Byte"/> array containing the CRC32 checksum computed for the specified string.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Checksum.Compute(System.String)">
+            <summary>
+              Returns a CRC32 checksum computed for the specified string.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.String"/> to compute a checksum for.
+            </param>
+            <returns>
+              A <see cref="T:System.Int32"/> value that contains the CRC32 checksum computed for the specified string.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Checksum.Compute(System.Object[])">
+            <summary>
+              Returns a CRC32 checksum computed for a set of values.
+            </summary>
+            <param name="args">
+              An array of <see cref="T:System.Object"/>s to compute a checksum for.
+            </param>
+            <returns>
+              An <see cref="T:System.Int32"/> value that contains the CRC32 checksum computed for the specified values.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ConfigurationBasedHttpTransportFactory">
+            <summary>
+            Enables the creation of an http transport based on Sitecore Configuration.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConfigurationBasedHttpTransportFactory.#ctor(System.String)">
+            <summary>
+            Creates a new instance using the given URI
+            </summary>
+            <param name="serviceHostUrl">URI to the service, excluding query string.</param>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.ConfigurationBasedHttpTransportFactory.HostUri">
+            <summary>
+            Gets or sets Service Host Uri, used as a base for request Uri.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConfigurationBasedHttpTransportFactory.CreateRequest(System.String)">
+            <summary>
+            Creates an <see cref="T:System.Net.HttpWebRequest"/> to connect with Sitecore's cloud services.
+            </summary>
+            <param name="path">
+            The path.
+            </param>
+            <returns>
+            The <see cref="T:System.Net.HttpWebRequest"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ConfigurationBasedHttpTransportFactory.CreateWebRequest(System.String)">
+            <summary>
+            Creates an <see cref="T:System.Net.HttpWebRequest"/> to connect with Sitecore's cloud services.
+            </summary>
+            <param name="path">
+            The path.
+            </param>
+            <returns>
+            The <see cref="T:System.Net.WebRequest"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Extensions.IdExtensions">
+            <summary>
+            Extension methods for <see cref="T:Sitecore.Data.ID"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Extensions.IdExtensions.ForQuery(Sitecore.Data.ID)">
+            <summary>
+            Transforms the ID for use in a reporting query.
+            </summary>
+            <param name="id">The ID to transform.</param>
+            <returns>The transformed ID.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Hash128">
+            <summary>
+              Represents a 128 bit hash code.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Hash128.Empty">
+            <summary>
+              A read-only instance of the <see cref="T:Sitecore.Analytics.Core.Hash128"/> value whose value is all zeros.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Hash128.algorithm">
+            <summary>
+              The hash algorithm used to generate the hash values.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Hash128.Algorithm">
+            <summary>
+              Gets the hash algorithm used to generate the hash values.
+            </summary>
+            <value>
+              A <see cref="T:System.Security.Cryptography.HashAlgorithm"/> object that is used internally to
+              generate hash values.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.#ctor(System.Byte[])">
+            <summary>
+              Initializes a new <see cref="T:Sitecore.Analytics.Core.Hash128"/> object using the specified
+              sequence of bytes.
+            </summary>
+            <param name="value">
+              An array of <see cref="T:System.Byte"/> values that represent the hash value.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.#ctor(System.Guid)">
+            <summary>
+              Initializes a new <see cref="T:Sitecore.Analytics.Core.Hash128"/> object using the specified
+              <see cref="T:System.Guid"/> value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.Guid"/> value representing the 128 bit hash code.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.CompareTo(Sitecore.Analytics.Core.Hash128)">
+            <summary>
+            Compares the current object with another object of the same type.
+            </summary>
+            <returns>
+            A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other"/> parameter.Zero This object is equal to <paramref name="other"/>. Greater than zero This object is greater than <paramref name="other"/>.
+            </returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.Equals(System.Object)">
+            <summary>
+              Compares an object to the current <see cref="T:Sitecore.Analytics.Core.Hash128"/> class
+              instance.
+            </summary>
+            <param name="obj">
+              The <see cref="T:System.Object"/> to compare to the current instance.
+            </param>
+            <returns>
+              <c>true</c> of <paramref name="obj"/> equals the current object;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.Equals(Sitecore.Analytics.Core.Hash128)">
+            <summary>
+              Compares a <see cref="T:Sitecore.Analytics.Core.Hash128"/> object to the current
+              <see cref="T:Sitecore.Analytics.Core.Hash128"/> instance.
+            </summary>
+            <param name="other">
+              The <see cref="T:Sitecore.Analytics.Core.Hash128"/> object to compare to the current instance.
+            </param>
+            <returns>
+              <c>true</c> of <paramref name="other"/> equals the current object;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.GetHashCode">
+            <summary>
+              Servers as a hash function for the current object.
+            </summary>
+            <returns>
+              An <see cref="T:System.Int32"/> value that can be used as a hash code for the
+              current object.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.ToString">
+            <summary>
+              Returns the string representation of the current
+              <see cref="T:Sitecore.Analytics.Core.Hash128"/> value.
+            </summary>
+            <returns>
+              A <see cref="T:System.String"/> value that contains the string representation
+              of the current <see cref="T:Sitecore.Analytics.Core.Hash128"/> value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.ToBytes">
+            <summary>
+              Returns a 16 element byte array that contains the value of the
+              current instance.
+            </summary>
+            <returns>
+              A array of <see cref="T:System.Byte"/> values that contains the value of the
+              current instance.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.ToGuid">
+            <summary>
+              Returns a <see cref="T:System.Guid"/> value that is a GUID representation of
+              the current hash value.
+            </summary>
+            <returns>
+              A <see cref="T:System.Guid"/> value that is a GUID representation of the
+              current hash code.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.FromGuid(System.Guid)">
+            <summary>
+              Converts a <see cref="T:System.Guid"/> value to a <see cref="T:Sitecore.Analytics.Core.Hash128"/> value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.Guid"/> value to convert.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash128"/> value that was converted from the specified
+              <see cref="T:System.Guid"/> value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.op_Equality(Sitecore.Analytics.Core.Hash128,Sitecore.Analytics.Core.Hash128)">
+            <summary>
+              Determines whether two <see cref="T:Sitecore.Analytics.Core.Hash128"/> values are equal.
+            </summary>
+            <param name="left">
+              The <see cref="T:Sitecore.Analytics.Core.Hash128"/> value on the left side of the comparision.
+            </param>
+            <param name="right">
+              The <see cref="T:Sitecore.Analytics.Core.Hash128"/> value on the right side of the comparision.
+            </param>
+            <returns>
+              <c>true</c> if <paramref name="left"/> equals <paramref name="right"/>;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.op_Inequality(Sitecore.Analytics.Core.Hash128,Sitecore.Analytics.Core.Hash128)">
+            <summary>
+              Determines whether two <see cref="T:Sitecore.Analytics.Core.Hash128"/> values are inequal.
+            </summary>
+            <param name="left">
+              The <see cref="T:Sitecore.Analytics.Core.Hash128"/> value on the left side of the comparision.
+            </param>
+            <param name="right">
+              The <see cref="T:Sitecore.Analytics.Core.Hash128"/> value on the right side of the comparision.
+            </param>
+            <returns>
+              <c>true</c> if <paramref name="left"/> does not equal
+              <paramref name="right"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.Compute(System.Byte[])">
+            <summary>
+              Computes a 128 bit hash code for the specified sequesnce of bytes.
+            </summary>
+            <param name="value">
+              The array of <see cref="T:System.Byte"/> value for which to generate a hash code for.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash128"/> object that can be used as a hash code for the
+              specified sequence of bytes.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.Compute(System.String)">
+            <summary>
+              Computes a 128 bit hash code for the specified string value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.String"/> value for which to generate a hash code for.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash128"/> object that can be used as a hash code for the
+              specified <see cref="T:System.String"/> value.
+            </returns>
+            <remarks>
+              This method is not case-sensitive.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash128.Compute(System.Object[])">
+            <summary>
+              Computes a 128 bit hash code for the combined value of the specified
+              arguments.
+            </summary>
+            <param name="args">
+              An array of objects for which to generate a 
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash128"/> object that can be used as a hash code for the
+              specified combination of value.
+            </returns>
+            <remarks>
+              This method is not case-sensitive, however, the order in which the
+              values are supplied matters.
+            </remarks>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Hash64">
+            <summary>
+              Represents a 64 bit hash code.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Hash64.Empty">
+            <summary>
+              A read-only instance of the <see cref="T:Sitecore.Analytics.Core.Hash64"/> value whose value is all zeros.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Hash64.algorithm">
+            <summary>
+              The hash algorithm used to generate the hash values.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Hash64.Algorithm">
+            <summary>
+              Gets the hash algorithm used to generate the hash values.
+            </summary>
+            <value>
+              A <see cref="T:System.Security.Cryptography.HashAlgorithm"/> object that is used internally to
+              generate hash values.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.#ctor(System.Byte[])">
+            <summary>
+              Initializes a new <see cref="T:Sitecore.Analytics.Core.Hash64"/> object using the specified
+              sequence of bytes.
+            </summary>
+            <param name="value">
+              An array of <see cref="T:System.Byte"/> values that represent the hash value.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.#ctor(System.Int64)">
+            <summary>
+              Initializes a new <see cref="T:Sitecore.Analytics.Core.Hash64"/> object using the specified
+              <see cref="T:System.Int64"/> value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.Int64"/> value that represent the hash code.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.CompareTo(Sitecore.Analytics.Core.Hash64)">
+            <summary>
+            Compares the current object with another object of the same type.
+            </summary>
+            <returns>
+            A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other"/> parameter.Zero This object is equal to <paramref name="other"/>. Greater than zero This object is greater than <paramref name="other"/>.
+            </returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.Equals(System.Object)">
+            <summary>
+              Compares an object to the current <see cref="T:Sitecore.Analytics.Core.Hash64"/> class
+              instance.
+            </summary>
+            <param name="obj">
+              The <see cref="T:System.Object"/> to compare to the current instance.
+            </param>
+            <returns>
+              <c>true</c> of <paramref name="obj"/> equals the current object;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.Equals(Sitecore.Analytics.Core.Hash64)">
+            <summary>
+              Compares a <see cref="T:Sitecore.Analytics.Core.Hash64"/> object to the current
+              <see cref="T:Sitecore.Analytics.Core.Hash64"/> instance.
+            </summary>
+            <param name="other">
+              The <see cref="T:Sitecore.Analytics.Core.Hash64"/> object to compare to the current instance.
+            </param>
+            <returns>
+              <c>true</c> of <paramref name="other"/> equals the current object;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.GetHashCode">
+            <summary>
+              Servers as a hash function for the current object.
+            </summary>
+            <returns>
+              An <see cref="T:System.Int32"/> value that can be used as a hash code for the
+              current object.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.ToString">
+            <summary>
+              Returns the string representation of the current
+              <see cref="T:Sitecore.Analytics.Core.Hash64"/> value.
+            </summary>
+            <returns>
+              A <see cref="T:System.String"/> value that contains the string representation
+              of the current <see cref="T:Sitecore.Analytics.Core.Hash64"/> value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.ToBytes">
+            <summary>
+              Returns a 8 element byte array that contains the value of the
+              current instance.
+            </summary>
+            <returns>
+              A array of <see cref="T:System.Byte"/> values that contains the value of the
+              current instance.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.ToInt64">
+            <summary>
+              Returns an <see cref="T:System.Int64"/> value that is a 64 bit integer
+              representation of the current hash value.
+            </summary>
+            <returns>
+              An <see cref="T:System.Int64"/> value that is a 64 bit integer representation
+              of the current hash code.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.FromInt64(System.Int64)">
+            <summary>
+              Converts an <see cref="T:System.Int64"/> value to a <see cref="T:Sitecore.Analytics.Core.Hash64"/>
+              value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.Int64"/> value to convert.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash64"/> value that was converted from the specified
+              <see cref="T:System.Int64"/> value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.op_Equality(Sitecore.Analytics.Core.Hash64,Sitecore.Analytics.Core.Hash64)">
+            <summary>
+              Determines whether two <see cref="T:Sitecore.Analytics.Core.Hash64"/> values are equal.
+            </summary>
+            <param name="left">
+              The <see cref="T:Sitecore.Analytics.Core.Hash64"/> value on the left side of the comparision.
+            </param>
+            <param name="right">
+              The <see cref="T:Sitecore.Analytics.Core.Hash64"/> value on the right side of the comparision.
+            </param>
+            <returns>
+              <c>true</c> if <paramref name="left"/> equals <paramref name="right"/>;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.op_Inequality(Sitecore.Analytics.Core.Hash64,Sitecore.Analytics.Core.Hash64)">
+            <summary>
+              Determines whether two <see cref="T:Sitecore.Analytics.Core.Hash64"/> values are inequal.
+            </summary>
+            <param name="left">
+              The <see cref="T:Sitecore.Analytics.Core.Hash64"/> value on the left side of the comparision.
+            </param>
+            <param name="right">
+              The <see cref="T:Sitecore.Analytics.Core.Hash64"/> value on the right side of the comparision.
+            </param>
+            <returns>
+              <c>true</c> if <paramref name="left"/> does not equal
+              <paramref name="right"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.Compute(System.Byte[])">
+            <summary>
+              Cumputes a 64 bit hash code for the specified sequesnce of bytes.
+            </summary>
+            <param name="value">
+              The array of <see cref="T:System.Byte"/> value for which to generate a hash code for.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash64"/> object that can be used as a hash code for the
+              specified sequence of bytes.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.Compute(System.String)">
+            <summary>
+              Computes a 64 bit hash code for the specified string value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.String"/> value for which to generate a hash code for.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash64"/> object that can be used as a hash code for the
+              specified <see cref="T:System.String"/> value.
+            </returns>
+            <remarks>
+              This method is not case-sensitive.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash64.Compute(System.Object[])">
+            <summary>
+              Computes a 64 bit hash code for the combined value of the specified
+              arguments.
+            </summary>
+            <param name="args">
+              An array of objects for which to generate a 
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash64"/> object that can be used as a hash code for the
+              specified combination of value.
+            </returns>
+            <remarks>
+              This method is not case-sensitive, however, the order in which the
+              values are supplied matters.
+            </remarks>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Hash32">
+            <summary>
+              Represents a 32 bit hash code.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Hash32.Empty">
+            <summary>
+              A read-only instance of the <see cref="T:Sitecore.Analytics.Core.Hash32"/> value whose value is all zeros.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Hash32.algorithm">
+            <summary>
+              The hash algorithm used to generate the hash values.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Hash32.Algorithm">
+            <summary>
+              Gets the hash algorithm used to generate the hash values.
+            </summary>
+            <value>
+              A <see cref="T:System.Security.Cryptography.HashAlgorithm"/> object that is used internally to
+              generate hash values.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.#ctor(System.Byte[])">
+            <summary>
+              Initializes a new <see cref="T:Sitecore.Analytics.Core.Hash32"/> object using the specified
+              sequence of bytes.
+            </summary>
+            <param name="value">
+              An array of <see cref="T:System.Byte"/> values that represent the hash value.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.#ctor(System.Int32)">
+            <summary>
+              Initializes a new <see cref="T:Sitecore.Analytics.Core.Hash32"/> object using the specified
+              <see cref="T:System.Int32"/> value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.Int32"/> value that represent the hash code.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.CompareTo(Sitecore.Analytics.Core.Hash32)">
+            <summary>
+            Compares the current object with another object of the same type.
+            </summary>
+            <returns>
+            A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other"/> parameter.Zero This object is equal to <paramref name="other"/>. Greater than zero This object is greater than <paramref name="other"/>.
+            </returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.Equals(System.Object)">
+            <summary>
+              Compares an object to the current <see cref="T:Sitecore.Analytics.Core.Hash32"/> class
+              instance.
+            </summary>
+            <param name="obj">
+              The <see cref="T:System.Object"/> to compare to the current instance.
+            </param>
+            <returns>
+              <c>true</c> of <paramref name="obj"/> equals the current object;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.Equals(Sitecore.Analytics.Core.Hash32)">
+            <summary>
+              Compares a <see cref="T:Sitecore.Analytics.Core.Hash32"/> object to the current
+              <see cref="T:Sitecore.Analytics.Core.Hash32"/> instance.
+            </summary>
+            <param name="other">
+              The <see cref="T:Sitecore.Analytics.Core.Hash32"/> object to compare to the current instance.
+            </param>
+            <returns>
+              <c>true</c> of <paramref name="other"/> equals the current object;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.GetHashCode">
+            <summary>
+              Servers as a hash function for the current object.
+            </summary>
+            <returns>
+              An <see cref="T:System.Int32"/> value that can be used as a hash code for the
+              current object.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.ToInt32">
+            <summary>
+              Returns an <see cref="T:System.Int32"/> value that is a 32 bit integer
+              representation of the current hash value.
+            </summary>
+            <returns>
+              An <see cref="T:System.Int32"/> value that is a 32 bit integer representation
+              of the current hash code.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.ToBytes">
+            <summary>
+              Returns a 4 element byte array that contains the value of the
+              current instance.
+            </summary>
+            <returns>
+              A array of <see cref="T:System.Byte"/> values that contains the value of the
+              current instance.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.ToString">
+            <summary>
+              Returns the string representation of the current
+              <see cref="T:Sitecore.Analytics.Core.Hash32"/> value.
+            </summary>
+            <returns>
+              A <see cref="T:System.String"/> value that contains the string representation
+              of the current <see cref="T:Sitecore.Analytics.Core.Hash32"/> value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.FromInt32(System.Int32)">
+            <summary>
+              Converts an <see cref="T:System.Int32"/> value to a <see cref="T:Sitecore.Analytics.Core.Hash32"/>
+              value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.Int32"/> value to convert.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash32"/> value that was converted from the specified
+              <see cref="T:System.Int32"/> value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.op_Equality(Sitecore.Analytics.Core.Hash32,Sitecore.Analytics.Core.Hash32)">
+            <summary>
+              Determines whether two <see cref="T:Sitecore.Analytics.Core.Hash32"/> values are equal.
+            </summary>
+            <param name="left">
+              The <see cref="T:Sitecore.Analytics.Core.Hash32"/> value on the left side of the comparision.
+            </param>
+            <param name="right">
+              The <see cref="T:Sitecore.Analytics.Core.Hash32"/> value on the right side of the comparision.
+            </param>
+            <returns>
+              <c>true</c> if <paramref name="left"/> equals <paramref name="right"/>;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.op_Inequality(Sitecore.Analytics.Core.Hash32,Sitecore.Analytics.Core.Hash32)">
+            <summary>
+              Determines whether two <see cref="T:Sitecore.Analytics.Core.Hash32"/> values are inequal.
+            </summary>
+            <param name="left">
+              The <see cref="T:Sitecore.Analytics.Core.Hash32"/> value on the left side of the comparision.
+            </param>
+            <param name="right">
+              The <see cref="T:Sitecore.Analytics.Core.Hash32"/> value on the right side of the comparision.
+            </param>
+            <returns>
+              <c>true</c> if <paramref name="left"/> does not equal
+              <paramref name="right"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.Compute(System.Byte[])">
+            <summary>
+              Computes a 32 bit hash code for the specified sequesnce of bytes.
+            </summary>
+            <param name="value">
+              The array of <see cref="T:System.Byte"/> value for which to generate a hash code for.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash32"/> object that can be used as a hash code for the
+              specified sequence of bytes.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.Compute(System.String)">
+            <summary>
+              Computes a 32 bit hash code for the specified string value.
+            </summary>
+            <param name="value">
+              The <see cref="T:System.String"/> value for which to generate a hash code for.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash32"/> object that can be used as a hash code for the
+              specified <see cref="T:System.String"/> value.
+            </returns>
+            <remarks>
+              This method is not case-sensitive.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Hash32.Compute(System.Object[])">
+            <summary>
+              Computes a 32 bit hash code for the combined value of the specified
+              arguments.
+            </summary>
+            <param name="args">
+              An array of objects for which to generate a 
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Core.Hash32"/> object that can be used as a hash code for the
+              specified combination of value.
+            </returns>
+            <remarks>
+              This method is not case-sensitive, however, the order in which the
+              values are supplied matters.
+            </remarks>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.HttpTransportFactoryBase">
+            <summary>
+            Enables centralized creation of a <see cref="T:System.Net.HttpWebRequest"/> for communicating with Remote Http Services.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.HttpTransportFactoryBase.CreateRequest(System.String)">
+            <summary>
+            Implementing classes should create a ready-to-use http request.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The <see cref="T:System.Net.HttpWebRequest"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.HttpTransportFactoryBase.CreateWebRequest(System.String)">
+            <summary>
+            The create web request.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The <see cref="T:System.Net.WebRequest"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.IAgent">
+            <summary>
+            Defines a set of operations, a work agent must implement to be executed by <see cref="T:Sitecore.Analytics.Core.BackgroundService"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.IAgent.Execute">
+            <summary>
+            Executes the agent.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.BrowserInformationBase">
+            <summary>
+            The IBrowserData interface.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.BrowserInformationBase.BrowserMajorName">
+            <summary>
+            Gets or sets the major browser name.
+            </summary>
+            <value>
+            The major browser name.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.BrowserInformationBase.BrowserMinorName">
+            <summary>
+            Gets or sets the minor browser name.
+            </summary>
+            <value>
+            The minor browser name.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.BrowserInformationBase.BrowserVersion">
+            <summary>
+            Gets or sets the browser version.
+            </summary>
+            <value>
+            The browser version.
+            </value>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.IPage">
+            <summary>
+            The Page interface.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.DateTime">
+            <summary>
+            Gets or sets the date and time the page request was processed, expressed as UTC.
+            </summary>
+            <value>
+            The date time, expressed as UTC.
+            </value>
+            <remarks>
+              <c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.
+            </remarks>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.Duration">
+            <summary>
+            Gets or sets the page view duration.
+            </summary>
+            <value>
+            View duration of the page in milliseconds.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.Item">
+            <summary>
+            Gets or sets the Sitecore item the page is associated with.
+            </summary>
+            <value>
+            The item.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.Outcomes">
+            <summary>
+            Gets the outcomes.
+            </summary>
+            <value>
+            The outcomes.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.PageEvents">
+            <summary>
+            Gets page events of this page.
+            </summary>
+            <value>
+            The page events.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.SitecoreDevice">
+            <summary>
+            Gets or sets the Sitecore device associated with the page.
+            </summary>
+            <value>
+            The sitecore device.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.Personalization">
+            <summary>
+            Gets or sets the personalization.
+            </summary>
+            <value>
+            The personalization.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.Url">
+            <summary>
+            Gets or sets the URL of the request.
+            </summary>
+            <value>
+            The url.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.IPage.VisitPageIndex">
+            <summary>
+            Gets or sets the index of the visit page.
+            </summary>
+            <value>
+            The visit page index.
+            </value>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ISchedulable">
+            <summary>
+            Interface for process scheduling.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.ISchedulable.State">
+            <summary>
+            Gets or sets the running state.
+            </summary>
+            <value>
+            The state.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ISchedulable.Start">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ISchedulable.Cancel">
+            <summary>
+            Cancels this instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ISchedulable.Pause">
+            <summary>
+            Pauses this instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ISchedulable.Resume">
+            <summary>
+            Resumes this instance.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ISmtpClient">
+            <summary>
+            Common interface for SmtpClient wrappers
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ISmtpClient.Send(System.Net.Mail.MailMessage)">
+            <summary>
+            Sends the specified mail message.
+            </summary>
+            <param name="mailMessage">The mail message.</param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ISupportsTesting">
+            <summary>
+              Interface for objects that support storing test combinations.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.ISupportsTesting.MvTest">
+            <summary>
+              Gets or sets the data describing a single MV test exposure.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ISupportsTesting.IsTestSetIdNull">
+            <summary>
+              Gets a value indicating whether this instance is test set id null.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is test set id null; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ItemBatch`1">
+            <summary>
+              Represents a strongly-typed batch of items.
+            </summary>
+            <typeparam name="TItem">
+              Type of the items in the batch.
+            </typeparam>
+            <remarks>
+              When a new item batch is created, items in the batch can be accessed via teh <see cref="P:Sitecore.Analytics.Core.ItemBatch`1.Items"/> property.
+              Items can be marked as postponed via the <see cref="M:Sitecore.Analytics.Core.ItemBatch`1.Postpone(`0)"/> method. Postponed items can be access via
+              the <see cref="P:Sitecore.Analytics.Core.ItemBatch`1.Postponed"/> property.
+            </remarks>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.ItemBatch`1.Items">
+            <summary>
+              Gets all items in contained in the current batch.
+            </summary>
+            <value>
+              An <see cref="T:System.Collections.Generic.IReadOnlyList`1"/> object containing all items in the current batch.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.ItemBatch`1.Postponed">
+            <summary>
+              Gets the collection of postponed items.
+            </summary>
+            <value>
+              A <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> or <typeparamref name="TItem"/> objects containing postponed
+              items.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ItemBatch`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.ItemBatch`1"/> class.
+            </summary>
+            <param name="items">
+              An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <typeparamref name="TItem"/> objects that contains the items to batch.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="items"/> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ItemBatch`1.IsPostponed(`0)">
+            <summary>
+              Determines whether an item has been postponed.
+            </summary>
+            <param name="item">
+              The <typeparamref name="TItem"/> to be checked.
+            </param>
+            <returns>
+              <c>true</c> is the item has been postponed; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="item"/> is <c>null</c>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="item"/> is not part of the current batch.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ItemBatch`1.Postpone">
+            <summary>
+              Postpones all items in the current batch.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ItemBatch`1.Postpone(`0)">
+            <summary>
+            Request to postpone processing of item.
+            </summary>
+            <param name="item">
+            Reference to the item that should be postponed.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="item"/> is <c>null</c>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="item"/> is not part of the current batch.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ItemBatch`1.Resume(`0)">
+            <summary>
+            Request to resume processing of item.
+            </summary>
+            <param name="item">
+            Reference to the postponed item that should be resumed.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="item"/> is <c>null</c>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="item"/> is not part of the current batch.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ItemBatch`1.EnsureItemIsInBatch(`0)">
+            <summary>
+            Ensures that the <paramref name="item"/> is part of the current batch.
+            </summary>
+            <param name="item">An item to check.</param>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="item"/> is not part of the current batch.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Logging.ClassicLogger`1">
+            <summary>
+              Implements a <see cref="T:Microsoft.Extensions.Logging.ILogger`1"/> that writes to the traditional Sitecore log.
+            </summary>
+            <typeparam name="TCategoryName"></typeparam>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Logging.ClassicLogger`1.BeginScope``1(``0)">
+            <summary>
+            Begins a logical operation scope.
+            </summary>
+            <typeparam name="TState">The type of the state.</typeparam>
+            <param name="state">The state.</param>
+            <returns> An <see cref="T:System.IDisposable"/> that ends the logical operation scope on dispose.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Logging.ClassicLogger`1.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+              Checks if the given log level is enabled.
+            </summary>
+            <param name="logLevel">
+              The log level to check.
+            </param>
+            <returns>
+              <b>true</b> if logging at the specified level is enabled; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Logging.ClassicLogger`1.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <summary>
+              Writes a message to the log.
+            </summary>
+            <param name="logLevel">
+              The severity of the event being logged.
+            </param>
+            <param name="eventId">
+              The identifier of the event being logged.
+            </param>
+            <param name="state">
+              An <see cref="T:System.Object"/> representing the state of the event being logged.
+            </param>
+            <param name="exception">
+              The <see cref="T:System.Exception"/> representing the error being logged.
+            </param>
+            <param name="formatter">
+              A function that formattes the log message.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.MaintenanceAgent">
+            <summary>
+              Provides periodic maintenance checks to services that implement <see cref="T:Sitecore.Analytics.Core.Services.IRequirePeriodicMaintenance"/> interface.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.MaintenanceAgent.ExecuteCoreAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously executes the agent.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.MaintenanceAgent.RegisterService(Sitecore.Analytics.Core.Services.IRequirePeriodicMaintenance)">
+            <summary>
+              Registers the provided service with the maintenance agent.
+            </summary>
+            <param name="service">
+              Reference to the service to be registered.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.MemberHelper">
+            <summary>
+              Contains generic helper methods for class members.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.MemberHelper.GetMemberName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+              Gets a string representing the name of the class member specified
+              by the provided member expression.
+            </summary>
+            <param name="memberExpression">
+              Specifies how to get the class member.
+            </param>
+            <typeparam name="T">
+              Type of the class.
+            </typeparam>
+            <typeparam name="TValue">
+              Type of the class member.
+            </typeparam>
+            <returns>
+              A string representing name of the class member.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.OperationStopwatch">
+            <summary>
+            Provides RAII scope for measuring operation time with given precision and recording into a performance counter.
+            </summary>
+            <remarks>If null reference is supplied as the counter, does nothing with minimal performance impact.</remarks>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.OperationStopwatch.counter">
+            <summary>
+            Encapsulated performance counter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.OperationStopwatch.precision">
+            <summary>
+            Precision of the counter.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.OperationStopwatch.stopwatch">
+            <summary>
+            Encapsulated stopwatch.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.OperationStopwatch.#ctor(Sitecore.Diagnostics.PerformanceCounters.AverageCounter,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.OperationStopwatch"/> class.
+            </summary>
+            <param name="counter">
+            The counter where to register the measured time.
+            </param>
+            <param name="precision">
+            Precision of the counter.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.OperationStopwatch.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.RangeScheduler.Comparer`1">
+            <summary>
+            Defines the Comparer.
+            </summary>
+            <typeparam name="T">The type of objects to compare.</typeparam>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.RangeScheduler.Comparer`1.comparer">
+            <summary>
+            The comparer.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.Comparer`1.#ctor(System.Comparison{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.RangeScheduler.Comparer`1"/> class.
+            </summary>
+            <param name="comparer">
+            The comparer.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.Comparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <returns>
+            A signed integer that indicates the relative values of <paramref name="x"/> and <paramref name="y"/>, as shown in
+              the following table.Value Meaning Less than zero<paramref name="x"/> is less than <paramref name="y"/>.Zero
+              <paramref name="x"/> equals <paramref name="y"/>.Greater than zero<paramref name="x"/> is greater than
+              <paramref name="y"/>.
+            </returns>
+            <param name="x">
+            The first object to compare.
+            </param>
+            <param name="y">
+            The second object to compare.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.RangeScheduler.LongArithmetics">
+            <summary>
+            Implements long integer arithmetic operations on byte arrays.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LongArithmetics.GetMedian(System.Byte[],System.Byte[])">
+            <summary>
+            Returns an ordinal median of the two provided keys.
+            </summary>
+            <param name="left">Left boundary key.</param>
+            <param name="right">Right boundary key.</param>
+            <returns>A key value which lies in the middle of the fragment identified by provided left and right boundaries.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LongArithmetics.IsDifferenceGreaterThan(System.Byte[],System.Byte[],System.Int64)">
+            <summary>
+            Checks whether ordinal difference between the two keys is greater than the provided threshold.
+            </summary>
+            <param name="left">Left key to compare.</param>
+            <param name="right">Right key to compare.</param>
+            <param name="threshold">Ordinal difference threshold value.</param>
+            <returns>True if the ordinal difference between the two keys is greater than the provided threshold</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LongArithmetics.Increment(System.Byte[],System.Int32)">
+            <summary>
+            Increments the specified key by the specified number of positions.
+            </summary>
+            <param name="key">Key to increment, represented as a byte array.</param>
+            <param name="n">The number to add to or subtract from the key.</param>
+            <returns>A new key which is offset from the specified key by the specified number of increments/decrements.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LongArithmetics.CompareKeys(System.Byte[],System.Byte[])">
+            Compare two keys of the same length.
+            <param name="left">Left key to compare.</param>
+            <param name="right">Right key to compare</param>
+            <returns>1 if left > right, 0 if the keys are equal and -1 if left &lt; right.</returns>
+            <exception cref="T:System.InvalidOperationException">Cannot compare keys of different length</exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy">
+            <summary>
+            Manages global lease strategy used by <see cref="T:Sitecore.Analytics.Core.IWorkScheduler`1"/> and <see cref="T:Sitecore.Analytics.Core.IAsyncWorkScheduler`1"/>.
+            </summary>
+            <remarks>
+            A single copy of this class must be maintained per server, for a given type of scheduler.
+            Methods in this class must be thread safe.
+            </remarks>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.randomizerLock">
+            <summary>
+            Fuzzy logic element in scheduler behavior.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.randomizer">
+            <summary>
+            Fuzzy logic element in scheduler behavior.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.minimumGracePeriod">
+            <summary>
+            Gets or sets the minimum grace period between attempts to lock or request a split on a range.
+            </summary>
+            <value>
+            The minimum grace period.
+            </value>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.maximumGracePeriod">
+            <summary>
+            Gets or sets the maximum grace period between attempts to lock or request a split on a range.
+            </summary>
+            <value>
+            The maximum grace period.
+            </value>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.minRetries">
+            <summary>
+            The minimum number of retry attempts used to retrieve a new range if none is available when requested.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.rangeAbortDetectedCount">
+            <summary>
+            Ranges aborted detected.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.#ctor(System.TimeSpan,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy"/> class.
+            </summary>
+            <param name="baseLeaseDuration">The base lease duration for the scheduler.</param>
+            <param name="minRetries">The minimum retries when attempting to lock a range to process (null if no retries should be made).</param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy"/> class.
+            </summary>
+            <param name="baseLeaseDuration">
+            The base lease duration.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy"/> class.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.MinRetries">
+            <summary>
+            Gets or sets the minimum number of retry attempts used to retrieve a new range if none is available when requested.
+            </summary>
+            <value>
+            The min retries raw value.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.BaseLeaseDuration">
+            <summary>
+            Gets or sets the base lease duration for the scheduler.
+            </summary>
+            <value>
+            The base lease duration.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.OnRangeMapAborted">
+            <summary>
+            Method called by schedulers when the range map they were processing expired, or was in any other way removed.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.GetGracePeriod">
+            <summary>
+            Gets a grace period value for the scheduler. This is used to sleep between "big loop" iterations.
+            </summary>
+            <returns>Duration of the grace period as a <see cref="T:System.TimeSpan"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.GetNextRangeRetries">
+            <summary>
+            Get the retries to use when retrieving the next range in the scheduler.
+            </summary>
+            <returns>
+            The retries.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.GetCurrentLeaseDuration">
+            <summary>
+            Gets the current lease duration.
+            </summary>
+            <returns>
+            The <see cref="T:System.TimeSpan"/>.
+            </returns>
+            <remarks>
+            By default this value is increased with every range abort detected, 
+            that normally happens due to another agent/worker picking the expired range that was being processed.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.GetSplitRequestPollInterval">
+            <summary>
+            Gets the interval for checking the result of a successful split request.
+            </summary>
+            <returns>A <see cref="T:System.TimeSpan"/> the determines how frequently the scheduler will poll the database for the result of a split request.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy.GetRandomValue(System.Int32)">
+            <summary>
+            Gets a random value.
+            </summary>
+            <param name="maxValue">The maximum value.</param>
+            <returns>
+            The <see cref="T:System.Random"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Page">
+            <summary>
+              Wraps a <see cref="T:Sitecore.Analytics.Model.PageData"/> model object.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Page.data">
+            <summary>
+              The data of this page.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Page.#ctor(Sitecore.Analytics.Model.PageData)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.Page"/> class.
+            </summary>
+            <param name="page">
+              The page data object.
+            </param>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.DateTime">
+            <summary>
+              Gets or sets the date and time the page request was processed, expressed as UTC.
+            </summary>
+            <remarks>
+              <c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.
+            </remarks>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.Duration">
+            <summary>
+              Gets or sets the page view duration.
+            </summary>
+            <value>
+              View duration of the page in milliseconds.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.Item">
+            <summary>
+              Gets or sets the Sitecore item the page is associated with.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.Outcomes">
+            <summary>
+            Gets the outcomes.
+            </summary>
+            <value>
+            The outcomes.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.Personalization">
+            <summary>
+              Gets or sets the personalization data associated with the current page.
+            </summary>
+            <value>
+              The <see cref="T:Sitecore.Analytics.Model.PersonalizationData"/> object representing the personalization data associated with the
+              current page.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.MvTest">
+            <summary>
+              Gets or sets the data describing a single MV test exposure.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Page.IsTestSetIdNull">
+            <summary>
+            The is test set id null.
+            </summary>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.PageEvents">
+            <summary>
+              Gets page events of this page.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.SitecoreDevice">
+            <summary>
+              Gets or sets the Sitecore device associated with the page.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.Url">
+            <summary>
+              Gets or sets the URL of the request.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.VisitPageIndex">
+            <summary>
+              Gets or sets the index of the visit page.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.CustomValues">
+            <summary>
+            Gets the custom values.
+            </summary>
+            <value>
+            The custom values.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Page.Data">
+            <summary>
+              Gets the page data.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ContactClassification">
+            <summary>
+              Visitor classification helper class.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ContactClassification.Unidentified">
+            <summary>
+              Classification value corresponding to an unidentified classification.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ContactClassification.RobotBoundary">
+            <summary>
+              Robot boundary. All classifications greater or equal to this number
+              are considered robots.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ContactClassification.AutodetectedRobot">
+            <summary>
+              Classification value corresponding to autodetected robot.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ContactClassification.MaliciousRobot">
+            <summary>
+              Classification value corresponding to malicious robot.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ContactClassification.IsHuman(System.Int32)">
+            <summary>
+              Determines whether the specified classification corresponds to a human.
+            </summary>
+            <param name="classification">
+              An integer identifying the classification.
+            </param>
+            <returns>
+              <c>true</c> if the specified classification corresponds to a human;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ContactClassification.IsRobot(System.Int32)">
+            <summary>
+              Determines whether the specified classification corresponds to a robot.
+            </summary>
+            <param name="classification">
+              An integer identifying the classification.
+            </param>
+            <returns>
+              <c>true</c> if the specified classification corresponds to a robot;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ContactClassification.IsAutoDetectedRobot(System.Int32)">
+            <summary>
+              Determines whether the specified classification is an auto-detected robot.
+            </summary>
+            <param name="classification">
+              An integer identifying the classification.
+            </param>
+            <returns>
+              <c>true</c> if the specified classification is an auto-detected robot;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.ContactClassification.IsMaliciousRobot(System.Int32)">
+            <summary>
+              Determines whether the specified classification is a malicious robot.
+            </summary>
+            <param name="classification">
+              An integer identifying the classification.
+            </param>
+            <returns>
+              <c>true</c> if the specified classification is a malicious robot;
+              otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ScheduleState">
+            <summary>
+            Enumerates the running state of process.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.Unknown">
+            <summary>
+            The process is in an unknown state.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.NotRunning">
+            <summary>
+            The process is not running.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.Starting">
+            <summary>
+            The process is starting.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.Running">
+            <summary>
+            The process is running.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.Stopping">
+            <summary>
+            The process is stopping.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.Pausing">
+            <summary>
+            The process is pausing.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.Paused">
+            <summary>
+            The process is paused.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.Resuming">
+            <summary>
+            The process is resuming.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.ScheduleState.Cancelling">
+            <summary>
+            The process is cancelling.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.ScreenInformationBase">
+            <summary>
+            The screen information base.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.ScreenInformationBase.ScreenHeight">
+            <summary>
+            Gets or sets the screen height.
+            </summary>
+            <value>
+            The screen height.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.ScreenInformationBase.ScreenWidth">
+            <summary>
+            Gets or sets the screen width.
+            </summary>
+            <value>
+            The screen width.
+            </value>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Services.IMaintenanceAgent">
+            <summary>
+              Allows an class to implement an agent that peiodicly sends messages to components to do maintenance work.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Services.IMaintenanceAgent.RegisterService(Sitecore.Analytics.Core.Services.IRequirePeriodicMaintenance)">
+            <summary>
+            Registers the given service with the maintenance agent.
+            </summary>
+            <param name="service">
+            Reference to the service to be registered.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Services.IRequirePeriodicMaintenance">
+            <summary>
+              Interface for services that require periodic maintenance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Services.IRequirePeriodicMaintenance.StartMaintenanceTasks">
+            <summary>
+            Initiates maintenance tasks. The caller may choose to wait on the tasks or chain tasks when finished.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> of <see cref="T:System.Threading.Tasks.Task"/> objects.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.DoubleExtensions">
+            <summary>
+              Provides extension methods to the <see cref="T:System.Double"/> type.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.DoubleExtensions.IsEqualTo(System.Double,System.Double,System.Double)">
+            <summary>
+              Compares the specified values to the current value.
+            </summary>
+            <param name="a">
+              The current <see cref="T:System.Double"/> value.
+            </param>
+            <param name="b">
+              The <see cref="T:System.Double"/> value to compare to the current value.
+            </param>
+            <param name="epsilon">
+              The tolerance.
+            </param>
+            <returns>
+              <b>true</b> if the specified <see cref="T:System.Double"/> value is equal to the current value; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.SingleExtensions">
+            <summary>
+              Provides extension methods to the <see cref="T:System.Single"/> type.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.SingleExtensions.IsEqualTo(System.Single,System.Single,System.Single)">
+            <summary>
+              Compares the specified values to the current value.
+            </summary>
+            <param name="a">
+              The current <see cref="T:System.Single"/> value.
+            </param>
+            <param name="b">
+              The <see cref="T:System.Single"/> value to compare to the current value.
+            </param>
+            <param name="epsilon">
+              The tolerance.
+            </param>
+            <returns>
+              <b>true</b> if the specified <see cref="T:System.Single"/> value is equal to the current value; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.SmtpClientWrapper">
+            <summary>
+            SMTP client wrapper.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.SmtpClientWrapper.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Core.SmtpClientWrapper"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.SmtpClientWrapper.Send(System.Net.Mail.MailMessage)">
+            <summary>
+            Sends the specified mail message.
+            </summary>
+            <param name="mailMessage">The mail message.</param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.SmtpClientWrapper.Dispose">
+            <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.SubsystemLoader">
+            <summary>
+            Loads number of subsystems as a part of application initialization process.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.SubsystemLoader.Name">
+            <summary>
+            Gets or sets the name of the subsystem to load. This value is used for reporting errors when subsystem is loaded.
+            </summary>
+            <value>
+            A <see cref="T:System.String"/> containing the name of the subsystem.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.SubsystemLoader.Subsystem">
+            <summary>
+            Gets or sets the subsystem to be loaded.
+            </summary>
+            <value>
+            A <see cref="T:System.Collections.Generic.Dictionary`2"/> of <see cref="P:Sitecore.Analytics.Core.SubsystemLoader.Subsystem"/> objects, configured through Web.config.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.SubsystemLoader.Initialize">
+            <summary>
+            Initializes and registers configured subsystems in the hosting environment.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.Subsystem">
+            <summary>
+            Defines a subsystem within a product, which is started with the application, and is stopped when ASP.NET is shut down.
+              A subsystem at the minimum consists of a number of background services which implement certain pieces of functionality.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Subsystem.DefaultTerminateThreadTimeoutSeconds">
+            <summary>
+            The default terminate thread timeout in seconds.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Core.Subsystem._backgroundServices">
+            <summary>
+            Backing field for <see cref="P:Sitecore.Analytics.Core.Subsystem.BackgroundServices"/> property.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Core.Subsystem.BackgroundServices">
+            <summary>
+            Gets the list of background services associated with this subsystem.
+            </summary>
+            <value>
+            A <see cref="T:System.Collections.Generic.IReadOnlyList`1"/> of <see cref="T:Sitecore.Analytics.Core.IBackgroundService"/> instances registered with this subsystem..
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Subsystem.Add(Sitecore.Analytics.Core.IBackgroundService)">
+            <summary>
+            Adds the specified background service to the list of registered daemons.
+            </summary>
+            <param name="backgroundService">
+            The background service to add.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Subsystem.Initialize">
+            <summary>
+            Initializes this subsystem.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.Subsystem.Stop(System.Boolean)">
+            <summary>
+            Requests a registered object to unregister.
+            </summary>
+            <param name="immediate">
+            True to indicate the registered object should unregister from the hosting environment before returning; otherwise, false.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.WebTransportFactoryBase">
+            <summary>
+            Enables centralized creation of a <see cref="T:System.Net.WebRequest"/> for communicating with Remote Http Services.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.WebTransportFactoryBase.CreateWebRequest(System.String)">
+            <summary>
+            The create web request.
+            </summary>
+            <param name="path">
+            The path.
+            </param>
+            <returns>
+            The <see cref="T:System.Net.WebRequest"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Core.IWorkScheduler`1">
+            <summary>
+              Allows a class to implement a work scheduler that returns a work items of type <typeparamref name="TItem"/>.
+            </summary>
+            <typeparam name="TItem">
+              The type of the work items the work scheduler returns.
+            </typeparam>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.IWorkScheduler`1.TryGetNext(`0@)">
+            <summary>
+              Tries to obtain a piece of work.
+            </summary>
+            <param name="item">
+              A <typeparamref name="TItem"/> variable that receives the next piece of work, if available.
+            </param>
+            <returns>
+              <b>true</b> if a new piece of work was available and stored in the <paramref name="item"/> variable;
+              otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Core.IWorkScheduler`1.MarkProcessed(`0)">
+            <summary>
+              Marks the specified work item completed.
+            </summary>
+            <param name="item">
+              The work item to mark as completed.
+            </param>
+        </member>
+    </members>
+</doc>

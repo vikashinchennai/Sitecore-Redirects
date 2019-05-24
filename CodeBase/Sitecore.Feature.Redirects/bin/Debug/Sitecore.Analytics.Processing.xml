@@ -1,0 +1,2928 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Analytics.Processing</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactProcessingPoolScheduler">
+            <summary>
+                Represents a scheduler that uses <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" /> as a source of
+                <see cref="T:Sitecore.XConnect.Interaction" /> instances to process.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactProcessingPoolScheduler.#ctor(Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{Sitecore.Xdb.Processing.Queue.BinaryKey},Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.XConnect.ExpandOptions,System.Int16)">
+            <summary>
+                Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactProcessingPoolScheduler" />.
+            </summary>
+            <param name="pool">The pool used as a backlog for <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext" /> instances failed to process. </param>
+            <param name="xdbContextFactory">
+                An <see cref="T:Sitecore.XConnect.ExpandOptions" /> instance that allow to instantiate
+                <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext" /> to retrieve interactions.
+            </param>
+            <param name="options">
+                The <see cref="T:System.ArgumentNullException" /> instance specifying which facets should be retrieved for
+                each interaction.
+            </param>
+            <param name="maxBatchSize">
+                The maximum amount of the interactions, that scheduler will return in one call to
+                <see cref="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.TryGetNextAsync" />.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="pool" />, <paramref name="xdbContextFactory" />, or <paramref name="options" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactProcessingPoolScheduler.GetEntityKey(Sitecore.XConnect.Contact)">
+            <summary>
+            Gets a key based on <paramref name="entity"/>
+            </summary>
+            <param name="entity">The entity to get a key for.</param>
+            <returns>A key for an <paramref name="entity"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactProcessingPoolScheduler.GetEntityReference(Sitecore.Xdb.Processing.Queue.BinaryKey)">
+            <summary>
+            Gets an entity reference using entity <paramref name="key"/>.
+            </summary>
+            <param name="key">The key to get entity reference from.</param>
+            <returns>An entity reference, created based on an entity key.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactSchedulerWithBacklog">
+            <summary>
+                Represents a scheduler, that retries to process failed <see cref="T:Sitecore.XConnect.Interaction" /> instances by using
+                <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" /> as a backlog.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactSchedulerWithBacklog.#ctor(Sitecore.Analytics.Processing.XConnectWorkScheduler{Sitecore.XConnect.Contact},Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{Sitecore.Xdb.Processing.Queue.BinaryKey},System.Int16)">
+            <summary>
+                Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactSchedulerWithBacklog" />.
+            </summary>
+            <param name="primaryScheduler">The primary scheduler to get <see cref="T:Sitecore.XConnect.Interaction" /> instances from.</param>
+            <param name="pool">The pool used as a backlog for <see cref="T:Sitecore.XConnect.Interaction" /> instances failed to process. </param>
+            <param name="maxBatchSize">
+                The maximum amount of the interactions, that scheduler will return in one call to
+                <see cref="M:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactSchedulerWithBacklog.TryGetNextAsync" />.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="primaryScheduler" /> or <paramref name="pool" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactSchedulerWithBacklog.MarkProcessedAsync(Sitecore.Analytics.Core.ItemBatch{Sitecore.XConnect.Contact})">
+            <summary>
+                Asynchronously marks the specified piece of work as completed.
+            </summary>
+            <param name="batch">
+                The work item to mark as processed.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.BinaryKeyContactSchedulerWithBacklog.TryGetNextAsync">
+            <summary>
+                Asynchronously tries to obtain a new piece of work.
+            </summary>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with work item if a new piece of work was available and returned; <c>null</c> otherwise.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Contacts.ContactCursorScheduler">
+            <summary>
+                Represents a scheduler that retrieves contacts from xConnect cursors and maintains their state using
+                <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider" />.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.ContactCursorScheduler.#ctor(Sitecore.Analytics.Processing.AgentId,Sitecore.Analytics.Processing.ICursorDataProvider,Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.XConnect.ExpandOptions,System.Int32,Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy,System.Int16)">
+            <summary>
+                Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.Contacts.ContactCursorScheduler" />.
+            </summary>
+            <param name="ownerId">The owner of the current scheduler.</param>
+            <param name="provider">The provider to work with <see cref="T:Sitecore.Analytics.Processing.Cursor" /> instances.</param>
+            <param name="xdbContextFactory">
+                An <see cref="T:Sitecore.Analytics.Processing.IXdbContextFactory" /> instance that allow to instantiate
+                <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext" /> to retrieve contacts.
+            </param>
+            <param name="options">
+                The <see cref="T:Sitecore.XConnect.ExpandOptions" /> instance specifying which facets should be retrieved for each
+                contact.
+            </param>
+            <param name="minimumRangeSize">The minimum size of the range to allow split of the cursor.</param>
+            <param name="strategy">The global lease strategy for the scheduler.</param>
+            <param name="maxBatchSize">The maximum amount of the contacts, that scheduler will return in one call.</param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="ownerId" />, <paramref name="provider" />, <paramref name="xdbContextFactory" />,
+                <paramref name="strategy" />, or <paramref name="options" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.ContactCursorScheduler.GetPriorityForEnumerator(Sitecore.XConnect.IAsyncEntityBatchEnumerator{Sitecore.XConnect.Contact})">
+            <summary>
+                Gets priority for <see cref="T:Sitecore.Analytics.Processing.Cursor" /> based on the <paramref name="enumerator" />.
+            </summary>
+            <param name="enumerator">The enumerator used to get priority for <see cref="T:Sitecore.Analytics.Processing.Cursor" />.</param>
+            <returns>Priority for <see cref="T:Sitecore.Analytics.Processing.Cursor" /> that is received base on the <paramref name="enumerator" />.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Contacts.ContactCursorScheduler.CreateEnumeratorAsync(Sitecore.XConnect.IReadOnlyXdbContext,System.Byte[],Sitecore.XConnect.ExpandOptions,System.Int32)">
+            <summary>
+                Creates enumerator to enumerate <see cref="T:Sitecore.XConnect.Interaction" /> instances.
+            </summary>
+            <param name="context">The context to get data from xConnect.</param>
+            <param name="bookmark"></param>
+            <param name="expandOptions">Specifies which facets should be retrieved for each entity.</param>
+            <param name="batchSize">The amount of the entities received in one call.</param>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with <see cref="T:Sitecore.XConnect.IAsyncEntityBatchEnumerator`1" /> representing
+                enumerator.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.CursorScheduler`1">
+            <summary>
+                Represents a base scheduler to work with <see cref="T:Sitecore.Analytics.Processing.Cursor" /> instances.
+            </summary>
+            <typeparam name="TEntity">The type of the entity</typeparam>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.CursorScheduler`1.AgentInfo">
+            <summary>
+            Gets the well formatted information about the current agent.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.CursorScheduler`1.#ctor(Sitecore.Analytics.Processing.AgentId,Sitecore.Analytics.Processing.ICursorDataProvider,Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.XConnect.ExpandOptions,System.Int32,Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy,System.Int16)">
+            <summary>
+                Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.CursorScheduler`1" />.
+            </summary>
+            <param name="ownerId">The owner of the current scheduler.</param>
+            <param name="provider">The provider to work with <see cref="T:Sitecore.Analytics.Processing.Cursor" /> instances.</param>
+            <param name="xdbContextFactory">
+                An <see cref="T:Sitecore.Analytics.Processing.IXdbContextFactory" /> instance that allow to instantiate
+                <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext" /> to retrieve entities.
+            </param>
+            <param name="options">
+                The <see cref="T:Sitecore.XConnect.ExpandOptions" /> instance specifying which facets should be retrieved for each
+                entity.
+            </param>
+            <param name="minimumRangeSize">The minimum size of the range to allow split of the cursor.</param>
+            <param name="strategy">The global lease strategy for the scheduler.</param>
+            <param name="maxBatchSize">
+                The maximum amount of the entities, that scheduler will return in one call to
+                <see cref="M:Sitecore.Analytics.Processing.CursorScheduler`1.TryGetNextAsync" />.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="ownerId" />, <paramref name="provider" />, <paramref name="xdbContextFactory" />,
+                <paramref name="strategy" />, or <paramref name="options" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.CursorScheduler`1.MarkProcessedAsync(Sitecore.Analytics.Core.ItemBatch{`0})">
+            <summary>
+                Asynchronously marks the specified piece of work as completed.
+            </summary>
+            <param name="batch">
+                The work item to mark as processed.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.CursorScheduler`1.TryGetNextAsync">
+            <summary>
+                Asynchronously tries to obtain a new piece of work.
+            </summary>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with work item if a new piece of work was available and returned; <c>null</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.CursorScheduler`1.CompleteCursorAsync">
+            <summary>
+                Asynchronously completes current <see cref="T:Sitecore.Analytics.Processing.Cursor" /> instance.
+            </summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task" /> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.CursorScheduler`1.GetCursorThroughSplitAsync">
+            <summary>
+                Retrieves the <see cref="T:Sitecore.Analytics.Processing.Cursor" /> by trying to set ownership on the existing. If no available cursor exists,
+                split will be requested.
+            </summary>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with <see cref="T:Sitecore.Analytics.Processing.Cursor" /> representing locked cursor. If no cursor locked,
+                returns <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.CursorScheduler`1.GetPriorityForEnumerator(Sitecore.XConnect.IAsyncEntityBatchEnumerator{`0})">
+            <summary>
+                Gets priority for <see cref="T:Sitecore.Analytics.Processing.Cursor" /> based on the <paramref name="enumerator" />.
+            </summary>
+            <param name="enumerator">The enumerator used to get priority for <see cref="T:Sitecore.Analytics.Processing.Cursor" />.</param>
+            <returns>Priority for <see cref="T:Sitecore.Analytics.Processing.Cursor" /> that is received base on the <paramref name="enumerator" />.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.CursorScheduler`1.CreateEnumeratorAsync(Sitecore.XConnect.IReadOnlyXdbContext,System.Byte[],Sitecore.XConnect.ExpandOptions,System.Int32)">
+            <summary>
+                Creates enumerator to enumerate <typeparamref name="TEntity" /> instances.
+            </summary>
+            <param name="context">The context to get data from xConnect.</param>
+            <param name="bookmark"></param>
+            <param name="expandOptions">Specifies which facets should be retrieved for each entity.</param>
+            <param name="batchSize">The amount of the entities received in one call.</param>
+            <returns>
+                Returns <see cref="T:System.Threading.Tasks.Task`1" /> with <see cref="T:Sitecore.XConnect.IAsyncEntityBatchEnumerator`1" /> representing
+                enumerator.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.CursorScheduler`1.TrySplitAsync">
+            <summary>
+            Asynchronously splits cursor if split is needed.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> that represents an asynchronous operation. Result of the operation is set to true if split is performed. Otherwise - false. </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.DelegateSerializer">
+            <summary>
+                Serializes and deserializes delegates.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DelegateSerializer.Serialize(System.Delegate)">
+            <summary>
+                Serializes an object instance to a byte array.
+            </summary>
+            <param name="action">
+                The instance to serialize.
+            </param>
+            <returns>
+                The a byte array containing serialized representation of the object.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DelegateSerializer.DeserializeAction``1(System.Byte[])">
+            <summary>
+                Deserializes an action of serializable object from a byte array.
+            </summary>
+            <param name="buffer">
+                The buffer containing serialized representation of the object.
+            </param>
+            <returns>
+                An <see cref="T:System.Delegate" /> with type
+                <typeparam name="TAction" />
+                instance based on the information in the buffer.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DelegateSerializer.DeserializeTarget(System.Byte[])">
+            <summary>
+                Deserializes a serializable object from a byte array.
+            </summary>
+            <param name="buffer">
+                The buffer containing serialized representation of the object.
+            </param>
+            <returns>
+                An <see cref="T:System.Object" /> instance if serialized <see cref="T:System.Delegate" /> was instance method. Otherwise, returns
+                <b>null</b>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.DelegateSerializer.Record">
+            <summary>
+                Structure to hold delegate information for serialization
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DelegateSerializer.Record.#ctor(System.String,System.Object)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.DelegateSerializer.Record" /> class.
+            </summary>
+            <param name="method">
+                The name of the method representing the action.
+            </param>
+            <param name="target">
+                The object exposing the method represented by the action, or <b>null</b> if the method is a static
+                method.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DelegateSerializer.Record.#ctor(System.String,System.Type)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.DelegateSerializer.Record" /> class.
+            </summary>
+            <param name="method">
+                The name of the method representing the action.
+            </param>
+            <param name="type">
+                The object exposing the method represented by the action.
+            </param>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.DelegateSerializer.Record.Type">
+            <summary>
+                Gets the object exposing the method represented by the action.
+            </summary>
+            <value>
+                An <see cref="T:System.Object" /> instance exposing the method represented by the action.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.DelegateSerializer.Record.Target">
+            <summary>
+                Gets the object exposing the method represented by the action.
+            </summary>
+            <value>
+                An <see cref="T:System.Object" /> instance exposing the method represented by the action.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.DelegateSerializer.Record.Method">
+            <summary>
+                Gets the name of the method representing the action.
+            </summary>
+            <value>
+                A <see cref="T:System.String" /> value containing the name of the method representing the action.
+            </value>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Diagnostics.PerformanceCounters.AnalyticsProcessingCount">
+            <summary>
+            The analytics aggregation performance counters.
+            </summary>
+            <summary>
+            This static class holds Sitecore Performance Counters for 'Sitecore.Analytics.Processing' operations.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Diagnostics.PerformanceCounters.AnalyticsProcessingCount.Initialize">
+            <summary>
+            Initializes analytics aggregation performance counters.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Diagnostics.PerformanceCounters.AnalyticsProcessingCount.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:Sitecore.Analytics.Processing.Diagnostics.PerformanceCounters.AnalyticsProcessingCount"/> class.
+            Defines instances of Sitecore performance counters.
+            NOTE: This code is auto-generated. To introduce new counters or modify existing ones the update 'Counters.xml'.
+            The generated classes are partial so add new logic in matching partial class in a separate file.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Diagnostics.PerformanceCounters.AnalyticsProcessingCount.AverageTimeToUpdateCursorProgressms">
+            <summary>
+            Gets the counter that counts average time it takes to update progress of the cursor, agent currently works on.
+            </summary>
+            <value>
+            The counter instance.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Diagnostics.PerformanceCounters.AnalyticsProcessingCount.AverageTimeToSplitCursorms">
+            <summary>
+            Gets the counter that counts average time it takes to split the cursor, agent currently works on.
+            </summary>
+            <value>
+            The counter instance.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Diagnostics.PerformanceCounters.AnalyticsProcessingCount.AverageTimeToAcquireAvailableCursorms">
+            <summary>
+            Gets the counter that counts average time it takes to acquire available cursor by free agent.
+            </summary>
+            <value>
+            The counter instance.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Diagnostics.PerformanceCounters.AnalyticsProcessingCount.AverageTimeToRequestAndWaitForCursorSplitms">
+            <summary>
+            Gets the counter that counts average time it takes for free agent to request and wait for split, to be performed by the owner of the cursor.
+            </summary>
+            <value>
+            The counter instance.
+            </value>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.DistributedTaskOptions">
+            <summary>
+              Specifies options for a processing task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.DistributedTaskOptions.DefaultDistributed">
+            <summary>
+              Provides a default set of options for processing tasks.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DistributedTaskOptions.#ctor(System.String,System.TimeSpan,System.Nullable{System.Guid},System.Nullable{System.Guid})">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.TaskOptions"/> class.
+            </summary>
+            <param name="description">
+              A human-readable description of the task.
+            </param>
+            <param name="expiration">
+              An expiration time for the task.
+            </param>
+            <param name="taskId">
+              The unique identifier to use for the task. This can be used for recurring tasks in the system.
+            </param>
+            <param name="poolId">
+              The unique identifier to use for the pool. This can be used for recurring tasks in the system.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DistributedTaskOptions.#ctor(System.String,System.TimeSpan,System.Nullable{System.Guid},System.Nullable{System.Guid},System.Int16,System.Int16)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.TaskOptions"/> class.
+            </summary>
+            <param name="description">
+              A human-readable description of the task.
+            </param>
+            <param name="expiration">
+              An expiration time for the task.
+            </param>
+            <param name="taskId">
+              The unique identifier to use for the task. This can be used for recurring tasks in the system.
+            </param>
+            <param name="poolId">
+              The unique identifier to use for the pool. This can be used for recurring tasks in the system.
+            </param>
+            <param name="retryAttempts">
+              A number of attempts to process an <see cref="T:Sitecore.XConnect.Entity"/> within <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/> task.
+            </param>
+            <param name="retryDelay">
+              The retry delay in seconds between attempts to process an <see cref="T:Sitecore.XConnect.Entity"/> within <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/> task.
+            </param>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.DistributedTaskOptions.RetryAttempts">
+            <summary>
+            Gets the number of attempts to process an <see cref="T:Sitecore.XConnect.Entity"/> within <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/> task.
+            </summary>
+            <value>
+            A number of attempts to process an <see cref="T:Sitecore.XConnect.Entity"/>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.DistributedTaskOptions.RetryDelay">
+            <summary>
+            Gets the retry delay in seconds between attempts to process an <see cref="T:Sitecore.XConnect.Entity"/> within <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/> task.
+            </summary>
+            <value>
+            A retry delay in seconds between attempts to process an <see cref="T:Sitecore.XConnect.Entity"/>.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.DistributedTaskOptions.PoolId">
+            <summary>
+              Gets the predefined pool identifier.
+            </summary>
+            <value>
+              A <see cref="T:System.Guid"/> containing the predefined identifier or <c>null</c> if not specified.
+            </value>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionProcessingPoolScheduler">
+            <summary>
+                Represents a scheduler that uses <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" /> as a source of
+                <see cref="T:Sitecore.XConnect.Interaction" /> instances to process.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionProcessingPoolScheduler.#ctor(Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{Sitecore.Xdb.Processing.Queue.BinaryKey},Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.XConnect.ExpandOptions,System.Int16)">
+            <summary>
+                Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionProcessingPoolScheduler" />.
+            </summary>
+            <param name="pool">The pool used as a backlog for <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext" /> instances failed to process. </param>
+            <param name="xdbContextFactory">
+                An <see cref="T:Sitecore.XConnect.ExpandOptions" /> instance that allow to instantiate
+                <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext" /> to retrieve interactions.
+            </param>
+            <param name="options">
+                The <see cref="T:System.ArgumentNullException" /> instance specifying which facets should be retrieved for
+                each interaction.
+            </param>
+            <param name="maxBatchSize">
+                The maximum amount of the interactions, that scheduler will return in one call to
+                <see cref="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.TryGetNextAsync" />.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="pool" />, <paramref name="xdbContextFactory" />, or <paramref name="options" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionProcessingPoolScheduler.GetEntityKey(Sitecore.XConnect.Interaction)">
+            <summary>
+            Gets a key based on <paramref name="entity"/>
+            </summary>
+            <param name="entity">The entity to get a key for.</param>
+            <returns>A key for an <paramref name="entity"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionProcessingPoolScheduler.GetEntityReference(Sitecore.Xdb.Processing.Queue.BinaryKey)">
+            <summary>
+            Gets an entity reference using entity <paramref name="key"/>.
+            </summary>
+            <param name="key">The key to get entity reference from.</param>
+            <returns>An entity reference, created based on an entity key.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionSchedulerWithBacklog">
+            <summary>
+                Represents a scheduler, that retries to process failed <see cref="T:Sitecore.XConnect.Interaction" /> instances by using
+                <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" /> as a backlog.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionSchedulerWithBacklog.#ctor(Sitecore.Analytics.Processing.XConnectWorkScheduler{Sitecore.XConnect.Interaction},Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{Sitecore.Xdb.Processing.Queue.BinaryKey},System.Int16)">
+            <summary>
+                Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionSchedulerWithBacklog" />.
+            </summary>
+            <param name="primaryScheduler">The primary scheduler to get <see cref="T:Sitecore.XConnect.Interaction" /> instances from.</param>
+            <param name="pool">The pool used as a backlog for <see cref="T:Sitecore.XConnect.Interaction" /> instances failed to process. </param>
+            <param name="maxBatchSize">
+                The maximum amount of the interactions, that scheduler will return in one call to
+                <see cref="M:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionSchedulerWithBacklog.TryGetNextAsync" />.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="primaryScheduler" /> or <paramref name="pool" /> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionSchedulerWithBacklog.MarkProcessedAsync(Sitecore.Analytics.Core.ItemBatch{Sitecore.XConnect.Interaction})">
+            <summary>
+                Asynchronously marks the specified piece of work as completed.
+            </summary>
+            <param name="batch">
+                The work item to mark as processed.
+            </param>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.BinaryKeyInteractionSchedulerWithBacklog.TryGetNextAsync">
+            <summary>
+                Asynchronously tries to obtain a new piece of work.
+            </summary>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with work item if a new piece of work was available and returned; <c>null</c> otherwise.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Interactions.IInteractionCursorPriorityResolver">
+            <summary>
+            Defines contract to resolve priority of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.IInteractionCursorPriorityResolver.GetPriority(Sitecore.XConnect.IAsyncInteractionBatchEnumerator)">
+            <summary>
+            Gets priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/> based on the <paramref name="enumerator"/>.
+            </summary>
+            <param name="enumerator">The enumerator used to get priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <returns>Priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/> that is received base on the <paramref name="enumerator"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Interactions.CutOffInteractionCursorPriorityResolver">
+            <summary>
+            Resolves priority of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instance using CutOffDate.
+            </summary>
+            <remarks>
+              Priority resolved based on <see cref="P:Sitecore.XConnect.IAsyncInteractionBatchEnumerator.MaximumStartDateTime"/>. 
+              The closer <see cref="P:Sitecore.XConnect.IAsyncInteractionBatchEnumerator.MaximumStartDateTime"/> to the provided CutOffDate, 
+              the higher priority.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.CutOffInteractionCursorPriorityResolver.#ctor(System.DateTime)">
+            <summary>
+            Creates instance of <see cref="T:Sitecore.Analytics.Processing.Interactions.CutOffInteractionCursorPriorityResolver"/>.
+            </summary>
+            <param name="utcCutoffTime">Upper boundary for <see cref="P:Sitecore.XConnect.Interaction.EndDateTime"/> of the returned interactions, expressed as UTC.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="utcCutoffTime"/> have <see cref="P:System.DateTime.Kind"/> different from <see cref="F:System.DateTimeKind.Utc"/></exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.CutOffInteractionCursorPriorityResolver.GetPriority(Sitecore.XConnect.IAsyncInteractionBatchEnumerator)">
+             <summary>
+             Gets priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/> based on the <paramref name="enumerator"/>
+             </summary>
+             <param name="enumerator">The enumerator used to get priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+             <returns>Priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/> that is received base on the <paramref name="enumerator"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="enumerator"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Interactions.InteractionCursorScheduler">
+            <summary>
+            Represents a scheduler that retrieves interactions from xConnect cursors and maintains their state using <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionCursorScheduler.#ctor(Sitecore.Analytics.Processing.AgentId,Sitecore.Analytics.Processing.ICursorDataProvider,Sitecore.Analytics.Processing.Interactions.IInteractionCursorPriorityResolver,Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.XConnect.ExpandOptions,System.Int32,Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy,System.Int16)">
+            <summary>
+            Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.Interactions.InteractionCursorScheduler"/>. 
+            </summary>
+            <param name="ownerId">The owner of the current scheduler.</param>
+            <param name="provider">The provider to work with <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances.</param>
+            <param name="cursorPriorityResolver">The <see cref="T:Sitecore.Analytics.Processing.Interactions.IInteractionCursorPriorityResolver"/> instance that controls priorities of the newly split <see cref="T:Sitecore.Analytics.Processing.Cursor"/>instances.</param>
+            <param name="xdbContextFactory">An <see cref="T:Sitecore.Analytics.Processing.IXdbContextFactory"/> instance that allow to instantiate <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> to retrieve interactions.</param>
+            <param name="options">The <see cref="T:Sitecore.XConnect.ExpandOptions"/> instance specifying which facets should be retrieved for each interaction.</param>
+            <param name="minimumRangeSize">The minimum size of the range to allow split of the cursor.</param>
+            <param name="strategy">The global lease strategy for the scheduler.</param>
+            <param name="maxBatchSize">The maximum amount of the interactions, that scheduler will return in one call.</param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="ownerId"/>, <paramref name="provider"/>, <paramref name="xdbContextFactory"/>, 
+              <paramref name="strategy"/>, or <paramref name="options"/> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionCursorScheduler.GetPriorityForEnumerator(Sitecore.XConnect.IAsyncEntityBatchEnumerator{Sitecore.XConnect.Interaction})">
+            <summary>
+            Gets priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/> based on the <paramref name="enumerator"/>.
+            </summary>
+            <param name="enumerator">The enumerator used to get priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <returns>Priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/> that is received base on the <paramref name="enumerator"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionCursorScheduler.CreateEnumeratorAsync(Sitecore.XConnect.IReadOnlyXdbContext,System.Byte[],Sitecore.XConnect.ExpandOptions,System.Int32)">
+            <summary>
+            Creates enumerator to enumerate <see cref="T:Sitecore.XConnect.Interaction"/> instances.
+            </summary>
+            <param name="context">The context to get data from xConnect.</param>
+            <param name="bookmark"></param>
+            <param name="expandOptions">Specifies which facets should be retrieved for each entity.</param>
+            <param name="batchSize">The amount of the entities received in one call.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1"/> with <see cref="T:Sitecore.XConnect.IAsyncEntityBatchEnumerator`1"/> representing enumerator.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Interactions.InteractionProcessingPoolScheduler">
+            <summary>
+            Represents a scheduler that uses <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/> as a source of <see cref="T:Sitecore.XConnect.Interaction"/> instances to process.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionProcessingPoolScheduler.#ctor(Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{Sitecore.Xdb.Processing.Queue.InteractionKey},Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.XConnect.ExpandOptions,System.Int16)">
+            <summary>
+            Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.Interactions.InteractionProcessingPoolScheduler"/>. 
+            </summary>
+            <param name="pool">The pool used as a backlog for <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> instances failed to process. </param>
+            <param name="xdbContextFactory">An <see cref="T:Sitecore.XConnect.ExpandOptions"/> instance that allow to instantiate <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> to retrieve interactions.</param>
+            <param name="options">The <see cref="T:System.ArgumentNullException"/> instance specifying which facets should be retrieved for each interaction.</param>
+            <param name="maxBatchSize">The maximum amount of the interactions, that scheduler will return in one call to <see cref="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.TryGetNextAsync"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="pool"/>, <paramref name="xdbContextFactory"/>, or <paramref name="options"/> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionProcessingPoolScheduler.GetEntityKey(Sitecore.XConnect.Interaction)">
+            <summary>
+            Gets a key based on <paramref name="entity"/>
+            </summary>
+            <param name="entity">The entity to get a key for.</param>
+            <returns>A key for an <paramref name="entity"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionProcessingPoolScheduler.GetEntityReference(Sitecore.Xdb.Processing.Queue.InteractionKey)">
+            <summary>
+            Gets an entity reference using entity <paramref name="key"/>.
+            </summary>
+            <param name="key">The key to get entity reference from.</param>
+            <returns>An entity reference, created based on an entity key.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Interactions.InteractionSchedulerWithBacklog">
+            <summary>
+            Represents a scheduler, that retries to process failed <see cref="T:Sitecore.XConnect.Interaction"/> instances by using <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/> as a backlog.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionSchedulerWithBacklog.#ctor(Sitecore.Analytics.Processing.XConnectWorkScheduler{Sitecore.XConnect.Interaction},Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{Sitecore.Xdb.Processing.Queue.InteractionKey},System.Int16)">
+            <summary>
+            Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.Interactions.InteractionSchedulerWithBacklog"/>. 
+            </summary>
+            <param name="primaryScheduler">The primary scheduler to get <see cref="T:Sitecore.XConnect.Interaction"/> instances from.</param>
+            <param name="pool">The pool used as a backlog for <see cref="T:Sitecore.XConnect.Interaction"/> instances failed to process. </param>
+            <param name="maxBatchSize">The maximum amount of the interactions, that scheduler will return in one call to <see cref="M:Sitecore.Analytics.Processing.Interactions.InteractionSchedulerWithBacklog.TryGetNextAsync"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="primaryScheduler"/> or <paramref name="pool"/> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionSchedulerWithBacklog.MarkProcessedAsync(Sitecore.Analytics.Core.ItemBatch{Sitecore.XConnect.Interaction})">
+            <summary>
+              Asynchronously marks the specified piece of work as completed.
+            </summary>
+            <param name="batch">
+              The work item to mark as processed.
+            </param>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Interactions.InteractionSchedulerWithBacklog.TryGetNextAsync">
+            <summary>
+              Asynchronously tries to obtain a new piece of work.
+            </summary>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task`1"/> with work item if a new piece of work was available and returned; <c>null</c> otherwise.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.PoolItemBatch`2">
+            <summary>
+                Represents a strongly-typed batch for items. Contains additional information for
+                <see cref="T:Sitecore.Xdb.Processing.Queue.IProcessingPool`1" /> or <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" />.
+            </summary>
+            <typeparam name="TKey">
+                The type of the key of the <see cref="T:Sitecore.Xdb.Processing.Queue.IProcessingPool`1" /> or
+                <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" /> item.
+            </typeparam>
+            <typeparam name="TWorkItem">The type of the work items.</typeparam>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.PoolItemBatch`2.#ctor(System.Collections.Generic.IReadOnlyDictionary{`0,Sitecore.Xdb.Processing.Queue.WorkItem{`0}},System.Collections.Generic.IReadOnlyCollection{`1})">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.PoolItemBatch`2" /> class.
+            </summary>
+            <param name="poolItems">
+                Dictionary of the <see cref="T:Sitecore.Xdb.Processing.Queue.IProcessingPool`1" /> or <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" /> items that
+                correspond to the items in <paramref name="items" /> collection.
+            </param>
+            <param name="items">
+                Collection of items to be processed in the batch.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="poolItems" /> or <paramref name="items" /> is <c>null</c>.</exception>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.PoolItemBatch`2.PoolItems">
+            <summary>
+                Gets the dictionary of the <see cref="T:Sitecore.Xdb.Processing.Queue.IProcessingPool`1" /> or <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" /> items.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.BinaryKeyUtilities">
+            <summary>
+                Represents a class that contains helper methods to for <see cref="T:Sitecore.Xdb.Processing.Queue.BinaryKey" />.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.BinaryKeyUtilities.CreateContactBinaryKey(System.Guid)">
+            <summary>
+                Creates <see cref="T:Sitecore.Xdb.Processing.Queue.BinaryKey" /> for <see cref="T:Sitecore.XConnect.Contact" />.
+            </summary>
+            <param name="contactId">The unique identifier of the <see cref="T:Sitecore.XConnect.Contact" />.</param>
+            <returns>The <see cref="T:Sitecore.Xdb.Processing.Queue.BinaryKey" /> that represents <see cref="T:Sitecore.XConnect.Contact" /> unique identifier.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.BinaryKeyUtilities.GetInteractionBinaryKey(System.Guid,System.Guid)">
+            <summary>
+                Creates <see cref="T:Sitecore.Xdb.Processing.Queue.BinaryKey" /> for <see cref="T:Sitecore.XConnect.Interaction" />.
+            </summary>
+            <param name="contactId">
+                The unique identifier of the <see cref="T:Sitecore.XConnect.Contact" /> for <see cref="T:Sitecore.XConnect.Interaction" /> defined in .
+                <paramref name="interactionId" />.
+            </param>
+            <param name="interactionId">The unique identifier of the <see cref="T:Sitecore.XConnect.Interaction" />.</param>
+            <returns>The <see cref="T:Sitecore.Xdb.Processing.Queue.BinaryKey" /> that represents <see cref="T:Sitecore.XConnect.Interaction" /> unique identifier.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.BinaryKeyUtilities.GetInteractionKeys(System.Byte[])">
+            <summary>
+                Retrieves unique identifiers of <see cref="T:Sitecore.XConnect.Contact" /> and <see cref="T:Sitecore.XConnect.Interaction" />.
+            </summary>
+            <param name="binaryKey">The binary key to get unique identifiers from.</param>
+            <returns>
+                An array of the unique identifiers. First element is unique identifier of <see cref="T:Sitecore.XConnect.Contact" />.
+                Second element is unique identifier of <see cref="T:Sitecore.XConnect.Interaction" />.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="binaryKey" /> is <b>null</b>.</exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.BinaryKeyUtilities.GetContactKey(System.Byte[])">
+            <summary>
+                Retrieves unique identifier of the <see cref="T:Sitecore.XConnect.Contact" />.
+            </summary>
+            <param name="binaryKey">The binary key to get unique identifier from.</param>
+            <returns>A unique identifier for <see cref="T:Sitecore.XConnect.Contact" />.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="binaryKey" /> is <b>null</b>.</exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32">
+            <summary>
+            Implements a strategy for selecting the next batch size, represented as <see cref="T:System.Int32"/>.
+            </summary>
+            <remarks>
+              The strategy starts from 1 and grows proportionally, using <see cref="F:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32._factor"/> as multiplier, until <see cref="P:Sitecore.Analytics.Processing.Internals.BatchSizeStrategy`1.MaxBatchSize"/> is reached.
+            </remarks>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32._currentBatchSize">
+            <summary>
+            Current batch size.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32._factor">
+            <summary>
+            The factor that is used to calculate next batch size.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32"/> class.
+            </summary>
+            <param name="maxBatchSize">
+            The maximum batch size that can be returned by the strategy.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="maxBatchSize"/>  is less than 1.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32.#ctor(System.Int32,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32"/> class.
+            </summary>
+            <param name="maxBatchSize">
+            The maximum batch size that can be returned by the strategy.
+            </param>
+            <param name="factor">
+              The factor that is used to calculate batch size.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="maxBatchSize"/> or <paramref name="factor"/> is less than 1.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProprotionalGrowingBatchSizeStrategyInt32.RecalculateSize(System.Boolean)">
+            <summary>
+            Recalculates size of the next batch.
+            </summary>
+            <param name="lastBatchWasSuccessful">
+            A value indicating whether the last batch was successful.
+            </param>
+            <returns>
+            The number of items that the next batch should contain, as proposed by the strategy.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16">
+            <summary>
+              Implements a strategy for selecting the next batch size, represented as <see cref="T:System.Int16"/>.
+            </summary>
+            <remarks>
+              The strategy starts from 1 and grows proportionally, using <see cref="F:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16._factor"/> as multiplier, until <see cref="P:Sitecore.Analytics.Processing.Internals.BatchSizeStrategy`1.MaxBatchSize"/> is reached.
+            </remarks>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16._currentBatchSize">
+            <summary>
+            Current batch size.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16._factor">
+            <summary>
+            The factor that is used to calculate next batch size.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16.#ctor(System.Int16)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16"/> class.
+            </summary>
+            <param name="maxBatchSize">
+              The maximum batch size that can be returned by the strategy.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="maxBatchSize"/> is less than 1.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16.#ctor(System.Int16,System.Double)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16"/> class.
+            </summary>
+            <param name="maxBatchSize">
+              The maximum batch size that can be returned by the strategy.
+            </param>
+            <param name="factor">
+              The factor that is used to calculate batch size.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="maxBatchSize"/> or <paramref name="factor"/> is less than 1.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProportionalGrowingBatchSizeStrategyInt16.RecalculateSize(System.Boolean)">
+            <summary>
+            Recalculates size of the next batch.
+            </summary>
+            <param name="lastBatchWasSuccessful">
+            A value indicating whether the last batch was successful.
+            </param>
+            <returns>
+            The number of items that the next batch should contain, as proposed by the strategy.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.BatchSizeStrategy`1">
+            <summary>
+            A base class for a strategy for selecting the next batch size.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.BatchSizeStrategy`1.MaxBatchSize">
+            <summary>
+            Maximum batch size returned by the strategy.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.BatchSizeStrategy`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.BatchSizeStrategy`1"/> class.
+            </summary>
+            <param name="maxBatchSize">
+            The maximum batch size that can be returned by the strategy.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.BatchSizeStrategy`1.RecalculateSize(System.Boolean)">
+            <summary>
+            Recalculates size of the next batch.
+            </summary>
+            <param name="lastBatchWasSuccessful">
+            A value indicating whether the last batch was successful.
+            </param>
+            <returns>
+            The number of items that the next batch should contain, as proposed by the strategy.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.ExecutorFactory">
+            <summary>
+              Contains the logic for creating executors for processing tasks.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ExecutorFactory.#ctor(Sitecore.Analytics.Processing.Internals.TaskHub,Sitecore.Analytics.Processing.AgentId,System.Int32,Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy,System.Int16)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.ExecutorFactory"/> class. 
+            </summary>
+            <param name="hub">
+              The <see cref="T:Sitecore.Analytics.Processing.Internals.TaskHub"/> object associated with the executor factory.
+            </param>
+            <param name="ownerId">The <see cref="T:Sitecore.Analytics.Processing.AgentId"/> of the owner of <see cref="T:Sitecore.Analytics.Processing.ExecutorBase"/> instance.</param>
+            <param name="minimumRangeSize">The minimum size of a range partition to a single worker.</param>
+            <param name="strategy">The lock lease strategy associated to the range scheduler.</param>
+            <param name="maxBatchSize">The maximum size of the batches requested from the scheduler in one call.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="hub"/> or <paramref name="strategy"/> is <b>null</b>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="minimumRangeSize"/> is less than one.</exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ExecutorFactory.CreateExecutor(Sitecore.Analytics.Processing.ProcessingTaskData)">
+            <summary>
+              Creates and initializes a <see cref="T:Sitecore.Analytics.Processing.ExecutorBase"/> instance based on parameters specified in the task.
+            </summary>
+            <param name="task">
+              Task to create executor for.
+            </param>
+            <returns>
+              A new uninitialized instance of <see cref="T:Sitecore.Analytics.Processing.ExecutorBase"/> class matching the parameters in the task.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.TaskHub">
+            <summary>
+            Represents the core of the Task Framework and provides operations to manipulate and schedule <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> in a data store.
+            To the consumers it is represented as a <see cref="T:Sitecore.Analytics.Processing.ITaskManager"/> facade.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.TaskHub.MaxCacheDuration">
+            <summary>
+              Gets the time for how long tasks may be cached.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.TaskHub.CursorDataProviderFactory">
+            <summary>
+            Gets the factory that is responsible for creation of the <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider"/> instances.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.TaskHub.XdbContextFactory">
+            <summary>
+            Gets the factory that is responsible for creation of the <see cref="T:Sitecore.XConnect.IXdbContext"/> instances.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.TaskHub.PoolFactory">
+            <summary>
+            Gets the factory that is responsible for creation of the <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/> instances.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.TaskHub.#ctor(Sitecore.Analytics.Processing.ITaskDataProvider,Sitecore.Analytics.Processing.ICursorDataProviderFactory,Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.Xdb.Processing.Queue.IAsyncProcessingPoolFactory)">
+            <summary>
+              Creates an instance of <see cref="T:Sitecore.Analytics.Processing.Internals.TaskHub"/>.
+            </summary>
+            <param name="taskDataProvider">
+            The data provider to manipulate <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> instances in the data store.
+            </param>
+            <param name="cursorFactory">
+            The factory that is responsible for creation of the <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider"/> instances.
+            </param>
+            <param name="xdbContextFactory">
+            The <see cref="T:Sitecore.Analytics.Processing.IXdbContextFactory"/> instance that allows to instantiate <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/>.
+            </param>
+            <param name="poolFactory">
+            The factory that can asynchronously create, provide access to, and remove dynamically created <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/> instances.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="taskDataProvider"/>, <paramref name="cursorFactory"/>, <paramref name="xdbContextFactory"/>, or <paramref name="poolFactory"/> is <b>null</b>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.TaskHub.GetTaskAsync(System.Guid)">
+            <summary>
+              Gets a processing task by its unique identifier.
+            </summary>
+            <param name="taskId">
+              The unique identifier of the processing task.
+            </param>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> object containing information about the requested task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.TaskHub.RemoveTaskAsync(System.Guid)">
+            <summary>
+              Removes a task from the queue.
+            </summary>
+            <param name="taskId">
+              Description object for the task.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.TaskHub.UpdateTaskStatusAsync(System.Guid,System.DateTime,Sitecore.Analytics.Processing.ProcessingTaskStatus,System.String)">
+            <summary>
+            Asynchronously updates the status of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.
+            </summary>
+            <param name="taskId">
+            Id of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> to be updated.
+            </param>
+            <param name="updated">
+            The last time, known to the owner agent when the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> was updated.
+            </param>
+            <param name="status">
+            Status to be assigned to the task.
+            </param>
+            <param name="errorText">
+            Optional text of the exception associated with the status.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> instance that represents processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.TaskHub.IncrementProgressAsync(System.Guid,System.Int64)">
+            <summary>
+              Increments progress on a task.
+            </summary>
+            <param name="taskId">
+              The unique identifier of the processing task to update.
+            </param>
+            <param name="progress">
+              Value to be added to the task's progress.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.TaskHub.ScheduleTaskAsync(Sitecore.Analytics.Processing.ProcessingTaskData)">
+            <summary>
+              Schedules a task given the task description.
+            </summary>
+            <param name="description">
+              Object containing description of the task.
+            </param>
+            <returns>
+              Instance of <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> object that allows to manipulate the task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.TaskHub.Wrap(Sitecore.Analytics.Processing.ProcessingTaskData)">
+            <summary>
+              Wraps the provided task description into a <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> instance.
+            </summary>
+            <param name="description">
+              Description of a task that needs to be wrapped.
+            </param>
+            <returns>
+              An instance of <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> class.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.TaskHub.CleanUpAsync">
+            <summary>
+              Asynchronously cleans up all tasks from the data store with <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.Status"/> 
+              equals to <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Failed"/>, <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Completed"/>, or <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Expired"/>. 
+            </summary>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.ProcessingTask">
+            <summary>
+              Represents a cached copy of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> object.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.ProcessingTask.IsExpired">
+            <summary>
+              Gets a value indicating whether this task information is expired and no longer corresponds to a valid
+              task in the queue.
+            </summary>
+            <value>
+              A boolean value containing <b>true</b> if this task handle no longer corresponds to a valid task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.ProcessingTask.TaskId">
+            <summary>
+              Gets the unique task identifier.
+            </summary>
+            <value>
+              A <see cref="T:System.Guid"/> value containing the unique identifier of the task represented by this instance.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.ProcessingTask.Description">
+            <summary>
+              Gets description of the task to be exposed through <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskHandle.Description"/> and for use in
+              administrative UI.
+            </summary>
+            <value>
+              A <see cref="T:System.String"/> containing description of the task as assigned in <see cref="P:Sitecore.Analytics.Processing.TaskOptions.Description"/>
+              when creating the task, or <see cref="F:System.String.Empty"/> if no description is present.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTask.#ctor(Sitecore.Analytics.Processing.ProcessingTaskData,Sitecore.Analytics.Processing.Internals.TaskHub)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> class.
+            </summary>
+            <param name="task">
+              The task information object to be wrapped.
+            </param>
+            <param name="hub">
+              The hub to which this instance belongs.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTask.GetStatusAsync">
+            <summary>
+              Gets a snapshot of status information for the task.
+            </summary>
+            <returns>
+              An instance of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo"/> containing the status information of the task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTask.CancelAsync">
+            <summary>
+              Cancels the task and removes it from the task queue.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTask.ReportProgressAsync(System.Int64)">
+            <summary>
+              Asynchronously reports progress on the current task.
+            </summary>
+            <param name="progress">
+              Value by which the progress of the task should be incremented.
+            </param>
+            <exception cref="T:System.InvalidOperationException">
+              Gets thrown when an attempt is made to report progress on tasks of type 'deferred action', i.e. tasks
+              which just represent a single method call deferred to the processing cluster.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTask.UpdateCache(Sitecore.Analytics.Processing.ProcessingTaskData)">
+            <summary>
+              Forces an update of the cached value, e.g. when the task hub receives a fresh instance of task description
+              as a result of some operation.
+            </summary>
+            <param name="recent">
+              A fresh instance of task description.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTask.UpdateCacheAsync(System.Boolean)">
+            <summary>
+              Asynchronously synchronizes in-memory information object with the task storage.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache">
+            <summary>
+            Encapsulates the static cache of tasks which have been loaded by this ASP.NET instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache"/> class.
+            </summary>
+            <param name="cacheName">
+            The name of the _cache.
+            </param>
+            <param name="maxCachedHandles">
+            The maximum number of cached task handles.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache.Add(Sitecore.Analytics.Processing.Internals.ProcessingTask)">
+            <summary>
+            Adds a handle to the _cache.
+            </summary>
+            <param name="handle">
+            Reference to the <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> representing a particular task.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache.Get(System.Guid)">
+            <summary>
+            Gets a handle from the _cache.
+            </summary>
+            <param name="taskId">
+            ID of the task to retrieve cached handle for.
+            </param>
+            <returns>
+            A reference to a <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> instance, or <c>null</c> if there is no cached handle.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache.Remove(System.Guid)">
+            <summary>
+            Removes a handle from the _cache.
+            </summary>
+            <param name="taskId">
+            ID of the task to remove.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache.Clear">
+            <summary>
+             Clears the cache.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache.FormatCacheEntryKey(System.Guid)">
+            <summary>
+              Formats the cache entry key.
+            </summary>
+            <param name="id">
+              The unique identifier of the task.
+            </param>
+            <returns>
+              A string value that can be used as the cache entry key.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache.SetList(System.Collections.Generic.IReadOnlyList{Sitecore.Analytics.Processing.ProcessingTaskData})">
+            <summary>
+            Sets the cached list of tasks from the task queue.
+            </summary>
+            <param name="list">
+            A read-only list of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> objects, as returned by <see cref="T:Sitecore.Analytics.Processing.TaskQueue"/>.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.ProcessingTaskCache.GetList">
+            <summary>
+            Gets the cached list of tasks in the task queue.
+            </summary>
+            <returns>A read-only list of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> objects, as returned by <see cref="T:Sitecore.Analytics.Processing.TaskQueue"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor">
+            <summary>
+              Implements execution of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> with <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.TaskType"/> equals to 
+              <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/> type. 
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.ExecutorInfo">
+            <summary>
+            Gets the well formatted information about the current agent.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.#ctor(Sitecore.Analytics.Processing.ProcessingTaskData,Sitecore.Analytics.Processing.Internals.TaskHub,Sitecore.Analytics.Processing.AgentId,System.Int32,Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy,System.Int16)">
+            <summary>
+              Creates an instance of <see cref="T:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor"/>. 
+            </summary>
+            <param name="task">
+              The instance of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> to process.
+            </param>
+            <param name="hub">
+              The <see cref="T:Sitecore.Analytics.Processing.Internals.TaskHub"/> object associated with the executor factory.
+            </param>
+            <param name="ownerId">
+              The <see cref="T:Sitecore.Analytics.Processing.AgentId"/> of the owner of <see cref="T:Sitecore.Analytics.Processing.ExecutorBase"/> instance.</param>
+            <param name="minimumRangeSize">
+              The minimum size of a range partition to a single worker.</param>
+            <param name="strategy">
+              The lock lease strategy associated to the range scheduler.</param>
+            <param name="maxBatchSize">
+              The maximum size of the batches requested from the scheduler in one call.</param>
+            <exception cref="T:System.ArgumentException">
+              <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.TaskType"/> in the <paramref name="task"/> is not equal to 
+              <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/>.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="task"/>, <paramref name="hub"/>, <paramref name="ownerId"/>, or <paramref name="strategy"/> is <b>null</b>.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="minimumRangeSize"/> or <paramref name="minimumRangeSize"/> is less than one.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes the logic associated with the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.CreateInteractionsScheduler(Sitecore.Analytics.Processing.IDistributedInteractionWorker,Sitecore.Analytics.Processing.ICursorDataProvider,Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{Sitecore.Xdb.Processing.Queue.BinaryKey})">
+            <summary>
+            Creates an interactions scheduler for specified <paramref name="worker"/>.
+            </summary>
+            <param name="worker">The worker to create a scheduler for.</param>
+            <param name="cursorProvider">The provider to work with <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances.</param>
+            <param name="pool">The processing pool to postpone failed items.</param>
+            <returns>A ready to use scheduler for <paramref name="worker"/>.</returns>
+            <exception cref="T:System.InvalidOperationException">
+              <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.PoolId"/> is not specified in the current <see cref="F:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor._task"/>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.CreateContactsScheduler(Sitecore.Analytics.Processing.IDistributedContactWorker,Sitecore.Analytics.Processing.ICursorDataProvider,Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{Sitecore.Xdb.Processing.Queue.BinaryKey})">
+            <summary>
+            Creates a contacts scheduler for specified <paramref name="worker"/>.
+            </summary>
+            <param name="worker">The worker to create a scheduler for.</param>
+            <param name="cursorProvider">The provider to work with <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances.</param>
+            <param name="pool">The processing pool to postpone failed items.</param>
+            <returns>A ready to use scheduler for <paramref name="worker"/>.</returns>
+            <exception cref="T:System.InvalidOperationException">
+              <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.PoolId"/> is not specified in the current <see cref="F:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor._task"/>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.GetInteractionExpandOptions(Sitecore.Analytics.Processing.IDistributedInteractionWorker)">
+            <summary>
+            Retrieves <see cref="T:Sitecore.XConnect.InteractionExpandOptions"/> specified in <paramref name="worker"/>.
+            </summary>
+            <param name="worker">The worker to get <see cref="T:Sitecore.XConnect.InteractionExpandOptions"/> from.</param>
+            <returns>An <see cref="T:Sitecore.XConnect.InteractionExpandOptions"/> retrieved from <paramref name="worker"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.GetContactExpandOptions(Sitecore.Analytics.Processing.IDistributedContactWorker)">
+            <summary>
+            Retrieves <see cref="T:Sitecore.XConnect.ContactExpandOptions"/> specified in <paramref name="worker"/>.
+            </summary>
+            <param name="worker">The worker to get <see cref="T:Sitecore.XConnect.ContactExpandOptions"/> from.</param>
+            <returns>An <see cref="T:Sitecore.XConnect.ContactExpandOptions"/> retrieved from <paramref name="worker"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.InternalExecutor`1">
+            <summary>
+            A strongly-typed implementation of <see cref="T:Sitecore.Analytics.Processing.ExecutorBase"/>.
+            </summary>
+            <typeparam name="T">Type of the work items processed by the task.</typeparam>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.InternalExecutor`1.#ctor(Sitecore.Analytics.Processing.Internals.ProcessingTask,Sitecore.Analytics.Processing.XConnectWorkScheduler{`0},Sitecore.Analytics.Processing.IDistributedWorker{`0})">
+            <summary>
+              Creates an instance of the <see cref="T:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.InternalExecutor`1"/>.
+            </summary>
+            <param name="task">The task to create executor for.</param>
+            <param name="scheduler">The scheduler to retrieve <see cref="T:Sitecore.Analytics.Core.ItemBatch`1"/> instances.</param>
+            <param name="worker">The worker to process items.</param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="task"/>, <paramref name="scheduler"/>, or <paramref name="worker"/> is <b>null</b>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.InternalExecutor`1.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+              Executes the logic associated with the task.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.MaxPriorityResolver">
+            <summary>
+            Resolves priority of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instance to constant <b>1.0f</b>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.DistributedWorkExecutor.MaxPriorityResolver.GetPriority(Sitecore.XConnect.IAsyncInteractionBatchEnumerator)">
+            <summary>
+            Gets priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/> based on the <paramref name="enumerator"/>.
+            </summary>
+            <param name="enumerator">The enumerator used to get priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <returns>Priority for <see cref="T:Sitecore.Analytics.Processing.Cursor"/> that is received base on the <paramref name="enumerator"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Internals.SingleThreadTaskExecutor">
+            <summary>
+            An implementation of <see cref="T:Sitecore.Analytics.Processing.ExecutorBase"/> that executes the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> with 
+            <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.TaskType"/> equals to <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DeferredAction"/> on a single thread.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.SingleThreadTaskExecutor.#ctor(Sitecore.Analytics.Processing.ProcessingTaskData)">
+            <summary>
+              Creates an instance of <see cref="T:Sitecore.Analytics.Processing.Internals.SingleThreadTaskExecutor"/>.
+            </summary>
+            <param name="task">The task to execute.</param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="task"/> is <b>null</b>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Internals.SingleThreadTaskExecutor.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes the logic associated with the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Pipelines.Loader.InitializeProcessingPerformanceCounters">
+            <summary>Initializes the performance counters.</summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Pipelines.Loader.InitializeProcessingPerformanceCounters.Process(Sitecore.Pipelines.PipelineArgs)">
+            <summary>Runs the processor.</summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.AsyncPoolScheduler`2">
+            <summary>
+            Reperesents the base class for <see cref="T:Sitecore.Analytics.Processing.XConnectWorkScheduler`1"/> that receives data from <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/>
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.#ctor(Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool{`0},Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.XConnect.ExpandOptions,System.Int16)">
+            <summary>
+            Creates and instance of the <see cref="T:Sitecore.Analytics.Processing.AsyncPoolScheduler`2"/>. 
+            </summary>
+            <param name="pool">The pool used as a backlog for <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> instances failed to process. </param>
+            <param name="xdbContextFactory">An <see cref="T:Sitecore.XConnect.ExpandOptions"/> instance that allow to instantiate <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> to retrieve interactions.</param>
+            <param name="options">The <see cref="T:System.ArgumentNullException"/> instance specifying which facets should be retrieved for each interaction.</param>
+            <param name="maxBatchSize">The maximum amount of the interactions, that scheduler will return in one call to <see cref="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.TryGetNextAsync"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="pool"/>, <paramref name="xdbContextFactory"/>, or <paramref name="options"/> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.Pool">
+            <summary>
+            Gets the <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/> instance to get <see cref="T:Sitecore.Xdb.Processing.Queue.WorkItem`1"/> instances from.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.XdbContext">
+            <summary>
+            Gets the <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> to read <see cref="T:Sitecore.XConnect.Entity"/> instances from.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.LinearGrowingBatchSizeStrategy">
+            <summary>
+            Gets the strategy that determines the size of the batch.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.MarkProcessedAsync(Sitecore.Analytics.Core.ItemBatch{`1})">
+            <summary>
+              Asynchronously marks the specified piece of work as completed.
+            </summary>
+            <param name="batch">
+              The work item to mark as processed.
+            </param>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.TryGetNextAsync">
+            <summary>
+              Asynchronously tries to obtain a new piece of work.
+            </summary>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task`1"/> with work item if a new piece of work was available and returned; <c>null</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.GetEntityKey(`1)">
+            <summary>
+            Gets a key based on <paramref name="entity"/>
+            </summary>
+            <param name="entity">The entity to get a key for.</param>
+            <returns>A key for an <paramref name="entity"/>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.AsyncPoolScheduler`2.GetEntityReference(`0)">
+            <summary>
+            Gets an entity reference using entity <paramref name="key"/>.
+            </summary>
+            <param name="key">The key to get entity reference from.</param>
+            <returns>An entity reference, created based on an entity key.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingTaskProviderException">
+            <summary>
+            Exception type that may be thrown by the classes implementing <see cref="T:Sitecore.Analytics.Processing.ITaskDataProvider"/> in case of an unexpected error.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskProviderException.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskProviderException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskProviderException.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskProviderException"/> class.
+            </summary>
+            <param name="message">
+              The error message that explains the reason for the exception.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskProviderException.#ctor(System.String,System.Exception)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskProviderException"/> class.
+            </summary>
+            <param name="message">
+              The error message that explains the reason for the exception.
+            </param>
+            <param name="innerException">
+              The exception that is the cause of the current exception.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskProviderException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskProviderException"/> class from serialized data.
+            </summary>
+            <param name="info">
+              The serialization information object holding the serialized object data in the name-value form. 
+            </param>
+            <param name="context">
+              The contextual information about the source or destination of the exception.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ObjectRangeDefinition">
+            <summary>
+            Base class for descriptions of object ranges in XDB. Instances of this
+            class can be obtained through data provider interfaces and are used by
+            Sitecore Analytics Task Framework.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.TaskAgentOptions">
+            <summary>
+            Specifies options for a <see cref="T:Sitecore.Analytics.Processing.TaskAgent"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskAgentOptions.#ctor(System.Int16,System.TimeSpan,System.TimeSpan,System.Int32,Sitecore.Analytics.Core.RangeScheduler.LockLeaseStrategy)">
+            <summary>
+              Creates an instance of <see cref="T:Sitecore.Analytics.Processing.TaskAgentOptions"/>.
+            </summary>
+            <param name="maximumBatchSize">
+              The maximum size of the batches requested from the scheduler in one call.
+            </param>
+            <param name="maintenanceInterval">
+              The interval of maintenance operations on the task queue.
+            </param>
+            <param name="taskAfterlife">
+              The time a task will be kept in the task queue after the task is executed with status either <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Completed"/>,
+              <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Completed"/>, or <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Failed"/>.
+            </param>
+            <param name="minimumRangeSize">The minimum size of a range to be split for a single worker.</param>
+            <param name="strategy">The lock lease strategy associated to the range scheduler.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="minimumRangeSize"/> is less than one.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="strategy"/> is <b>null</b>.</exception>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskAgentOptions.MaximumBatchSize">
+            <summary>
+              Gets the maximum number of interactions in batches used when scanning interactions history and rebuilding
+              reporting database. The system will adjust the size of the batches dynamically but will not create batches
+              larger than this value. With SQL reporting database this has direct impact on the size of transactions
+              sent to SQL server.
+            </summary>
+            <value>
+              Maximum number of interactions in batches used when rebuilding reporting database.
+            </value>
+            <remarks>
+              This parameter has no impact on processing of EAS states when rebuilding reporting database.
+            </remarks>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskAgentOptions.MaintenanceInterval">
+            <summary>
+              Gets the interval between executions of maintenance operations on the task queue.
+            </summary>
+            <value>
+              A <see cref="T:System.TimeSpan"/> containing the minimum time interval between execution of maintenance operations on the task queue.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskAgentOptions.TaskAfterlife">
+            <summary>
+              Gets minimum time task information is kept in the database after the task has been completed or failed.
+            </summary>
+            <value>
+              A <see cref="T:System.TimeSpan"/> containing the minimum time a task entry is kept in the queue after the task execution is finished.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskAgentOptions.MinimumRangeSize">
+            <summary>
+            Gets the minimum size of a range to be split for a single worker.
+            </summary>
+            <value>
+            The minimum size of a range to be split for a single worker.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskAgentOptions.LockLeaseStrategy">
+            <summary>
+            Gets the lock lease strategy associated to the range scheduler.
+            </summary>
+            <value>
+            The lock lease strategy.
+            </value>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.TimePeriod">
+            <summary>
+              Defines time period by specifying two points in time.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TimePeriod.Start">
+            <summary>
+              Gets the date and time value that marks the start of the time period.
+            </summary>
+            <value>
+              A <see cref="T:System.DateTime"/> value that marks the start of the time period.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TimePeriod.End">
+            <summary>
+              Gets the date and time value that marks the end of the time period.
+            </summary>
+            <value>
+              A <see cref="T:System.DateTime"/> value that marks the end of the time period.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TimePeriod.#ctor(System.DateTime,System.DateTime)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.TimePeriod"/>
+            </summary>
+            <param name="start">
+              The date and time value that marks the start of the time period, expressed in UTC.
+            </param>
+            <param name="end">
+              The date and time value that marks the end of the time period, expressed in UTC.
+            </param>
+            <exception cref="T:System.ArgumentException">
+              Argument <paramref name="start"/> is greater than <paramref name="end"/>; or either of the parameters is
+              not specified in UTC time.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.AgentId">
+            <summary>
+            Represents a compound key that uniquely identifies an agent. 
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.AgentId.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Creates an instance of <see cref="T:Sitecore.Analytics.Processing.AgentId"/> with specified parameters.
+            </summary>
+            <param name="computer">The computer name of the agent without domain name.</param>
+            <param name="process">The Windows process ID of the agent.</param>
+            <param name="agent">The agent id.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="computer"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.AgentId.Computer">
+            <summary>
+            Gets the computer name of the agent without domain name.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.AgentId.Process">
+            <summary>
+            Gets the Windows process ID of the agent.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.AgentId.Agent">
+            <summary>
+            Gets the agent id.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.AllowBreakingChangeAttribute">
+            <summary>
+              Annotates a member or a class to allow breaking changes.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ICursorDataProviderFactory">
+            <summary>
+            Defines factory that is responsible for creation of the <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider"/> instances.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProviderFactory.Create(System.Guid)">
+            <summary>
+              Creates an instance of the <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider"/> for specific task.
+            </summary>
+            <param name="taskId">The unique identifier of the task to create <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider"/> instance for.</param>
+            <returns>
+              The instance of the <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider"/> that can manage <see cref="T:Sitecore.Analytics.Processing.Cursor"/> 
+              instances for task, specified in <paramref name="taskId"/>
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.IDistributedContactWorker">
+            <summary>
+              Allows a class to implement a distributed worker that can process a batch of <see cref="T:Sitecore.XConnect.Contact"/> entities.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.IDeferredAction">
+            <summary>
+              Allows a class to implement a deferred action that represents work that can be scheduled with the processing
+              framework.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.IDeferredAction.ExecuteAsync">
+            <summary>
+              Asynchronously executes the deferred action.
+            </summary>
+            <returns>
+              Returns <see cref="T:System.Threading.Tasks.Task"/> representing asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ICursorDataProvider">
+            <summary>
+            Provides a set of operations to manipulate instances of <see cref="T:Sitecore.Analytics.Processing.Cursor"/> and split them between worker agents.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ICursorDataProvider.TaskId">
+            <summary>
+            The unique identifier of the task associated with all the operations on <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.AddAsync(Sitecore.Analytics.Processing.Cursor)">
+            <summary>
+            Asynchronously adds new <see cref="T:Sitecore.Analytics.Processing.Cursor"/> to the data store.
+            </summary>
+            <param name="cursor">The <see cref="T:Sitecore.Analytics.Processing.Cursor"/> to add.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task"/> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.TryAcquireCursorAsync(Sitecore.Analytics.Processing.AgentId)">
+            <summary>
+            Asynchronously attempts to acquire available <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.
+            </summary>
+            <param name="agentId">An <see cref="T:Sitecore.Analytics.Processing.AgentId" /> object that uniquely identifies the agent acquiring the cursor.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1"/> with the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instance if attempt succeeded. 
+            Otherwise, returns <see cref="T:System.Threading.Tasks.Task`1"/> with <c>null</c>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.MarkCompletedAsync(System.Guid,System.DateTime)">
+            <summary>
+            Asynchronously marks completed the <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.
+            </summary>
+            <param name="cursorId">The <see cref="P:Sitecore.Analytics.Processing.Cursor.Id"/> to complete.</param>
+            <param name="accessed">The last time, known to the owner agent when the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> was accessed.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task"/> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.UpdateProgressAsync(System.Guid,System.DateTime,System.Byte[],System.Int64)">
+            <summary>
+            Asynchronously updates the progress of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.
+            </summary>
+            <param name="cursorId">The <see cref="P:Sitecore.Analytics.Processing.Cursor.Id"/> to update.</param>
+            <param name="accessed">The last time, known to the owner agent when the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> was accessed.</param>
+            <param name="bookmark">The updated bookmark, which represents the current position in the <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <param name="consumed">The updated amount of visited work items.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task"/> containing updated <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instance.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.SaveSplitAsync(System.Guid,System.DateTime,System.Byte[],System.Single,System.Int64,System.Collections.Generic.IReadOnlyCollection{Sitecore.Analytics.Processing.Cursor})">
+            <summary>
+            Asynchronously saves the split of the cursor in the database
+            </summary>
+            <param name="originalCursorId">The <see cref="P:Sitecore.Analytics.Processing.Cursor.Id"/> that was split.</param>
+            <param name="accessed">The last time, known to the owner agent when the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> was accessed.</param>
+            <param name="updatedBookmark">The updated bookmark, which represents the current position in the split <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <param name="updatedPriority">The updated priority of the split <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <param name="updatedSize">The updated, approximate, total amount of items to work on in the split <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <param name="newCursors">The <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> that contains new cursors, received after split.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task"/> containing updated <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instance.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.TryRegisterSplitRequestAsync">
+            <summary>
+            Asynchronously makes attempt to register split request of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> in the data store.
+            </summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1"/> containing <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instance with registered split if attempt succeeded. 
+            Otherwise, returns <see cref="T:System.Threading.Tasks.Task`1"/> with <c>null</c>.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.DeleteByTaskAsync(System.Boolean)">
+            <summary>
+            Asynchronously deletes all the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances.
+            </summary>
+            <param name="deleteCompletedOnly">Indicates whether only completed cursors have to be removed (<c>true</c>) or not (<c>false</c>).</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task"/> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.GetCursorCountAsync">
+            <summary>
+            Asynchronously retrieves count of all the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances.
+            </summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1"/> with the <see cref="T:System.Int32"/>, which represents amount of <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances in the data store.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.GetTotalNumberOfConsumedItemsAsync">
+            <summary>
+            Asynchronously retrieves amount of the consumed items throughout all the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances.
+            </summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1"/> with the <see cref="T:System.Int64"/>, which represents amount of the processed items throughout all the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances in the data store.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ICursorDataProvider.AreAllCursorsCompletedAsync">
+            <summary>
+              Asynchronously checks whether all the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances are completed (<see cref="P:Sitecore.Analytics.Processing.Cursor.IsCompleted"/> is <c>true</c>).
+            </summary>
+            <returns>
+              Returns <see cref="T:System.Threading.Tasks.Task`1"/> with the <see cref="T:System.Boolean"/>, which is <c>true</c> if all the 
+              <see cref="T:Sitecore.Analytics.Processing.Cursor"/> instances have <see cref="P:Sitecore.Analytics.Processing.Cursor.IsCompleted"/> is <c>true</c>.
+              Otherwise, returns <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.Cursor">
+            <summary>
+            The representation of the cursor utilized during processing.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Cursor.#ctor(System.Guid,System.Guid,System.DateTime,System.DateTime,Sitecore.Analytics.Processing.AgentId,System.Single,System.Int64,System.Byte[],System.Int64,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Creates instance of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> using specified parameters.
+            </summary>
+            <param name="id">The unique id of the cursor.</param>
+            <param name="taskId">The id of the task, this cursor belongs to.</param>
+            <param name="created">The UTC date when cursor was created.</param>
+            <param name="accessed">The UTC date when the cursor was accessed last time.</param>
+            <param name="owner">The instance of <see cref="T:Sitecore.Analytics.Processing.AgentId"/> 
+            that contains information about the agent holding the cursor.</param>
+            <param name="priority">The priority of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> from 0.0 to 1.0 (inclusive, the bigger value the higher 
+            priority) which determines the order, <see cref="T:Sitecore.Analytics.Processing.Cursor"/> candidates will be chosen for agent to work on.</param>
+            <param name="size">The approximate total amount of items to consume in the <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <param name="bookmark">The bookmark from XConnect, which represents the current position in the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> received from XConnect.</param>
+            <param name="consumed">The amount of visited work items.</param>
+            <param name="isDescending">Indicates whether order of items in <see cref="T:Sitecore.Analytics.Processing.Cursor"/> is Ascending (<c>false</c>) or Descending (<c>true</c>).</param>
+            <param name="isSplitRequested">Indicates whether split of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> is requested by the non-owner agent.</param>
+            <param name="isCompleted">Indicates whether the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> is completed or not.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="bookmark"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Either <paramref name="created"/> or <paramref name="accessed"/> is non UTC dates.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="size"/> is less than 1. 
+            <paramref name="consumed"/> is less than 0. <paramref name="priority"/> is not in range between 0.0 and 1.0 inclusive.</exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.Cursor.#ctor(System.Guid,System.Guid,System.DateTime,System.DateTime,System.String,System.Int32,System.Int32,System.Single,System.Int64,System.Byte[],System.Int64,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Creates instance of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> using specified parameters.
+            </summary>
+            <param name="id">The unique id of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <param name="taskId">The id of the task, this cursor belongs to.</param>
+            <param name="created">The UTC date when cursor was created.</param>
+            <param name="accessed">The UTC date when the cursor was accessed last time.</param>
+            <param name="computer">The computer name of the owner agent without domain name.</param>
+            <param name="process">The Windows process ID of the owner agent.</param>
+            <param name="agent">The owner agent id.</param>
+            <param name="priority">The priority of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> from 0.0 to 1.0 (inclusive, the bigger value the higher 
+            priority) which determines the order, <see cref="T:Sitecore.Analytics.Processing.Cursor"/> candidates will be chosen for agent to work on.</param>
+            <param name="size">The approximate total amount of items to consume in the <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.</param>
+            <param name="bookmark">The bookmark from XConnect, which represents the current position in the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> received from XConnect.</param>
+            <param name="consumed">The amount of visited work items.</param>
+            <param name="isDescending">Indicates whether order of items in <see cref="T:Sitecore.Analytics.Processing.Cursor"/> is Ascending (<c>false</c>) or Descending (<c>true</c>).</param>
+            <param name="isSplitRequested">Indicates whether split of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> is requested by the non-owner agent.</param>
+            <param name="isCompleted">Indicates whether the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> is completed or not.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="bookmark"/> is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="size"/> is less than 1. 
+            <exception cref="T:System.ArgumentException">Either <paramref name="created"/> or <paramref name="accessed"/> is non UTC dates.</exception>
+            <paramref name="consumed"/> is less than 0. <paramref name="priority"/> is not in range between 0.0 and 1.0 inclusive.</exception>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.Id">
+            <summary>
+            Gets the unique id of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.TaskId">
+            <summary>
+            Gets the id of the task, this cursor belongs to.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.Created">
+            <summary>
+            Gets the date when cursor was created.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.Accessed">
+            <summary>
+            Gets the date when the cursor was accessed last time.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.Owner">
+            <summary>
+            Gets the agent id.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.Priority">
+            <summary>
+            Gets the priority from 0.0 to 1.0 (inclusive, the bigger value the higher priority) which determines the order,
+            <see cref="T:Sitecore.Analytics.Processing.Cursor"/> candidates will be chosen for agent to work on.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.Size">
+            <summary>
+            Gets the approximate total amount of items to work on in the <see cref="T:Sitecore.Analytics.Processing.Cursor"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.Bookmark">
+            <summary>
+            Gets the bookmark, which represents the current position in the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> received from XConnect.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.Consumed">
+            <summary>
+            Gets the amount of visited work items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.IsDescending">
+            <summary>
+            Gets the value that indicates whether order of items is Ascending (<c>false</c>) or Descending (<c>true</c>).
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.IsSplitRequested">
+            <summary>
+            Gets the value that indicates whether split of the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> is requested by the non-owner agent or not.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.Cursor.IsCompleted">
+            <summary>
+            Gets the value that indicates whether the <see cref="T:Sitecore.Analytics.Processing.Cursor"/> is completed or not.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ITaskDataProvider">
+            <summary>
+            Defines operations to asynchronously manipulate a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> instances in the data store.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.AddAsync(Sitecore.Analytics.Processing.ProcessingTaskData)">
+            <summary>
+              Asynchronously adds given <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> to the data store.
+            </summary>
+            <param name="task">
+              An object describing the task to be executed by the agents.
+            </param>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.GetAsync(System.Guid)">
+            <summary>
+             Asynchronously gets the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> by its unique identifier.
+            </summary>
+            <param name="id">
+            The unique identifier of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> to look for.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> instance containing information about the requested task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.PickDistributedTaskInProgressAsync">
+            <summary>
+            Asynchronously picks a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> with <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.TaskType"/> equals to <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/> 
+            and <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.Status"/> equals to <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Processing"/>, that has enough work items to split.
+            </summary>
+            <returns>The <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> instance that represents distributed processing task that is actively processed.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.PickDistributedTaskPendingAsync">
+            <summary>
+            Asynchronously gets a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> with <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.TaskType"/> equals to <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/> 
+            and <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.Status"/> equals to <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Pending"/>.
+            </summary>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> instance that represents distributed processing task that is not started yet.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.RemoveAsync(System.Guid)">
+            <summary>
+            Asynchronously removes the specified task from the data store.
+            </summary>
+            <param name="taskId">
+             The unique identifier of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> to remove. 
+            </param>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.PickDeferredActionAsync">
+            <summary>
+            Asynchronously picks an available <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> with <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.TaskType"/> equals to <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DeferredAction"/>, 
+            disregarding any locked tasks and locking the task for other workers.
+            </summary>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> instance that represents single-threaded processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.CleanUpAsync">
+            <summary>
+              Asynchronously cleans up all tasks from the data store with <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.Status"/> 
+              equals to <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Failed"/>, <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Completed"/>, or <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Expired"/>. 
+            </summary>
+            <returns>
+              The <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.IncrementProgressAsync(System.Guid,System.Int64)">
+            <summary>
+            Asynchronously increments <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.Progress"/>.
+            </summary>
+            <param name="taskId">
+            Id of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> to be updated.
+            </param>
+            <param name="progress">
+            Value to be added to the <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.Progress"/>.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> instance that represents processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskDataProvider.UpdateStatusAsync(System.Guid,System.DateTime,Sitecore.Analytics.Processing.ProcessingTaskStatus,System.String)">
+            <summary>
+            Asynchronously updates the status of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.
+            </summary>
+            <param name="taskId">
+            Id of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> to be updated.
+            </param>
+            <param name="updated">
+            The last time, known to the owner agent when the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> was updated.
+            </param>
+            <param name="status">
+            Status to be assigned to the task.
+            </param>
+            <param name="errorText">
+            Optional text of the exception associated with the status.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> instance that represents processing task.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.IDistributedInteractionWorker">
+            <summary>
+              Allows a class to implement a distributed worker that can process a batch of <see cref="T:Sitecore.XConnect.Interaction"/>
+              entities.
+            </summary>
+            <remarks>
+              Implementing types need to be binary serializable.
+            </remarks>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.IXdbContextFactory">
+            <summary>
+              Allows a class to implement an <see cref="T:Sitecore.XConnect.IXdbContext"/> and an <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> factory.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.IXdbContextFactory.CreateReadOnly">
+            <summary>
+              Creates a ready-to-use <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> instance.
+            </summary>
+            <returns>
+              A ready-to-use <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> object.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.IXdbContextFactory.Create">
+            <summary>
+              Creates a ready-to-use <see cref="T:Sitecore.XConnect.XdbContext"/> instance.
+            </summary>
+            <returns>
+              A ready-to-use <see cref="T:Sitecore.XConnect.XdbContext"/> object.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.IDistributedWorker`1">
+            <summary>
+              Allows a class to implement a distributed worker that can process a batch of work items.
+            </summary>
+            <typeparam name="TItem">
+              The type of the work item the current worker accepts.
+            </typeparam>
+            <remarks>
+              Implementing types need to be binary serializable.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.IDistributedWorker`1.ProcessAsync(Sitecore.Analytics.Core.ItemBatch{`0})">
+            <summary>
+              Asynchronously processes a batch of work items.
+            </summary>
+            <param name="items">
+              A <see cref="T:Sitecore.Analytics.Core.ItemBatch`1"/> of <typeparamref name="TItem"/> objects containing the work items to
+              process.
+            </param>
+            <returns>
+              Returns <see cref="T:System.Threading.Tasks.Task"/> representing asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.XConnectWorkScheduler`1">
+            <summary>
+              Defines a work scheduler which allows to obrain batches of <typeparamref name="TEntity"/> objects for
+              processing.
+            </summary>
+            <typeparam name="TEntity">
+              The type of entity the scheduler can obtain in batches.
+            </typeparam>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.XConnectWorkScheduler`1.XConnectFactory">
+            <summary>
+              Gets the <see cref="T:Sitecore.Analytics.Processing.IXdbContextFactory"/> instance that allows to instantiate <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> to retrieve <see cref="T:Sitecore.XConnect.Entity"/> instances.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.XConnectWorkScheduler`1.ExpandOptions">
+            <summary>
+              Gets the <see cref="P:Sitecore.Analytics.Processing.XConnectWorkScheduler`1.ExpandOptions"/> instance specifying which facets should be retrieved for each <see cref="T:Sitecore.XConnect.Entity"/> instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.XConnectWorkScheduler`1.#ctor(Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.XConnect.ExpandOptions)">
+            <summary>
+              Creates instance of <see cref="T:Sitecore.Analytics.Processing.XConnectWorkScheduler`1"/>
+            </summary>
+            <param name="factory">
+              The <see cref="T:Sitecore.Analytics.Processing.IXdbContextFactory"/> instance that allows to instantiate <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/> to retrieve <see cref="T:Sitecore.XConnect.Entity"/> instances.
+            </param>
+            <param name="options">
+              The <see cref="P:Sitecore.Analytics.Processing.XConnectWorkScheduler`1.ExpandOptions"/> instance specifying which facets should be retrieved for each <see cref="T:Sitecore.XConnect.Entity"/> instance.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="factory"/> or <paramref name="options"/> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.XConnectWorkScheduler`1.TryGetNextAsync">
+            <summary>
+              Tries to obtain the next batch of entities asynchronously.
+            </summary>
+            <returns>
+              A <see cref="T:System.Threading.Tasks.Task`1"/> of <see cref="T:Sitecore.Analytics.Core.ItemBatch`1"/> of <typeparamref name="TEntity"/> object that
+              represents the asynchronous operation. When the task completes, the <see cref="P:System.Threading.Tasks.Task`1.Result"/>
+              property contains the batch obtained; or <b>null</b> if a batch could not be obtained.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.XConnectWorkScheduler`1.MarkProcessedAsync(Sitecore.Analytics.Core.ItemBatch{`0})">
+            <summary>
+              Asynchronously marks the specified batch processed.
+            </summary>
+            <param name="batch">
+              A <see cref="T:Sitecore.Analytics.Core.ItemBatch`1"/> of <typeparamref name="TEntity"/> object that is the batch to mark processed.
+            </param>
+            <returns>
+              A <see cref="T:System.Threading.Tasks.Task"/> that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingReason">
+            <summary>
+              Enumerates reasons for processing entities.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingReason.Created">
+            <summary>
+              The entity is a new entity.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingReason.Updated">
+            <summary>
+              The entity has been updated.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingReason.Obsoleted">
+            <summary>
+              The entity identifier has been obsoleted.
+            </summary>
+            <remarks>
+              When the identifier of an entity is obsoleted, a the old identifier is not removed from the system. It can
+              still be used to locate and access the entity.
+            </remarks>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingReason.Unknown">
+            <summary>
+              The entity processing reason is unknown.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.TaskOptions">
+            <summary>
+              Specifies options for a processing task.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.TaskOptions.Default">
+            <summary>
+              Provides a default set of options for processing tasks.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskOptions.#ctor(System.String,System.TimeSpan)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.TaskOptions"/> class.
+            </summary>
+            <param name="description">
+              A human-readable description of the task.
+            </param>
+            <param name="expiration">
+              An expiration time for the task.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskOptions.#ctor(System.String,System.TimeSpan,System.Nullable{System.Guid})">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.TaskOptions"/> class.
+            </summary>
+            <param name="description">
+              A human-readable description of the task.
+            </param>
+            <param name="expiration">
+              An expiration time for the task.
+            </param>
+            <param name="taskId">
+              The unique identifier to use for the task. This can be used for recurring tasks in the system.
+            </param>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskOptions.Description">
+            <summary>
+              Gets the human-readable description of the task.
+            </summary>
+            <value>
+              A <see cref="T:System.String"/> containing human-readable description of the task or <c>null</c> if not specified.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskOptions.TaskId">
+            <summary>
+              Gets the predefined task identifier.
+            </summary>
+            <value>
+              A <see cref="T:System.Guid"/> containing the predefined identifier or <c>null</c> if not specified.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskOptions.Expiration">
+            <summary>
+            Gets the expiration time for the task.
+            </summary>
+            <value>
+            A <see cref="T:System.TimeSpan" /> value of expiration.
+            </value>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingTaskHandle">
+            <summary>
+              Provides access to operations on a task.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskHandle.TaskId">
+            <summary>
+              Gets the unique identifier of the task.
+            </summary>
+            <value>
+              A <see cref="T:System.Guid"/> value containing the unique identifier of the task represented by the current
+              instance.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskHandle.Description">
+            <summary>
+              Gets the description of the task that can be used in an administrative UI.
+            </summary>
+            <value>
+              A <see cref="T:System.String"/> containing description of the task as specified with the <see cref="T:Sitecore.Analytics.Processing.TaskOptions"/>
+              when the task was initialized, or <see cref="F:System.String.Empty"/> if a description was not provided.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskHandle.IsExpired">
+            <summary>
+              Gets a value indicating whether the current task has expired.
+            </summary>
+            <value>
+              <b>true</b> if the task has expired; otherwise, <b>false</b>.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskHandle.#ctor(Sitecore.Analytics.Processing.Internals.ProcessingTask)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle"/> class.
+            </summary>
+            <param name="task">
+              Reference to the internal representation of the task.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="task"/> is a <b>null</b> reference.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskHandle.CancelAsync">
+            <summary>
+              Cancels the task referenced by this handle.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskHandle.GetStatusAsync">
+            <summary>
+            Gets the status information of the task.
+            </summary>
+            <returns>
+            A <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo"/> object containing a snapshot of task status information.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo">
+            <summary>
+            Provides information about task status.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo.TaskId">
+            <summary>
+            Gets the unique identifier of the task for which status information is being provided.
+            </summary>
+            <value>
+            A <see cref="T:System.Guid"/> containing the identifier of the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo.Created">
+            <summary>
+            Gets or sets the time stamp of task.
+            </summary>
+            <value>
+            The time stamp.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo.Updated">
+            <summary>
+            Gets the time when the task was last updated by the task framework (had its status changed or progress reported).
+            </summary>
+            <value>
+            A <see cref="T:System.DateTime"/> value in UTC corresponding to the time of the last update on the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo.Status">
+            <summary>
+            Gets the current status of the task.
+            </summary>
+            <value>
+            A <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskStatus"/> enumeration value describing the status of the processing task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo.Error">
+            <summary>
+            Gets the text of the most recent exception associated with the execution of the task, if any.
+            </summary>
+            <value>
+            A <see cref="T:System.String"/> containing the text of the exception including the exception message, any nested exceptions and the stack trace on the server where the exception occurred.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo.Progress">
+            <summary>
+            Gets the progress of a distributed processing task. This value is always <c>0</c> for deferred action type tasks.
+            </summary>
+            <value>
+            A <see cref="T:System.Int64"/> value containing the number or work items (e.g. database records) processed by the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo.Total">
+            <summary>
+            Gets the total approximate number of items to process.
+            </summary>
+            <value>
+            The total approximate number of items to process, if processing task has 
+            type <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/>. Otherwise, returns null.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo.#ctor(System.Guid,Sitecore.Analytics.Processing.ProcessingTaskStatus,System.DateTime,System.DateTime,System.Int64,System.Nullable{System.Int64},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskStatusInfo"/> class.
+            </summary>
+            <param name="taskId">
+            Unique identifier of the task, for which the status information is provided.
+            </param>
+            <param name="status">
+            Current status of the task.
+            </param>
+            <param name="created">
+            The date and time the task was created.
+            </param>
+            <param name="updated">
+            Time when the task was last accessed by the framework.
+            </param>
+            <param name="progress">
+            The task progress.
+            </param>
+            <param name="total">
+            The total approximate number of items to process.
+            </param>
+            <param name="error">
+            The error if any.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.DefaultTaskContext">
+            <summary>
+            Default implementation of <see cref="T:Sitecore.Analytics.Processing.TaskContext"/> contract which is used in the <see cref="T:Sitecore.Analytics.Processing.TaskManager"/> stack.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.DefaultTaskContext.Backlog">
+            <summary>
+            Gets the backlog associated with the task.
+            </summary>
+            <value>
+            A reference to <see cref="T:Sitecore.Xdb.Processing.Queue.ProcessingPool`1"/> class representing the pool of postponed items to process by the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.DefaultTaskContext.TaskId">
+            <summary>
+            Gets the Id of the task being executed.
+            </summary>
+            <value>
+            A <see cref="T:System.Guid"/> value containing the unique identifier of the task.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DefaultTaskContext.#ctor(Sitecore.Analytics.Processing.ProcessingTaskData,Sitecore.Analytics.Processing.Internals.TaskHub,Sitecore.Xdb.Processing.Queue.IProcessingPool{Sitecore.Xdb.Processing.Queue.BinaryKey})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.DefaultTaskContext"/> class.
+            </summary>
+            <param name="task">
+            A reference to the task that the task context represents.
+            </param>
+            <param name="hub">
+            A reference to the task hub which provides facilities to execute the task.
+            </param>
+            <param name="backlog">
+              The backlog.
+            </param>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DefaultTaskContext.CreateObject``1(System.String)">
+            <summary>
+            Obtains a reference to a service available in task context.
+            </summary>
+            <param name="configurationPath">
+            The configuration path for the object in the system configuration.
+            </param>
+            <typeparam name="T">
+            Type of the service to request.
+            </typeparam>
+            <returns>
+            A reference to the service of the specified type or a <c>null</c> value if the service is not available.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.DefaultTaskContext.RegisterProgress(System.Int64)">
+            <summary>
+            Registers progress of the task achieved by the current worker.
+            </summary>
+            <param name="increment">
+            An integer value representing the progress made by the current worker.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ITaskManager">
+            <summary>
+              Defines an abstraction for managing distributed tasks.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskManager.ScheduleInteractionProcessingAsync(Sitecore.Analytics.Processing.IDistributedInteractionWorker,Sitecore.Analytics.Processing.DistributedTaskOptions)">
+            <summary>
+              Schedules a new interaction processing task.
+            </summary>
+            <param name="worker">
+              An <see cref="T:Sitecore.Analytics.Processing.IDistributedInteractionWorker"/> object that captures the work to be done.
+            </param>
+            <param name="options">
+              A set of options that control how the processing task is initialized. Use <see cref="F:Sitecore.Analytics.Processing.DistributedTaskOptions.DefaultDistributed"/>
+              if no special options are required.
+            </param>
+            <returns>
+              A <see cref="T:System.Threading.Tasks.Task`1"/> of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle"/> object representing the scheduled
+              processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskManager.ScheduleInteractionProcessingAsync(Sitecore.Analytics.Processing.IDistributedInteractionWorker,Sitecore.Analytics.Processing.TimePeriod,Sitecore.Analytics.Processing.DistributedTaskOptions)">
+            <summary>
+              Schedules a new interaction processing task for interactions started within the specified time period.
+            </summary>
+            <param name="worker">
+              An <see cref="T:Sitecore.Analytics.Processing.IDistributedInteractionWorker"/> object that captures the work to be done.
+            </param>
+            <param name="period">
+              A <see cref="T:Sitecore.Analytics.Processing.TimePeriod"/> object that specifies the interaction range by start date-time.
+            </param>
+            <param name="options">
+              A set of options that control how the processing task is initialized. Use <see cref="F:Sitecore.Analytics.Processing.DistributedTaskOptions.DefaultDistributed"/>
+              if no special options are required.
+            </param>
+            <returns>
+              A <see cref="T:System.Threading.Tasks.Task`1"/> of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle"/> object representing the scheduled
+              processing task.
+            </returns>
+            <remarks>
+              This method starts a processing task that includes all interactions with a <see cref="P:Sitecore.XConnect.Interaction.StartDateTime"/>
+              falling in the specified <paramref name="period"/>. The lower bound of the time period is inclusive and
+              the upper bound is exclusive.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskManager.ScheduleContactProcessingAsync(Sitecore.Analytics.Processing.IDistributedContactWorker,Sitecore.Analytics.Processing.DistributedTaskOptions)">
+            <summary>
+              Schedules a new contact processing task.
+            </summary>
+            <param name="worker">
+              An <see cref="T:Sitecore.Analytics.Processing.IDistributedContactWorker"/> object that captures the work to be done.
+            </param>
+            <param name="options">
+              A set of options that control how the processing task is initialized. Use <see cref="F:Sitecore.Analytics.Processing.DistributedTaskOptions.DefaultDistributed"/>
+              if no special options are required.
+            </param>
+            <returns>
+              A <see cref="T:System.Threading.Tasks.Task`1"/> of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle"/> object representing the scheduled
+              processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskManager.ScheduleActionAsync(Sitecore.Analytics.Processing.IDeferredAction,Sitecore.Analytics.Processing.TaskOptions)">
+            <summary>
+              Schedules a one-time action at the processing cluster.
+            </summary>
+            <param name="worker">
+              Reference to the code to be executed at the cluster.
+            </param>
+            <param name="options">
+              A set of options that control how the processing task is initialized. Use <see cref="F:Sitecore.Analytics.Processing.TaskOptions.Default"/>
+              if no special options are required.
+            </param>
+            <returns>
+              A <see cref="T:System.Threading.Tasks.Task`1"/> of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle"/> object representing the scheduled
+              processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ITaskManager.GetTaskAsync(System.Guid)">
+            <summary>
+              Returns a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle"/> object for the specified task.
+            </summary>
+            <param name="id">
+              Unique identifier of the task.
+            </param>
+            <returns>
+              A <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle"/> object representing the requested task, or <b>null</b> if the task does not exist.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingLoader">
+            <summary>
+            Implements a background daemon that executes the processing agents.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingLoader.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.ProcessingLoader"/> class.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingResult">
+            <summary>
+            Defines possible results for a processing operation on a single object.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingResult.Processed">
+            <summary>
+            The object has been processed by the worker.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingResult.Postpone">
+            <summary>
+            The object cannot be processed by the worker and needs to be postponed.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingTaskType">
+            <summary>
+            Defines types of tasks supported by the framework.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingTaskType.DeferredAction">
+            <summary>
+            A single-shot deferred action - execute code on the computing cluster instead of local machine.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing">
+            <summary>
+            A distributed processing task for a range of database entities.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ExecutorBase">
+            <summary>
+             Defines contract for executor of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ExecutorBase.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+              Executes the logic associated with the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingTaskStatus">
+            <summary>
+              Defines the states a processing task can be in.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Pending">
+            <summary>
+              The processing task has been created and is ready to be picked up by any of the workers.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Processing">
+            <summary>
+              The processing task has been picked up by one or multiple workers and is in progress.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Completed">
+            <summary>
+              The processing task has been completed successfully.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Failed">
+            <summary>
+              An error occurred during processing.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Expired">
+            <summary>
+              The processing task could not be completed within the allocated time frame.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Canceled">
+            <summary>
+              The processing task has been canceled.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.TaskContext">
+            <summary>
+            A base class describing interface between the code executing the task and its context.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskContext.Backlog">
+            <summary>
+            Gets the backlog associated with the task.
+            </summary>
+            <value>
+            A reference to <see cref="T:Sitecore.Xdb.Processing.Queue.IProcessingPool`1"/> class representing the pool of postponed items to process by the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskContext.TaskId">
+            <summary>
+            Gets the Id of the task being executed.
+            </summary>
+            <value>
+            A <see cref="T:System.Guid"/> value containing the unique identifier of the task.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskContext.CreateObject``1(System.String)">
+            <summary>
+            Obtains a reference to a service available in task context.
+            </summary>
+            <param name="configurationPath">
+            The configuration path for the object in the system configuration.
+            </param>
+            <typeparam name="T">
+            Type of the service to request.
+            </typeparam>
+            <returns>
+            A reference to the service of the specified type or a <c>null</c> value if the service is not available.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskContext.RegisterProgress(System.Int64)">
+            <summary>
+            Registers progress of the task achieved by the current worker.
+            </summary>
+            <param name="increment">
+            An integer value representing the progress made by the current worker.
+            </param>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.TaskManager">
+            <summary>
+                Task manager - the entry point to the task framework.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskManager.#ctor(Sitecore.Analytics.Processing.ITaskDataProvider,Sitecore.Analytics.Processing.ICursorDataProviderFactory,Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.Xdb.Processing.Queue.IAsyncProcessingPoolFactory)">
+            <summary>
+                Creates an instance of <see cref="T:Sitecore.Analytics.Processing.TaskManager" />
+            </summary>
+            <param name="taskProvider">
+                The data provider to manipulate <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask" /> instances in the data store.
+            </param>
+            <param name="cursorFactory">
+                The factory that is responsible for creation of the <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider" /> instances.
+            </param>
+            <param name="xdbContextFactory">
+                The <see cref="T:Sitecore.Analytics.Processing.IXdbContextFactory" /> instance that allows to instantiate <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext" />.
+            </param>
+            <param name="poolFactory">
+                The factory that can asynchronously create, provide access to, and remove dynamically created
+                <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1" /> instances.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="taskProvider" />, <paramref name="cursorFactory" />, <paramref name="xdbContextFactory" />, or
+                <paramref name="poolFactory" /> is <b>null</b>.
+            </exception>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskManager.Hub">
+            <summary>
+                Gets a reference to the task hub connected to this task manager instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskManager.ScheduleInteractionProcessingAsync(Sitecore.Analytics.Processing.IDistributedInteractionWorker,Sitecore.Analytics.Processing.DistributedTaskOptions)">
+            <summary>
+                Schedules a new interaction processing task.
+            </summary>
+            <param name="worker">
+                An <see cref="T:Sitecore.Analytics.Processing.IDistributedInteractionWorker" /> object that captures the work to be done.
+            </param>
+            <param name="options">
+                A set of options that control how the processing task is initialized. Use <see cref="F:Sitecore.Analytics.Processing.DistributedTaskOptions.DefaultDistributed" />
+                if no special options are required.
+            </param>
+            <returns>
+                A <see cref="T:System.Threading.Tasks.Task`1" /> of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle" /> object representing the scheduled
+                processing task.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="worker" /> or <paramref name="options" /> is <b>null</b>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskManager.ScheduleInteractionProcessingAsync(Sitecore.Analytics.Processing.IDistributedInteractionWorker,Sitecore.Analytics.Processing.TimePeriod,Sitecore.Analytics.Processing.DistributedTaskOptions)">
+            <summary>
+                Schedules a new interaction processing task for interactions started within the specified time period.
+            </summary>
+            <param name="worker">
+                An <see cref="T:Sitecore.Analytics.Processing.IDistributedInteractionWorker" /> object that captures the work to be done.
+            </param>
+            <param name="period">
+                A <see cref="T:Sitecore.Analytics.Processing.TimePeriod" /> object that specifies the interaction range by start date-time.
+            </param>
+            <param name="options">
+                A set of options that control how the processing task is initialized. Use <see cref="F:Sitecore.Analytics.Processing.DistributedTaskOptions.DefaultDistributed" />
+                if no special options are required.
+            </param>
+            <returns>
+                A <see cref="T:System.Threading.Tasks.Task`1" /> of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle" /> object representing the scheduled
+                processing task.
+            </returns>
+            <remarks>
+                This method starts a processing task that includes all interactions with a <see cref="P:Sitecore.XConnect.Interaction.StartDateTime" />
+                falling in the specified <paramref name="period" />. The lower bound of the time period is inclusive and
+                the upper bound is exclusive.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskManager.ScheduleContactProcessingAsync(Sitecore.Analytics.Processing.IDistributedContactWorker,Sitecore.Analytics.Processing.DistributedTaskOptions)">
+            <summary>
+                Schedules a new contact processing task.
+            </summary>
+            <param name="worker">
+                An <see cref="T:Sitecore.Analytics.Processing.IDistributedContactWorker" /> object that captures the work to be done.
+            </param>
+            <param name="options">
+                A set of options that control how the processing task is initialized. Use <see cref="F:Sitecore.Analytics.Processing.DistributedTaskOptions.DefaultDistributed" />
+                if no special options are required.
+            </param>
+            <returns>
+                A <see cref="T:System.Threading.Tasks.Task`1" /> of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle" /> object representing the scheduled
+                processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskManager.ScheduleActionAsync(Sitecore.Analytics.Processing.IDeferredAction,Sitecore.Analytics.Processing.TaskOptions)">
+            <summary>
+                Schedules a one-time action at the processing cluster.
+            </summary>
+            <param name="worker">
+                Reference to the code to be executed at the cluster.
+            </param>
+            <param name="options">
+                A set of options that control how the processing task is initialized. Use <see cref="F:Sitecore.Analytics.Processing.TaskOptions.Default" />
+                if no special options are required.
+            </param>
+            <returns>
+                A <see cref="T:System.Threading.Tasks.Task`1" /> of <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle" /> object representing the scheduled
+                processing task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskManager.GetTaskAsync(System.Guid)">
+            <summary>
+                Returns a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle" /> object for the specified task.
+            </summary>
+            <param name="id">
+                Unique identifier of the task.
+            </param>
+            <returns>
+                A <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskHandle" /> object representing the requested task, or <b>null</b> if the task
+                does not exist.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingModule">
+            <summary>
+            Defines components for the processing subsystem.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.ProcessingTaskData">
+            <summary>
+            The task base.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Id">
+            <summary>
+            Gets the unique ID of the task.
+            </summary>
+            <value>
+            A <see cref="T:System.Guid"/> value containing the unique identifier of the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Created">
+            <summary>
+            Gets the time when task was created, expressed as UTC.
+            </summary>
+            <value>
+            A <see cref="T:System.DateTime"/> value containing the creation time of the task, expressed as UTC.
+            </value>
+            <remarks><c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.</remarks>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Updated">
+            <summary>
+            Gets time when the record was last accessed by a worker, expressed as UTC. An access from the worker typically means an update in the task status or progress.
+            </summary>
+            <value>
+            A <see cref="T:System.DateTime"/> value containing time when the record was last accessed by a worker, expressed as UTC.
+            </value>
+            <remarks><c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.</remarks>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Expiration">
+            <summary>
+            Gets the absolute expiration time for the task, expressed as UTC.
+            </summary>
+            <value>
+            A <see cref="T:System.DateTime" /> value of absolute expiration.
+            </value>
+            <remarks><c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.</remarks>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.TaskType">
+            <summary>
+            Gets the type of the task: deferred action or distributed task.
+            </summary>
+            <value>
+            A <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskType"/> value describing the type of the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Worker">
+            <summary>
+            Gets the reference to the worker that will implement the task.
+            </summary>
+            <value>
+            A <see cref="T:System.Byte"/> array that contains the serialize delegate to the code that implements the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Error">
+            <summary>
+            Gets information about an error.
+            </summary>
+            <value>
+            Information about an error.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Status">
+            <summary>
+            Gets the status of the task.
+            </summary>
+            <value>
+            The status of the task. See <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskStatus"/> for possible values.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.WorkItemType">
+            <summary>
+            Gets the type of the work items.
+            </summary>
+            <value>
+            A string containing assembly qualified name of the type for the work items for the data processing task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Progress">
+            <summary>
+            Gets the progress of the task.
+            </summary>
+            <value>The number of items processed by the task so far, if <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.Status"/> property has value <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Processing"/>, or the total number of processed items, if <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.Status"/> property has value <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskStatus.Completed"/>.</value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Total">
+            <summary>
+            Gets the total approximate number of items to process.
+            </summary>
+            <value>
+            The total approximate number of items to process, if <see cref="P:Sitecore.Analytics.Processing.ProcessingTaskData.TaskType"/> property has 
+            value <see cref="F:Sitecore.Analytics.Processing.ProcessingTaskType.DistributedProcessing"/>. Otherwise, returns null.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.Description">
+            <summary>
+            Gets the human-readable description of the task for use in administrative UI.
+            </summary>
+            <value>
+            A <see cref="T:System.String"/> containing the description of the task, or <c>null</c> if no description was specified when creating the task.
+            </value>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.ProcessingTaskData.PoolId">
+            <summary>
+            Gets the unique identifier of the <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/> associated with current task.
+            </summary>
+            <value>
+            A <see cref="T:System.Guid"/> value containing the unique identifier of the pool.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.ProcessingTaskData.#ctor(System.Guid,System.DateTime,System.DateTime,System.DateTime,System.Byte[],System.String,Sitecore.Analytics.Processing.ProcessingTaskStatus,System.Int64,System.Nullable{System.Int64},System.String,Sitecore.Analytics.Processing.ProcessingTaskType,System.Nullable{System.Guid})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/> class.
+            </summary>
+            <param name="id">The unique identifier of the task.</param>
+            <param name="created">The time when task was created, expressed as UTC.</param>
+            <param name="updated">Time when the record was last accessed by a worker, expressed as UTC. An access from the worker typically means an update in the task status or progress.</param>
+            <param name="expiration">The absolute expiration time for the task, expressed as UTC.</param>
+            <param name="worker">The reference to the worker that will implement the task.</param>
+            <param name="error">Information about an error.</param>
+            <param name="status">The status of the task.</param>
+            <param name="progress">The progress of the task.</param>
+            <param name="total">The total approximate number of items to process.</param>
+            <param name="description">The human-readable description of the task for use in administrative UI.</param>
+            <param name="type">The type of the task: deferred action or distributed task.</param>
+            <param name="poolId">The unique identifier of the <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/> associated with current task.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="worker"/> is <b>null</b>.</exception>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="created"/>, <paramref name="expiration"/>, or <paramref name="updated"/> is not expressed as UTC.
+            <paramref name="status"/> is not defined in the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskStatus"/> or 
+            <paramref name="type"/> is not defined in the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskType"/> enumeration. 
+            </exception>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.TaskQueue">
+            <summary>
+                The queue for <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData" />.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskQueue.#ctor(Sitecore.Analytics.Processing.ITaskDataProvider)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.TaskQueue" /> class.
+            </summary>
+            <param name="provider">
+                Data provider to manipulate <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData" /> in a data source.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="provider" /> is <b>null</b>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskQueue.TryGetNextAsync">
+            <summary>
+                Asynchronously tries to obtain a new <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData" /> to work on.
+            </summary>
+            <returns>
+                The <see cref="T:System.Threading.Tasks.Task`1" /> with <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData" /> if a <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData" /> is
+                available; <c>null</c> otherwise.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Analytics.Processing.TaskAgent">
+            <summary>
+            The tasks agent to work with <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskAgent.AgentInfo">
+            <summary>
+            Gets the well formatted information about the current agent.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Analytics.Processing.TaskAgent.TaskHub">
+            <summary>
+            Gets an instance of the <see cref="P:Sitecore.Analytics.Processing.TaskAgent.TaskHub"/>
+            </summary>
+            <value>
+            The task hub reference.
+            </value>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskAgent.#ctor(Sitecore.Analytics.Processing.ITaskDataProvider,Sitecore.Analytics.Processing.ICursorDataProviderFactory,Sitecore.Analytics.Processing.IXdbContextFactory,Sitecore.Xdb.Processing.Queue.IAsyncProcessingPoolFactory,Sitecore.Analytics.Processing.TaskAgentOptions)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Analytics.Processing.TaskAgent"/> class.
+            </summary>
+            <param name="taskDataProvider">
+              The data provider to manipulate <see cref="T:Sitecore.Analytics.Processing.Internals.ProcessingTask"/> instances in the data store.
+            </param>
+            <param name="cursorFactory">
+              The factory that is responsible for creation of the <see cref="T:Sitecore.Analytics.Processing.ICursorDataProvider"/> instances.
+            </param>
+            <param name="xdbContextFactory">
+              The <see cref="T:Sitecore.Analytics.Processing.IXdbContextFactory"/> instance that allows to instantiate <see cref="T:Sitecore.XConnect.IReadOnlyXdbContext"/>.
+            </param>
+            <param name="poolFactory">
+              The factory that can asynchronously create, provide access to, and remove dynamically created <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/> instances.
+            </param>
+            <param name="taskAgentOptions">
+              The interval of maintenance operations on the task queue.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              Argument <paramref name="taskDataProvider"/>, <paramref name="cursorFactory"/>, <paramref name="xdbContextFactory"/>,
+              <paramref name="poolFactory"/>, or <paramref name="taskAgentOptions"/> is <b>null</b>.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskAgent.ExecuteCoreAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously executes the agent.
+            </summary>
+            <param name="token">The <see cref="T:System.Threading.CancellationToken"/> to communicate cancellation request.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that represents acynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskAgent.CreateExecutor(Sitecore.Analytics.Processing.ProcessingTaskData)">
+            <summary>
+            Creates a <see cref="T:Sitecore.Analytics.Processing.ExecutorBase"/> instance based on parameters specified in the task.
+            </summary>
+            <param name="task">
+            Task to create executor for.
+            </param>
+            <returns>
+            A new uninitialized instance of <see cref="T:Sitecore.Analytics.Processing.ExecutorBase"/> class matching the parameters in the task.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskAgent.CompleteTaskAsync(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Asynchronously completes task, making all the necessary cleanup.
+            </summary>
+            <param name="taskId">The unique identifier of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.</param>
+            <param name="poolId">The unique identifier of the <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/>.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task"/> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskAgent.FailTaskAsync(System.Guid,System.Nullable{System.Guid},System.String,System.Exception)">
+            <summary>
+            Asynchronously fails task, making all the necessary cleanup.
+            </summary>
+            <param name="taskId">The unique identifier of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.</param>
+            <param name="poolId">The unique identifier of the <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/>.</param>
+            <param name="errorText">The additional information about the error.</param>
+            <param name="ex">The exception that caused task processing to fail.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task"/> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskAgent.ExpireTaskAsync(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Asynchronously expires task, making all the necessary cleanup.
+            </summary>
+            <param name="taskId">The unique identifier of the <see cref="T:Sitecore.Analytics.Processing.ProcessingTaskData"/>.</param>
+            <param name="poolId">The unique identifier of the <see cref="T:Sitecore.Xdb.Processing.Queue.IAsyncProcessingPool`1"/>.</param>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task"/> representing asynchronous operation.</returns>
+        </member>
+        <member name="M:Sitecore.Analytics.Processing.TaskAgent.PerformTaskStorageMaintenanceAsync">
+            <summary>
+              Performs maintenance on the task storage.
+            </summary>
+        </member>
+    </members>
+</doc>

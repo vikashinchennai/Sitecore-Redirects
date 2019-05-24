@@ -1,0 +1,939 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.XConnect.Collection.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.XConnect.Collection.Model.Address">
+            <summary>
+            Represents a physical address for a contact
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.AddressLine1">
+            <summary>
+            Gets or sets the first line of the address.
+            </summary>
+            <value>
+            Address line 1.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.AddressLine2">
+            <summary>
+            Gets or sets the second line of the address.
+            </summary>
+            <value>
+            Address line 2.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.AddressLine3">
+            <summary>
+            Gets or sets the third line of the address.
+            </summary>
+            <value>
+            Address line 3.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.AddressLine4">
+            <summary>
+            Gets or sets the fourth line of the address.
+            </summary>
+            <value>
+            Address line 4.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.City">
+            <summary>
+            Gets or sets the city of the address.
+            </summary>
+            <value>
+            The city.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.CountryCode">
+            <summary>
+            Gets or sets the 2-digit ISO code from ISO 3166-alpha-2 for the country. Using this code enables marketers to easily build segments with our conditions by using an existing standard.
+            </summary>
+            <value>
+            The country code.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.GeoCoordinate">
+            <summary>
+            Gets or sets the geographic coordinates for the address. The value is optional. The brand must decide if they populate and therefore use this value..
+            </summary>
+            <value>
+            The geo coordinate.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.PostalCode">
+            <summary>
+            Gets or sets the zip or postal code of the address.
+            </summary>
+            <value>
+            The zip or postal code.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Address.StateOrProvince">
+            <summary>
+            Gets or sets the state of province of the address.
+            </summary>
+            <value>
+            The state or province.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.AddressList">
+            <summary>
+            Represents a list of addresses for a contact.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Facet" />
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.AddressList.#ctor(Sitecore.XConnect.Collection.Model.Address,System.String)">
+            <summary>
+            Constructs a new AddressList object.
+            </summary>
+            <param name="preferredAddress">Preferred address.</param>
+            <param name="preferredKey">The preferred key.</param>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AddressList.Others">
+            <summary>
+            Gets or sets the alternative addresses for this contact different than the preferred one. The key defines the identifier for that address. Examples are "work", "home", or "personal".
+            </summary>
+            <value>
+            The others.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AddressList.PreferredKey">
+            <summary>
+            Gets or sets the key related to the preferred address.
+            </summary>
+            <value>
+            The preferred key.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AddressList.PreferredAddress">
+            <summary>
+            Gets or sets the preferred email for the contact.
+            </summary>
+            <value>
+            The preferred email.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.AutomationPlanActivityEnrollmentCacheEntry">
+            <summary>
+            An entry of the cache of the of the automation plans for this contact. This is only to be updated during automation plan processing and used for personalization.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AutomationPlanActivityEnrollmentCacheEntry.ActivityId">
+            <summary>
+            Gets or sets the ID of the activity the contact is enrolled in.
+            </summary>
+            <value>
+            The activity identifier.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AutomationPlanActivityEnrollmentCacheEntry.AutomationPlanDefinitionId">
+            <summary>
+            Gets or sets the automation plan definition ID from the marketing operations API
+            </summary>
+            <value>
+            The definition ID.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AutomationPlanActivityEnrollmentCacheEntry.ContextKey">
+            <summary>
+            Gets or sets the context key. The context key is the same one which specifies an instance of the plan and enables a developer to look up additional details for the plan instance from the MarketingAutomationClient.
+            </summary>
+            <value>
+            The context key.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AutomationPlanActivityEnrollmentCacheEntry.ActivityEntryDate">
+            <summary>
+            Gets or sets the date and time when the contact entered the ActivityId.
+            </summary>
+            <value>
+            The activity entry date.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AutomationPlanActivityEnrollmentCacheEntry.PlanEntryDate">
+            <summary>
+            Gets or sets the date and time when the contact first entered the PlanId.
+            </summary>
+            <value>
+            The plan entry date.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AutomationPlanActivityEnrollmentCacheEntry.CustomValues">
+            <summary>
+            Gets or sets the custom values the contact is enrolled into the activity with.
+            </summary>
+            <value>
+            The custom values.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.AutomationPlanEnrollmentCache">
+            <summary>
+             A cache of the of the automation plans for this contact. This is only to be updated during automation plan processing and used for personalization.
+            The context key is the same one which specifies an instance of the plan and enables a developer to look up additional details for the plan instance from the MarketingAutomationClient
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Facet" />
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AutomationPlanResult.AutomationPlanDefinitionId">
+            <summary>
+            Gets or sets the definition ID of the plan that was exited.
+            </summary>
+            <value>
+            The automation plan definition ID.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.AutomationPlanResult.ExitDateTime">
+            <summary>
+            Gets or sets the date and time where the contact exited
+            </summary>
+            <value>
+            The exit time.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.Cache.GoalCacheEntry">
+            <summary>
+            Represents <see cref="T:Sitecore.XConnect.Goal"/> data to be cached for a given <see cref="T:Sitecore.XConnect.Interaction"/>
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.GoalCacheEntry.Timestamp">
+            <summary>
+            Goal.Timestamp
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.GoalCacheEntry.DefinitionId">
+            <summary>
+            Goal.DefinitionId
+            </summary>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry">
+            <summary>
+            Represents a single Interaction's data to be cached in the <see cref="T:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache"/> calculated facet.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.StartDateTime">
+            <summary>
+            A StartDateTime of the Interaction.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.ChannelId">
+            <summary>
+            A ChannelId of the Interaction.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.DefinitionIds">
+            <summary>
+            DefinitionId's of the Interaction.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.DownloadEventItemIds">
+            <summary>
+            DownloadEvent.ItemIds of the Interaction.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.Goals">
+            <summary>
+            Represents <see cref="T:Sitecore.XConnect.Goal"/> data to be cached for the Interaction.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.Outcomes">
+            <summary>
+            Represents <see cref="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.Outcomes"/> data to be cached for the <see cref="T:Sitecore.XConnect.Interaction"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.PageViewEventItemIds">
+            <summary>
+            PageViewEvent.ItemIds of the Interaction.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.ProfileScores">
+            <summary>
+            Represents <see cref="T:Sitecore.XConnect.Collection.Model.ProfileScore"/> data to be cached for the <see cref="T:Sitecore.XConnect.Interaction"/>.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionCacheEntry.SearchEventKeywords">
+            <summary>
+            SearchEvent.Keywords of the Interaction.
+            </summary>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.Cache.OutcomeCacheEntry">
+            <summary>
+            Represents <see cref="T:Sitecore.XConnect.Outcome"/> data to be cached for a given <see cref="T:Sitecore.XConnect.Interaction"/>
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.OutcomeCacheEntry.Timestamp">
+            <summary>
+            Outcome.Timestamp
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.OutcomeCacheEntry.DefinitionId">
+            <summary>
+            Outcome.DefinitionId
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.OutcomeCacheEntry.MonetaryValue">
+            <summary>
+            Outcome.MonetatyValue
+            </summary>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.Cache.ProfileScoreCacheEntry">
+            <summary>
+            Represents <see cref="T:Sitecore.XConnect.Collection.Model.ProfileScore"/> data to be cached for a given <see cref="T:Sitecore.XConnect.Interaction"/>
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.ProfileScoreCacheEntry.ProfileDefinitionId">
+            <summary>
+            ProfileScore.ProfileDefinitionId
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.ProfileScoreCacheEntry.MatchedPatternId">
+            <summary>
+            ProfileScore.MatchedPatternId
+            </summary>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache">
+            <summary>
+            Represents cached <see cref="T:Sitecore.XConnect.Interaction"/> values in a <see cref="T:Sitecore.XConnect.Contact"/>.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Facet" />
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.InteractionCaches">
+            <summary>
+            <see cref="T:Sitecore.XConnect.Interaction"/> data to be cached for the <see cref="T:Sitecore.XConnect.Contact"/>
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.DeviceVendorHardwareModels">
+            <summary>
+            Interaction.UserAgentInfo().DeviceVendorHardwareModel
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.CanSupportTouchScreen">
+            <summary>
+            Interaction.UserAgentInfo().CanSupportTouchScreen
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.DeviceTypes">
+            <summary>
+            Interaction.UserAgentInfo().DeviceType
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.DeviceVendors">
+            <summary>
+            Interaction.UserAgentInfo().DeviceVendor
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.AreaCodes">
+            <summary>
+            Interaction.IpInfo().AreaCode
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.BusinessNames">
+            <summary>
+            Interaction.IpInfo().BusinessName
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.Cities">
+            <summary>
+            Interaction.IpInfo().City
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.Countries">
+            <summary>
+            Interaction.IpInfo().Country
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.Dns">
+            <summary>
+            .IpInfo().Dns
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.Isps">
+            <summary>
+            Interaction.IpInfo().Isp
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.MetroCodes">
+            <summary>
+            Interaction.IpInfo().MetroCode
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.PostalCodes">
+            <summary>
+            Interaction.IpInfo().PostalCode
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.Regions">
+            <summary>
+            Interaction.IpInfo().Region
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.Referrers">
+            <summary>
+            Interaction.WebVisit().Referrer
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Cache.InteractionsCache.SearchKeywords">
+            <summary>
+            Interaction.WebVisit().SearchKeywords
+            </summary>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.CampaignEvent">
+            <summary>
+            Represents a campaign event that was triggered during an interaction.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Event" />
+        </member>
+        <member name="F:Sitecore.XConnect.Collection.Model.CampaignEvent.EventDefinitionId">
+            <summary>
+            The ID of the campaign event's definition.
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.CampaignEvent.#ctor(System.Guid,System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.XConnect.Collection.Model.CampaignEvent"/> class.
+            All campaigns have /sitecore/system/Settings/Analytics/Page Events/Campaign definition ID.
+            </summary>
+            <param name="campaignDefinitionId">The Campaign Definition ID.</param>
+            <param name="timestamp"></param>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.CampaignEvent.CampaignDefinitionId">
+            <summary>
+            Gets or sets the Campaign Definition ID.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ConsentInformation.ConsentRevoked">
+            <summary>
+            Gets or sets a value indicating whether the contact has revoked their consent to be contacted by the brand in any form.
+            </summary>
+            <value>
+              <c>true</c> if [consent revoked]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ConsentInformation.DoNotMarket">
+            <summary>
+            Gets or sets a value indicating whether the contact has globally unsubscribed from all marketing lists. This does not include system messages such as order confirmation or "your password is about to expire".
+            </summary>
+            <value>
+              <c>true</c> if [do not market]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ConsentInformation.ExecutedRightToBeForgotten">
+            <summary>
+            Gets or sets a value indicating whether the contact has executed the right to be forgotten.
+            </summary>
+            <value>
+            <c>true</c> if executed right to be forgotten; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ContactListSubscription.Added">
+            <summary>
+            Gets or sets when this contact list membership was added
+            </summary>
+            <value>
+            The added.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ContactListSubscription.IsActive">
+            <summary>
+            Gets or sets a value indicating whether this list membership is active.
+            </summary>
+            <value>
+              <c>true</c> if this membersship is active; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ContactListSubscription.ListDefinitionId">
+            <summary>
+            Gets or sets the Id of the contact list to which the contact has subscribed. This Id is defined by the ContactListDefinitionManager found in the Marketing Operations API.
+            </summary>
+            <value>
+            The list identifier.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ContactListSubscription.SourceDefinitionId">
+            <summary>
+            Gets or sets the definition ID for the source of this subscription, if any.
+            </summary>
+            <value>
+            The source definition ID.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.DownloadEvent">
+            <summary>
+            Represents a resource that was downloaded during an interaction.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Event" />
+        </member>
+        <member name="F:Sitecore.XConnect.Collection.Model.DownloadEvent.EventDefinitionId">
+            <summary>
+            The ID of the download event's definition.
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.DownloadEvent.#ctor(System.DateTime,System.Guid)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.XConnect.Collection.Model.DownloadEvent" /> class.
+            </summary>
+            <param name="timestamp">The point in time where the event occured.</param>
+            <param name="itemId">The Sitecore item ID for the downloaded item.</param>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.EmailAddress">
+            <summary>
+            Represents an email address for a <see cref="T:Sitecore.XConnect.Contact"/>
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.EmailAddress.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.XConnect.Collection.Model.EmailAddress"/> class.
+            </summary>
+            <param name="smtpAddress">The email address</param>
+            <param name="validated">Specifies whether this email has been validated</param>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EmailAddress.Validated">
+            <summary>
+            Gets or sets a value indicating whether this email has been validated.
+            </summary>
+            <value>
+              <c>true</c> if validated; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EmailAddress.SmtpAddress">
+            <summary>
+            Gets or sets the email address to be used when emailing this contact
+            </summary>
+            <value>
+            The SMTP address.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EmailAddress.BounceCount">
+            <summary>
+            Gets or sets the number of times the email address has bounced
+            </summary>
+            <value>
+            The bounce count
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.EmailAddressList">
+            <summary>
+            Represents a list of email addresses for a <see cref="T:Sitecore.XConnect.Contact"/>
+            </summary>
+        </member>
+        <member name="F:Sitecore.XConnect.Collection.Model.EmailAddressList.DefaultFacetKey">
+            <summary>
+            Default facet key for the EmailAddressList facet.
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.EmailAddressList.#ctor(Sitecore.XConnect.Collection.Model.EmailAddress,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.XConnect.Collection.Model.EmailAddressList"/> class.
+            </summary>
+            <param name="preferredEmail">The preferred email address</param>
+            <param name="preferredKey">The key related to the preferred email address</param>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EmailAddressList.Others">
+            <summary>
+            Gets or sets the alternative email addresses for this contact different than the preferred one. The key defines the identifier for that email address. Examples are "work", "home", or "personal".
+            </summary>
+            <value>
+            The entries.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EmailAddressList.PreferredKey">
+            <summary>
+            Gets or sets the key related to the preferred address.
+            </summary>
+            <value>
+            The preferred key.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EmailAddressList.PreferredEmail">
+            <summary>
+            Gets or sets the preferred email for the contact.
+            </summary>
+            <value>
+            The preferred email.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EngagementMeasures.TotalInteractionCount">
+            <summary>
+            Gets or sets the total interaction count for this contact. This replaces IContactSystemInfo.VisitCount.
+            </summary>
+            <value>
+            The total interaction count.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EngagementMeasures.TotalValue">
+            <summary>
+            Gets or sets the total value for this contact. This replaces IContactSystemInfo.Value.
+            </summary>
+            <value>
+            The total value.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EngagementMeasures.MostRecentInteractionStartDateTime">
+            <summary>
+            Gets or sets the start date time of the contact's most recent interaction
+            </summary>
+            <value>
+            The most recent interaction's start date time.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EngagementMeasures.MostRecentInteractionDuration">
+            <summary>
+            Gets or sets the duration of the contact's most recent interaction
+            </summary>
+            <value>
+            The duration of the most recent interaction.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EngagementMeasures.TotalInteractionDuration">
+            <summary>
+            Gets or sets the total duration of all the contact's interactions
+            </summary>
+            <value>
+            The total duration of the interaction.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.EngagementMeasures.AverageInteractionDuration">
+            <summary>
+            Gets or sets the average duration of the contact's interactions.
+            </summary>
+            <value>
+            The average duration of interactions.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.IpInfo.LocationId">
+            <summary>
+            Indicates the derived location based on the IpInformation for this interaction.
+            </summary>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.ListSubscriptions">
+            <summary>
+            All contact lists to which a contact belongs
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Facet" />
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ListSubscriptions.Subscriptions">
+            <summary>
+            Gets or sets the list subscriptions.
+            </summary>
+            <value>
+            The subscriptions.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.LocaleInfo">
+            <summary>
+            Specifies a set of properties specific to the locale of the contact when the interaction occurred.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Facet" />
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.LocaleInfo.TimeZoneOffset">
+            <summary>
+            Gets or sets the number of minutes the contact's time-zone is offset from UTC. This can be used to calculate the local time the contact performed an event.
+            </summary>
+            <value>
+            The time zone offset.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.LocaleInfo.GeoCoordinate">
+            <summary>
+            Gets or sets the geo coordinate at the start of the interaction.
+            </summary>
+            <value>
+            The geo coordinate.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.MergeInfo">
+            <summary>
+            Contains information about this contact's status regarding being merged.
+            For a contact to be considered obsolete, this facet must both exist and the obsolete property be marked true.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Facet" />
+        </member>
+        <member name="F:Sitecore.XConnect.Collection.Model.MergeInfo.DefaultFacetKey">
+            <summary>
+            Default facet key for the MergeInfo facet.
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.MergeInfo.#ctor(System.DateTime,System.Guid,System.Boolean)">
+            <summary>
+            Creates a new instance of MergeInfo facet
+            </summary>
+            <param name="mergeDate">Specifies the date on which the contact merge occurred.</param>
+            <param name="successorContactId">Specifies the contact which replaced this contact.</param>
+            <param name="obsolete">Specifies the contact which replaced this contact.</param>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.MergeInfo.MergeDate">
+            <summary>
+            Specifies the date on which the contact merge occurred.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.MergeInfo.SuccessorContactId">
+            <summary>
+            Specifies the contact which replaced this contact.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.MergeInfo.Obsolete">
+            <summary>
+            Specifies if the contact is obsolete.
+            </summary>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.PageViewEvent">
+            <summary>
+            Represents a Page View event
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.PageViewEvent.#ctor(System.DateTime,System.Guid,System.Int32,System.String)">
+            <summary>
+            Creates a Page View event
+            </summary>
+            <param name="timestamp">Timestamp.</param>
+            <param name="itemId">Item ID.</param>
+            <param name="itemVersion">Item Version.</param>
+            <param name="itemLanguage">Item Language.</param>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PageViewEvent.EventDefinitionId">
+            <summary>
+            Page Event Definition ID.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PageViewEvent.ItemLanguage">
+            <summary>
+            Item Language.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PageViewEvent.ItemVersion">
+            <summary>
+            Item Version.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PageViewEvent.Url">
+            <summary>
+            URL.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PageViewEvent.SitecoreRenderingDevice">
+            <summary>
+            Sitecore Rendering Device.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PhoneNumber.CountryCode">
+            <summary>
+            Gets or sets the country code.
+            </summary>
+            <value>
+            The country code.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PhoneNumber.Extension">
+            <summary>
+            Gets or sets the extension.
+            </summary>
+            <value>
+            The extension.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PhoneNumber.Number">
+            <summary>
+            Gets or sets the phone number excluding the country code and extension.
+            </summary>
+            <value>
+            The number.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PhoneNumberList.PreferredKey">
+            <summary>
+            Gets or sets the key related to the preferred phone number.
+            </summary>
+            <value>
+            The preferred key.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PhoneNumberList.PreferredPhoneNumber">
+            <summary>
+            Gets or sets the preferred phone number for the contact.
+            </summary>
+            <value>
+            The preferred phone number.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.PhoneNumberList.Others">
+            <summary>
+            Gets or sets the alternative phone numbers stored for this contact not including the preferred one. The key defines the identifier for Phone Number. Examples are "work", "home", or "mobile".
+            </summary>
+            <value>
+            The entries.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.Avatar">
+            <summary>
+            A thumbnail photo of the contact.
+            </summary>
+            <remarks>
+            Note, loading this with a large payload can slow the load time of contact data when requesting this facet.  This is primarily designed to be a standard sized thumbnail of the contact.
+            </remarks>
+            <seealso cref="T:Sitecore.XConnect.Facet" />
+        </member>
+        <member name="F:Sitecore.XConnect.Collection.Model.Avatar.DefaultFacetKey">
+            <summary>
+            Default facet key for the Avatar facet.
+            </summary>
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.Avatar.#ctor(System.String,System.Byte[])">
+            <summary>
+            Creates a new instance of Avatar.
+            </summary>
+            <param name="mimeType">A MIME-type.</param>
+            <param name="picture">A picture.</param>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Avatar.MimeType">
+            <summary>
+            Gets or sets MIME type for the binary representation of the picture
+            </summary>
+            <value>
+            The MIME type.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.Avatar.Picture">
+            <summary>
+            Gets or sets the binary representation of the picture, given the MIME type.
+            </summary>
+            <value>
+            The data.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.ProfileScore">
+            <summary>
+            Behavioral profile data scored during a session.
+            </summary> 
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Sitecore.XConnect.Collection.Model.ProfileScore.MatchedPatternId" -->
+        <member name="P:Sitecore.XConnect.Collection.Model.ProfileScore.ProfileDefinitionId">
+            <summary>
+            Gets or sets the definition ID of the profile defined in the marketing operations API
+            </summary>
+            <value>
+            The profile definition identifier.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ProfileScore.ScoreCount">
+            <summary>
+            Gets or sets the number of times the profile was scored during a session.
+            </summary>
+            <value>
+            The score count.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ProfileScore.Score">
+            <summary>
+            Gets or sets the total score of all values for this profile.
+            </summary>
+            <value>
+            The score.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ProfileScore.Values">
+            <summary>
+            Gets or sets the scored values for the profile keys. The key is the profile key ID and the value is the score.
+            </summary>
+            <value>
+            The values.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.ContactBehaviorProfile">
+            <summary>
+            The behavior profile for a contact with its profile scores.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ContactBehaviorProfile.Scores">
+            <summary>
+            Gets the profile scores indexed by the profiles' definition ID.
+            </summary>
+            <value>
+            The profile scores.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ContactBehaviorProfile.SourceInteractionStartDateTime">
+            <summary>
+            Gets or sets the date the profiles were scored.
+            </summary>
+            <value>
+            The score date.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.ProfileScores">
+            <summary>
+            The profile scores for a contact collected during an interaction.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Facet" />
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.ProfileScores.Scores">
+            <summary>
+            Gets the profile scores.
+            </summary>
+            <value>
+            The profile scores.
+            </value>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.SearchEvent">
+            <summary>
+            Represents a search that happened during an interaction.
+            </summary>
+            <seealso cref="T:Sitecore.XConnect.Event" />
+        </member>
+        <member name="F:Sitecore.XConnect.Collection.Model.SearchEvent.EventDefinitionId">
+            <summary>
+            The ID of the search event's definition.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.SearchEvent.Keywords">
+            <summary>
+            Gets or sets the keywords for the search.
+            </summary>
+            <value>
+            The keywords.
+            </value>
+        </member>
+        <member name="M:Sitecore.XConnect.Collection.Model.SearchEvent.#ctor(System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.XConnect.Collection.Model.SearchEvent"/> class.
+            </summary>
+            <param name="timestamp">The point in time where the event occured.</param>
+        </member>
+        <member name="T:Sitecore.XConnect.Collection.Model.WebVisit">
+            <summary>
+            Information collected at the <u>time</u> we collect the interaction.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.WebVisit.Language">
+            <summary>
+            Gets or sets to the site's context language. Brands should set this value during a web session if the contact chooses a different language.
+            </summary>
+            <value>
+            The language.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.WebVisit.Referrer">
+            <summary>
+            Gets or sets the HTTP referrer. PII related data could go into this field.
+            </summary>
+            <value>
+            The referrer.
+            </value>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.WebVisit.IsSelfReferrer">
+            <summary>
+            Indicates if the web visit was referred from the same website serving the visit.
+            </summary>
+        </member>
+        <member name="P:Sitecore.XConnect.Collection.Model.WebVisit.SearchKeywords">
+            <summary>
+            Gets or sets the search keywords incoming from a search engine or other site at the start of a web session.
+            </summary>
+            <value>
+            The search keywords.
+            </value>
+        </member>
+    </members>
+</doc>

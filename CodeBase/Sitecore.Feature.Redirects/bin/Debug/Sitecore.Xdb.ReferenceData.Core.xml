@@ -1,0 +1,1354 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Xdb.ReferenceData.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.BaseDefinition">
+            <summary>
+            Common members for all definitions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.BaseDefinition.#ctor(Sitecore.Xdb.ReferenceData.Core.DefinitionKey,System.DateTime)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The key for the definition.</param>
+            <param name="lastModified">The time stamp when the definition was last modified.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.BaseDefinition.Key">
+            <summary>
+            Gets the key for the definition.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.BaseDefinition.TypeKey">
+            <summary>
+            Gets the key for the type of the definition.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.BaseDefinition.IsActive">
+            <summary>
+            Gets or sets whether the definition is active.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.BaseDefinition.LastModified">
+            <summary>
+            Gets the time stamp when the definition was last modified.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.BaseDefinition.Clone">
+            <summary>
+            Creates a new copy of the <see cref="T:Sitecore.Xdb.ReferenceData.Core.BaseDefinition"/>.
+            </summary>
+            <returns>A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.BaseDefinition"/> instance.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache">
+            <summary>
+            Defines a cache used to temporarily store definitions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache.Add``1(System.String,``0)">
+            <summary>
+            Add a definition to the cache.
+            </summary>
+            <param name="key">The key used to identify the definition within the cache.</param>
+            <param name="definition">
+            The <see cref="T:Sitecore.Xdb.ReferenceData.Core.BaseDefinition" /> to cache.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache.Add``1(System.String,Sitecore.Xdb.ReferenceData.Core.ResultSet{``0})">
+            <summary>
+            Add a <see cref="T:Sitecore.Xdb.ReferenceData.Core.ResultSet`1" /> to the cache.
+            </summary>
+            <param name="key">The key used to identify the definition within the cache.</param>
+            <param name="resultSet">
+            The <see cref="T:Sitecore.Xdb.ReferenceData.Core.ResultSet`1" /> to cache.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache.Add(System.String,Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey)">
+            <summary>
+            Add a <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey" /> to the cache.
+            </summary>
+            <param name="key">The key used to identify the definition type within the cache.</param>
+            <param name="typeKey">
+            The <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey" /> to cache.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache.GetDefinition``1(System.String)">
+            <summary>
+            Get a previously added definition from the cache.
+            </summary>
+            <typeparam name="TDefinition">The type of the definition being retrieved.</typeparam>
+            <param name="key">The key used to identify the definition within the cache.</param>
+            <returns>The definition if found, otherwise null.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache.GetResultSet``1(System.String)">
+            <summary>
+            Get a previously added <see cref="T:Sitecore.Xdb.ReferenceData.Core.ResultSet`1" /> from the cache.
+            </summary>
+            <typeparam name="TDefinition">The type of a single definition in the result set being retrieved.</typeparam>
+            <param name="key">The key used to identify the result set within the cache.</param>
+            <returns>The result set if found, otherwise null.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache.GetDefinitionType(System.String)">
+            <summary>
+            Get a previously added <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey" /> from the cache.
+            </summary>
+            <param name="key">The key used to identify the definition type within the cache.</param>
+            <returns>The definition type key if found, otherwise null.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache.Clear">
+            <summary>
+            Clears all entries from the cache.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Cache.IDefinitionCache.Remove(System.String)">
+            <summary>
+            Remove a definition from the cache.
+            </summary>
+            <param name="key">The key used to identify the definition within the cache.</param>
+            <returns>True if the definition was found and removed, otherwise false.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultCollection`2">
+            <summary>
+            A collection holding results of a batch of operations.
+            </summary>
+            <typeparam name="TKey">The type of the key for which the operation is relevant.</typeparam>
+            <typeparam name="TStatus">The type of the status of the operation.</typeparam>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultReadOnlyCollection`2">
+            <summary>
+            A collection holding results of a batch of operations.
+            </summary>
+            <typeparam name="TKey">The type of the key for which the operation is relevant.</typeparam>
+            <typeparam name="TStatus">The type of the status of the operation.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultReadOnlyCollection`2.#ctor(Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultCollection{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultReadOnlyCollection`2"/> class.
+            </summary>
+            <param name="collection">The collection holding the entries.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary">
+            <summary>
+            A dictionary which uses <see cref="T:System.Globalization.CultureInfo"/> as the key and <see cref="T:System.Collections.Generic.IReadOnlyCollection`1"/> as the value.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary.#ctor">
+            <summary>
+            Create a new instance.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> containing the serialized data.</param>
+            <param name="context">The context for the serialization.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary.AddRange(Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary)">
+            <summary>
+            Adds a range of entries from an existing <see cref="T:Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary"/> dictionary.
+            </summary>
+            <param name="dictionary">The dictionary to add the entries from.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary.AddRange(Sitecore.Xdb.ReferenceData.Core.Collections.ReadOnlyCultureDataDictionary)">
+            <summary>
+            Adds a range of entries from an existing <see cref="T:Sitecore.Xdb.ReferenceData.Core.Collections.ReadOnlyCultureDataDictionary"/> dictionary.
+            </summary>
+            <param name="dictionary">The dictionary to add the entries from.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary.AddRange(System.Collections.Generic.Dictionary{System.Globalization.CultureInfo,System.Byte[]})">
+            <summary>
+            Adds a range of entries from an existing dictionary.
+            </summary>
+            <param name="dictionary">The dictionary to add the entries from.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Collections.DefinitionCollection`2">
+            <summary>
+            A List of <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2"/>
+            </summary>
+            <typeparam name="TCommonData">The type of the definition common data.</typeparam>
+            <typeparam name = "TCultureData" > The type of the definitions culture-specific data.</typeparam>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Collections.DefinitionResultSet`2">
+            <summary>
+            A <see cref="T:Sitecore.Xdb.ReferenceData.Core.ResultSet`1"/> of <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2"/>
+            </summary>
+            <typeparam name="TCommonData">The type of the definition common data.</typeparam>
+            <typeparam name = "TCultureData" > The type of the definitions culture-specific data.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Collections.DefinitionResultSet`2.#ctor(System.Int32,System.Int32,System.Int32,Sitecore.Xdb.ReferenceData.Core.Collections.IDefinitionCollection{`0,`1})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="total">The total number of results.</param>
+            <param name="pageNumber">The page number for this page of results.</param>
+            <param name="pageSize">The size of a single page.</param>
+            <param name="definitions">The definitions for the current page of results.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Collections.IDefinitionCollection`2">
+            <summary>
+            Defines an enumeration of <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2"/>
+            </summary>
+            <typeparam name="TCommonData">The type of the definition common data.</typeparam>
+            <typeparam name = "TCultureData" > The type of the definitions culture-specific data.</typeparam>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Collections.ReadOnlyCultureDataDictionary">
+            <summary>
+            A read-only implementation of <see cref="T:Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Collections.ReadOnlyCultureDataDictionary.#ctor(Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="dictionary">The dictionary to read the data from.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.CommonSettings">
+            <summary>
+            Contains common settings used amongst the converters.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.Converter.CommonSettings.JsonSerializerSettings">
+            <summary>
+            Gets the settings to use with the JSON serializer.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.GuidMonikerConverter">
+            <summary>
+            Converter, which is used to convert <see cref="T:System.Guid"/> to a moniker and vice versa.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.GuidMonikerConverter.Convert(System.String)">
+            <summary>
+            Converts a moniker to <see cref="T:System.Guid"/>.
+            </summary>
+            <param name="moniker">The moniker.</param>
+            <returns>
+            The <see cref="T:System.Guid"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.GuidMonikerConverter.Convert(System.Guid)">
+            <summary>
+            Converts a given <see cref="T:System.Guid"/> to a moniker.
+            </summary>
+            <param name="monikerSource">The moniker source.</param>
+            <returns>
+            The moniker.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.IMonikerConverter`1">
+            <summary>
+            Defines a moniker converter.
+            </summary>
+            <typeparam name="TMonikerSource">The type of the source to get a moniker from.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.IMonikerConverter`1.Convert(`0)">
+            <summary>
+            Converts a given source to a moniker.
+            </summary>
+            <param name="monikerSource">The moniker source.</param>
+            <returns>The moniker.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.IMonikerConverter`1.Convert(System.String)">
+            <summary>
+            Converts a moniker to a source.
+            </summary>
+            <param name="moniker">The moniker.</param>
+            <returns>The moniker source.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionEnvelopeJsonConverter">
+            <summary>
+            A <see cref="T:Sitecore.Xdb.ReferenceData.Core.Converter.IDefinitionEnvelopeConverter"/> implementation that converts definition data to UTF8 encoded JSON.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionEnvelopeJsonConverter.Convert``2(Sitecore.Xdb.ReferenceData.Core.Definition{``0,``1})">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionEnvelopeJsonConverter.Convert``2(Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionKeyTypeConverter">
+            <summary>
+            Defines the type converter, which is to be used for proper dictionaries serialization/deserialization, 
+            when <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionKey"/> is a key of the dictionary.
+            </summary>
+            <remarks>
+            Refer to the JSON.NET serialization guide: http://www.newtonsoft.com/json/help/html/SerializationGuide.htm
+            </remarks>
+            <seealso cref="T:System.ComponentModel.TypeConverter" />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionKeyTypeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether this converter can convert an object of the given type to the type of this converter, using the specified context.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
+            <param name="sourceType">A <see cref="T:System.Type" /> that represents the type you want to convert from.</param>
+            <returns>
+            true if this converter can perform the conversion; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionKeyTypeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            Converts the given object to the type of this converter, using the specified context and culture information.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo" /> to use as the current culture.</param>
+            <param name="value">The <see cref="T:System.Object" /> to convert.</param>
+            <returns>
+            An <see cref="T:System.Object" /> that represents the converted value.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionKeyTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether this converter can convert the object to the specified type, using the specified context.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
+            <param name="destinationType">A <see cref="T:System.Type" /> that represents the type you want to convert to.</param>
+            <returns>
+            true if this converter can perform the conversion; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionKeyTypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Converts the given value object to the specified type, using the specified context and culture information.
+            </summary>
+            <param name="context">An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
+            <param name="culture">A <see cref="T:System.Globalization.CultureInfo" />. If null is passed, the current culture is assumed.</param>
+            <param name="value">The <see cref="T:System.Object" /> to convert.</param>
+            <param name="destinationType">The <see cref="T:System.Type" /> to convert the <paramref name="value" /> parameter to.</param>
+            <returns>
+            An <see cref="T:System.Object" /> that represents the converted value.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.IDefinitionEnvelopeConverter">
+            <summary>
+            Defines a converter that converts between <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2"/> and <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope"/>
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.IDefinitionEnvelopeConverter.Convert``2(Sitecore.Xdb.ReferenceData.Core.Definition{``0,``1})">
+            <summary>
+            Converts a<see cref= "T:Sitecore.Xdb.ReferenceData.Core.Definition`2" /> to a<see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" /> ready for transport.
+            </summary>
+            <typeparam name="TCommonData" > The type of the non-culture specific data for the definition.</typeparam>
+            <typeparam name="TCultureData" > The type of the culture specific data for the definition.</typeparam>
+            <param name="definition" > The definition to convert.</param>
+            <returns>
+            A new <see cref = "T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" />, or null if the conversion failed.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.IDefinitionEnvelopeConverter.Convert``2(Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope)">
+            <summary>
+            Converts a <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" /> to a <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2" />.
+            </summary>
+            <typeparam name="TCommonData">The type of the non-culture specific data for the definition.</typeparam>
+            <typeparam name="TCultureData">The type of the culture specific data for the definition.</typeparam>
+            <param name="definitionEnvelope">The definition envelope to convert.</param>
+            <returns>
+            A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2" />, or null if the conversion failed.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.IRecordEnvelopeConverter">
+            <summary>
+            Defines a converter that converts between <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord"/> and <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope"/>
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.IRecordEnvelopeConverter.Convert(Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope)">
+            <summary>
+            Converts a <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" /> to a <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> ready for storage.
+            </summary>
+            <param name="definitionEnvelope">The definition to convert.</param>
+            <returns>
+            A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" />, or null if the conversion failed.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.IRecordEnvelopeConverter.Convert(Sitecore.Xdb.ReferenceData.Core.DefinitionRecord)">
+            <summary>
+            Converts a <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> to a <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" /> ready for transport.
+            </summary>
+            <param name="definitionRecord">The definition record to convert.</param>
+            <returns>
+            A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" />, or null if the conversion failed.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.RecordEnvelopeCloneConverter">
+            <summary>
+            A <see cref="T:Sitecore.Xdb.ReferenceData.Core.Converter.IRecordEnvelopeConverter"/> implementation that clones data from one definition to the other.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.RecordEnvelopeCloneConverter.Convert(Sitecore.Xdb.ReferenceData.Core.DefinitionRecord)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.RecordEnvelopeCloneConverter.Convert(Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionRecordJsonConverter">
+            <summary>
+            A <see cref="T:Sitecore.Xdb.ReferenceData.Core.Converter.IDefinitionRecordConverter"/> implementation that converts definition data to UTF8 encoded JSON.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionRecordJsonConverter.Convert``2(Sitecore.Xdb.ReferenceData.Core.Definition{``0,``1})">
+            <inheritdoc />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.DefinitionRecordJsonConverter.Convert``2(Sitecore.Xdb.ReferenceData.Core.DefinitionRecord)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Converter.IDefinitionRecordConverter">
+            <summary>
+            Defines a converter that converts between <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2"/> and <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord"/>
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.IDefinitionRecordConverter.Convert``2(Sitecore.Xdb.ReferenceData.Core.Definition{``0,``1})">
+            <summary>
+            Converts a <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2" /> to a <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> ready for transport or storage.
+            </summary>
+            <typeparam name="TCommonData">The type of the non-culture specific data for the definition.</typeparam>
+            <typeparam name="TCultureData">The type of the culture specific data for the definition.</typeparam>
+            <param name="definition">The definition to convert.</param>
+            <returns>
+            A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" />, or null if the conversion failed.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Converter.IDefinitionRecordConverter.Convert``2(Sitecore.Xdb.ReferenceData.Core.DefinitionRecord)">
+            <summary>
+            Converts a <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> to a <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2" />.
+            </summary>
+            <typeparam name="TCommonData">The type of the non-culture specific data for the definition.</typeparam>
+            <typeparam name="TCultureData">The type of the culture specific data for the definition.</typeparam>
+            <param name="definitionRecord">The definition record to convert.</param>
+            <returns>
+            A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2" />, or null if the conversion failed.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient">
+            <summary>
+            Defines a read-only client for interacting with the Reference Data Service.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient.GetDefinitionTypeAsync(System.String)">
+            <summary>
+            Retrieves a definition type by name, asynchronously.
+            </summary>
+            <param name="name">The name of the definition type.</param>
+            <returns>A task which yields the definition type key of the definition type.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient.GetDefinitionType(System.String)">
+            <summary>
+            Retrieves a definition type by name.
+            </summary>
+            <param name="name">The name of the definition type.</param>
+            <returns>A task which yields the definition type key of the definition type.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient.GetDefinitionAsync``2(Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria,System.Boolean)">
+            <summary>
+            Gets a single definition record from the data store, asynchronously.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="criteria">The <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria"/> used to identify the definition.</param>
+            <param name="latestActiveOnly">Indicates whether only the latest active version is returned, or all version.</param>
+            <returns>A task which yields the definition record if found, otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient.GetDefinition``2(Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria,System.Boolean)">
+            <summary>
+            Gets a single definition record from the data store.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="criteria">The <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria"/> used to identify the definition.</param>
+            <param name="latestActiveOnly">Indicates whether only the latest active version is returned, or all version.</param>
+            <returns>A task which yields the definition record if found, otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient.GetDefinitionsAsync``2(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria},System.Boolean)">
+            <summary>
+            Gets multiple definition records from the data store, asynchronously.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="criteria">The list of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria"/> used to identify the definitions.</param>
+            <param name="latestActiveOnly">Indicates whether only the latest active version is returned, or all version.</param>
+            <returns>A task which yields an enumeration of found definition records.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient.GetDefinitions``2(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria},System.Boolean)">
+            <summary>
+            Gets multiple definition records from the data store.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="criteria">The list of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria"/> used to identify the definitions.</param>
+            <param name="latestActiveOnly">Indicates whether only the latest active version is returned, or all version.</param>
+            <returns>A task which yields an enumeration of found definition records.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient.GetDefinitionsByTypeAsync``2(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets a page of definition records for the given definition type, asynchronously.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="typeKey">The key of the definition type to get the definitions for.</param>
+            <param name="latestActiveOnly">Indicates whether only the latest active version is returned, or all version.</param>
+            <param name="pageNumber">The page within the results to retrieve.</param>
+            <param name="pageSize">The size of each page of results.</param>
+            <returns>A task which yields a result set of definition records.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReadOnlyReferenceDataClient.GetDefinitionsByType``2(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets a page of definition records for the given definition type.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="typeKey">The key of the definition type to get the definitions for.</param>
+            <param name="latestActiveOnly">Indicates whether only the latest active version is returned, or all version.</param>
+            <param name="pageNumber">The page within the results to retrieve.</param>
+            <param name="pageSize">The size of each page of results.</param>
+            <returns>A task which yields a result set of definition records.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient">
+            <summary>
+            Defines a client for interacting with the Reference Data Service.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.EnsureDefinitionTypeAsync(System.String)">
+            <summary>
+            Add or retrieve a definition type by name, asynchronously.
+            </summary>
+            <param name="name">The name of the definition type.</param>
+            <returns>A task which yields the definition type key of the definition type.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.EnsureDefinitionType(System.String)">
+            <summary>
+            Add or retrieve a definition type by name.
+            </summary>
+            <param name="name">The name of the definition type.</param>
+            <returns>A task which yields the definition type key of the definition type.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.DeleteDefinitionTypeAsync(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey)">
+            <summary>
+            Deletes a definition type by ID, asynchronously.
+            </summary>
+            <param name="key">The key of the definition type.</param>
+            <returns>A task which yields the status of the delete operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.DeleteDefinitionType(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey)">
+            <summary>
+            Deletes a definition type by ID.
+            </summary>
+            <param name="key">The key of the definition type.</param>
+            <returns>A task which yields the status of the delete operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.SaveAsync``2(Sitecore.Xdb.ReferenceData.Core.Definition{``0,``1})">
+            <summary>
+            Saves a single definition record to the data store, asynchronously.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="definition">The definition to save.</param>
+            <returns>A task which yields the status indicating whether the save was successful.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.Save``2(Sitecore.Xdb.ReferenceData.Core.Definition{``0,``1})">
+            <summary>
+            Saves a single definition record to the data store.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="definition">The definition to save.</param>
+            <returns>A task which yields the status indicating whether the save was successful.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.SaveAsync``2(Sitecore.Xdb.ReferenceData.Core.Collections.IDefinitionCollection{``0,``1})">
+            <summary>
+            Saves multiple definition records to the data store, asynchronously.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="definitions">The definitions to save.</param>
+            <returns>A task which yields a batch result indicating whether the entire batch was successful, and the individual results of all save operations.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.Save``2(Sitecore.Xdb.ReferenceData.Core.Collections.IDefinitionCollection{``0,``1})">
+            <summary>
+            Saves multiple definition records to the data store.
+            </summary>
+            <typeparam name="TCommonData">The type of the common data.</typeparam>
+            <typeparam name="TCultureData">The type of the culture data.</typeparam>
+            <param name="definitions">The definitions to save.</param>
+            <returns>A task which yields a batch result indicating whether the entire batch was successful, and the individual results of all save operations.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.DeleteAsync(Sitecore.Xdb.ReferenceData.Core.DefinitionKey)">
+            <summary>
+            Deletes a single definition from the data store, asynchronously.
+            </summary>
+            <param name="key">The <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionKey"/> of the definition to delete.</param>
+            <returns>A task which yields the status of the delete operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.Delete(Sitecore.Xdb.ReferenceData.Core.DefinitionKey)">
+            <summary>
+            Deletes a single definition from the data store.
+            </summary>
+            <param name="key">The <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionKey"/> of the definition to delete.</param>
+            <returns>A task which yields the status of the delete operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.DeleteAsync(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionKey})">
+            <summary>
+            Deletes multiple definitions from the data store, asynchronously.
+            </summary>
+            <param name="keys">The definition keys of the definitions to delete.</param>
+            <returns>A task which yields a batch result indicating whether the entire batch was successful, and the individual results of all delete operations</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataClient.Delete(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionKey})">
+            <summary>
+            Deletes multiple definitions from the data store.
+            </summary>
+            <param name="keys">The definition keys of the definitions to delete.</param>
+            <returns>A task which yields a batch result indicating whether the entire batch was successful, and the individual results of all delete operations</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService">
+            <summary>
+            Defines a generic definition service.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService.GetDefinitionType(System.String)">
+            <summary>
+            Retrieves a definition type by name.
+            </summary>
+            <param name="name">The case-sensitive name of the definition type.</param>
+            <returns>The key of the existing definition type, or null if the definition type does not exist.</returns>
+            <remarks>Name comparison is case-sensitive.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService.EnsureDefinitionType(System.String)">
+            <summary>
+            Gets or creates a definition type by name.
+            </summary>
+            <param name="name">The case-sensitive name of the definition type.</param>
+            <returns>The key of the definition type.</returns>
+            <remarks>Name comparison is case-sensitive.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService.DeleteDefinitionType(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey)">
+            <summary>
+            Deletes an existing definition type.
+            </summary>
+            <param name="key">The key of the definition type to delete.</param>
+            <returns>A value indicating the status of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService.Save(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope})">
+            <summary>
+            Saves a batch of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" /> to the store.
+            </summary>
+            <param name="envelopes">The envelopes to save.</param>
+            <returns>The results of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService.Delete(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionKey})">
+            <summary>
+            Deletes a batch of definitions from the store.
+            </summary>
+            <param name="keys">The keys of the definitions to delete.</param>
+            <returns>The results of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService.GetDefinitions(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria},System.Boolean)">
+            <summary>
+            Gets a batch of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" /> from the store.
+            </summary>
+            <param name="criteria">The criteria for the definitions to retrieve.</param>
+            <param name="latestActiveOnly">Determines whether only the latest active definitions should be retrieved, or all versions.</param>
+            <returns>The definitions that where found from the criteria.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.IReferenceDataTransportService.GetDefinitionsByType(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets a page of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" /> of definitions that are of the specified type.
+            </summary>
+            <param name="typeKey">The key of the definition types to retrieve.</param>
+            <param name="latestActiveOnly">Determines whether only the latest active definitions should be retrieved, or all versions.</param>
+            <param name="pageNumber">The number of the page of results to retrieve.</param>
+            <param name="pageSize">The size of each page of results.</param>
+            <returns>
+            The page of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope" /> results.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataProvider">
+            <summary>
+            Defines types that implement a data store.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataProvider.GetDefinitionType(System.String)">
+            <summary>
+            Retrieves a definition type by name.
+            </summary>
+            <param name="name">The case-sensitive name of the definition type.</param>
+            <returns>The key of the existing definition type, or null if the definition type doesn’t exist.</returns>
+            <remarks>Name comparison is case-sensitive.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataProvider.EnsureDefinitionType(System.String)">
+            <summary>
+            Gets or creates a definition type by name.
+            </summary>
+            <param name="name">The case-sensitive name of the definition.</param>
+            <returns>The key of the definition type.</returns>
+            <remarks>Name comparison is case-sensitive.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataProvider.DeleteDefinitionType(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey)">
+            <summary>
+            Deletes an existing definition type.
+            </summary>
+            <param name="key"> The key of the definition type to delete.</param>
+            <returns>A value indicating the status of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataProvider.Save(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionRecord})">
+            <summary>
+            Saves a batch of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> to the store.
+            </summary>
+            <param name="records">The records to save.</param>
+            <returns>The results of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataProvider.Delete(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionKey})">
+            <summary>
+            Deletes a batch of definitions from the store.
+            </summary>
+            <param name="keys">The keys of the definitions to delete.</param>
+            <returns>The results of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataProvider.GetDefinitionRecords(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria},System.Boolean)">
+            <summary>
+            Gets a batch of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> from the store.
+            </summary>
+            <param name="criteria">The criteria for the definitions to retrieve.</param>
+            <param name="latestActiveOnly">Determines whether only the latest active definitions should be retrieved, or all versions.</param>
+            <returns>The definitions that where found from the criteria.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataProvider.GetDefinitionRecordsByType(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets a page of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> of definitions that are of the specified type.
+            </summary>
+            <param name="typeKey">The key of the definition types to retrieve.</param>
+            <param name="latestActiveOnly">Determines whether only the latest active definitions should be retrieved, or all versions.</param>
+            <param name="pageNumber">The number of the page of results to retrieve.</param>
+            <param name="pageSize">The size of each page of results.</param>
+            <returns>
+            The page of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> results.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataRepository">
+            <summary>
+            Defines a Reference Data repository.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataRepository.GetDefinitionType(System.String)">
+            <summary>
+            Retrieves a definition type by name.
+            </summary>
+            <param name="name">The case-sensitive name of the definition type.</param>
+            <returns>The key of the existing definition type, or null if the definition type doesn’t exist.</returns>
+            <remarks>Name comparison is case-sensitive.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataRepository.EnsureDefinitionType(System.String)">
+            <summary>
+            Gets or creates a definition type by name.
+            </summary>
+            <param name="name">The case-sensitive name of the definition.</param>
+            <returns>The key of the definition type.</returns>
+            <remarks>Name comparison is case-sensitive.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataRepository.DeleteDefinitionType(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey)">
+            <summary>
+            Deletes an existing definition type.
+            </summary>
+            <param name="key"> The key of the definition type to delete.</param>
+            <returns>A value indicating the status of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataRepository.Save(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionRecord})">
+            <summary>
+            Saves a batch of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> to the store.
+            </summary>
+            <param name="records">The records to save.</param>
+            <returns>The results of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataRepository.Delete(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionKey})">
+            <summary>
+            Deletes a batch of definitions from the store.
+            </summary>
+            <param name="keys">The keys of the definitions to delete.</param>
+            <returns>The results of the operation.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataRepository.GetDefinitionRecords(System.Collections.Generic.IEnumerable{Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria},System.Boolean)">
+            <summary>
+            Gets a batch of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> from the store.
+            </summary>
+            <param name="criteria">The criteria for the definitions to retrieve.</param>
+            <param name="latestActiveOnly">Determines whether only the latest active definitions should be retrieved, or all versions.</param>
+            <returns>The definitions that where found from the criteria.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Repository.IReferenceDataRepository.GetDefinitionRecordsByType(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets a page of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> of definitions that are of the specified type.
+            </summary>
+            <param name="typeKey">The key of the definition types to retrieve.</param>
+            <param name="latestActiveOnly">Determines whether only the latest active definitions should be retrieved, or all versions.</param>
+            <param name="pageNumber">The number of the page of results to retrieve.</param>
+            <param name="pageSize">The size of each page of results.</param>
+            <returns>
+            The page of <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord" /> results.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.BatchResult`2">
+            <summary>
+            Holds the results of a batch of operations.
+            </summary>
+            <typeparam name="TKey">The type of the key for which a single operation is relevant.</typeparam>
+            <typeparam name="TStatus">The type of the status of a single operation.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.BatchResult`2.#ctor(System.Boolean,Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultCollection{`0,`1})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="success">A value indicating whether the entire batch was successful.</param>
+            <param name="results">The results of all operations in the batch.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.Results.BatchResult`2.Success">
+            <summary>
+            Gets a value indicating whether the entire batch was successful.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.Results.BatchResult`2.Results">
+            <summary>
+            Gets the results of all operations in the batch.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.DefinitionOperationResultDiagnostics">
+            <summary>
+            Represents methods that are used to ensure definition operation results are successful.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Core.Results.DefinitionOperationResultDiagnostics.ErrorMessageDelimiter">
+            <summary>
+            The error message delimiter.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.DefinitionOperationResultDiagnostics.EnsureSuccess``1(Sitecore.Xdb.ReferenceData.Core.Results.BatchResult{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,``0},``0[])">
+            <summary>
+            Ensures batch results are successful.
+            </summary>
+            <typeparam name="TStatus">The type of the status of a single operation.</typeparam>
+            <param name="batchResult">The batch result.</param>
+            <param name="successValues">The expected success values.</param>
+            <remarks>
+            Throws <see cref="T:System.InvalidOperationException" /> in case of any failure found.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.DefinitionOperationResultDiagnostics.EnsureSuccess``1(Sitecore.Xdb.ReferenceData.Core.Results.OperationResult{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,``0},``0[])">
+            <summary>
+            Ensures operation results are successful.
+            </summary>
+            <typeparam name="TStatus">The type of the status of a single operation.</typeparam>
+            <param name="operationResult">The operation result.</param>
+            <param name="successValues">The expected success values.</param>
+            <remarks>
+            Throws <see cref="T:System.InvalidOperationException" /> in case of any failure found.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.DefinitionOperationResultDiagnostics.ThrowException``1(Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultReadOnlyCollection{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,``0})">
+            <summary>
+            Throws the <see cref="T:System.InvalidOperationException"/> with detailed error message (if any).
+            </summary>
+            <typeparam name="TStatus">The type of the status of a single operation.</typeparam>
+            <param name="failureOperationResults">The failure operation results.</param>
+            <exception cref="T:System.InvalidOperationException" />
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.DefinitionOperationResultDiagnostics.GetFailures``1(Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultReadOnlyCollection{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,``0},``0[])">
+            <summary>
+            Ensures operation results are successful.
+            </summary>
+            <typeparam name="TStatus">The type of the status of a single operation.</typeparam>
+            <param name="operationResults">The operation results.</param>
+            <param name="successValues">The expected success values.</param>
+            <returns>The failure results.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.DefinitionOperationResultDiagnostics.JoinErrorMessages``1(Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultReadOnlyCollection{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,``0})">
+            <summary>
+            Join error messages into a single string.
+            </summary>
+            <typeparam name="TStatus">The type of the status of a single operation.</typeparam>
+            <param name="failureOperationResults">The failure operation results.</param>
+            <returns>All failure messages joined into a single string with <see cref="F:Sitecore.Xdb.ReferenceData.Core.Results.DefinitionOperationResultDiagnostics.ErrorMessageDelimiter"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionsBatchResult">
+            <summary>
+            Holds the results of a batch of delete operations.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionsBatchResult.#ctor(System.Boolean,Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultCollection{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,Sitecore.Xdb.ReferenceData.Core.Results.DeleteStatus})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="success">A value indicating whether the entire batch was successful.</param>
+            <param name="results">The results of all operations in the batch.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionOperationResult">
+            <summary>
+            Holds the result of a delete definition operation.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionOperationResult.#ctor(Sitecore.Xdb.ReferenceData.Core.DefinitionKey,Sitecore.Xdb.ReferenceData.Core.Results.DeleteStatus,System.String)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The definition key for which the operation is relevant.</param>
+            <param name="status">The status of the operation.</param>
+            <param name="message">A message holding information about the operation.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionTypeOperationResult">
+            <summary>
+            Holds the result of a delete definition type operation.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.DeleteDefinitionTypeOperationResult.#ctor(Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey,Sitecore.Xdb.ReferenceData.Core.Results.DeleteStatus,System.String)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The definition type key for which the operation is relevant.</param>
+            <param name="status">The status of the operation.</param>
+            <param name="message">A message holding information about the operation.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.DeleteStatus">
+            <summary>
+            Defines statuses of a delete operation.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Core.Results.DeleteStatus.Success">
+            <summary>
+            The operation was a success.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Core.Results.DeleteStatus.FailNotFound">
+            <summary>
+            The operation failed, the definition could not be found.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Core.Results.DeleteStatus.Fail">
+            <summary>
+            The operation failed.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.IDefinitionOperationResultDiagnostics">
+            <summary>
+            Defines methods that are used to ensure definition operation results are successful.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.IDefinitionOperationResultDiagnostics.EnsureSuccess``1(Sitecore.Xdb.ReferenceData.Core.Results.OperationResult{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,``0},``0[])">
+            <summary>
+            Ensures operation results are successful.
+            </summary>
+            <typeparam name="TStatus">The type of the status of a single operation.</typeparam>
+            <param name="operationResult">The operation result.</param>
+            <param name="successValues">The expected success values.</param>
+            <exception cref="T:System.InvalidOperationException" />
+            <remarks>Throws <see cref="T:System.InvalidOperationException"/> in case of any failure found.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.IDefinitionOperationResultDiagnostics.EnsureSuccess``1(Sitecore.Xdb.ReferenceData.Core.Results.BatchResult{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,``0},``0[])">
+            <summary>
+            Ensures batch results are successful.
+            </summary>
+            <typeparam name="TStatus">The type of the status of a single operation.</typeparam>
+            <param name="batchResult">The batch result.</param>
+            <param name="successValues">The expected success values.</param>
+            <exception cref="T:System.InvalidOperationException" />
+            <remarks>Throws <see cref="T:System.InvalidOperationException"/> in case of any failure found.</remarks>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.OperationResult`2">
+            <summary>
+            Holds the result of an operation.
+            </summary>
+            <typeparam name="TKey">The type of the key for which the operation is relevant.</typeparam>
+            <typeparam name="TStatus">The type of the status of the operation.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.OperationResult`2.#ctor(`0,`1,System.String)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The key for which the operation is relevant.</param>
+            <param name="status">The status of the operation.</param>
+            <param name="message">A message holding information about the operation.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.Results.OperationResult`2.Key">
+            <summary>
+            Gets the key for which the operation is relevant.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.Results.OperationResult`2.Status">
+            <summary>
+            Gets the status of the operation.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.Results.OperationResult`2.Message">
+            <summary>
+            Gets a message holding information about the operation.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.SaveDefinitionsBatchResult">
+            <summary>
+            Holds the results of a batch of save operations.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.SaveDefinitionsBatchResult.#ctor(System.Boolean,Sitecore.Xdb.ReferenceData.Core.Collections.OperationResultCollection{Sitecore.Xdb.ReferenceData.Core.DefinitionKey,Sitecore.Xdb.ReferenceData.Core.Results.SaveStatus})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="success">A value indicating whether the entire batch was successful.</param>
+            <param name="results">The results of all operations in the batch.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.SaveDefinitionOperationResult">
+            <summary>
+            Holds the result of a save operation.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Results.SaveDefinitionOperationResult.#ctor(Sitecore.Xdb.ReferenceData.Core.DefinitionKey,Sitecore.Xdb.ReferenceData.Core.Results.SaveStatus,System.String)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The definition key for which the operation is relevant.</param>
+            <param name="status">The status of the operation.</param>
+            <param name="message">A message holding information about the operation.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Results.SaveStatus">
+            <summary>
+            Defines statuses of a save operation.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Core.Results.SaveStatus.SuccessNew">
+            <summary>
+            The operation was a success. A new record was created.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Core.Results.SaveStatus.SuccessUpdate">
+            <summary>
+            The operation was a success. An existing record was updated.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.ReferenceData.Core.Results.SaveStatus.Fail">
+            <summary>
+            The operation failed.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Definition`2">
+            <summary>
+            A definition to store in the data store or as retrieved from the data store.
+            </summary>
+            <typeparam name="TCommonData">The type of the non-culture specific data of the definition.</typeparam>
+            <typeparam name="TCultureData">The type of the culture specific data of the definition.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Definition`2.#ctor(Sitecore.Xdb.ReferenceData.Core.DefinitionKey)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The key for the definition.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.Definition`2.CommonData">
+            <summary>
+            Gets or sets the non-culture specific data for the definition.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.Definition`2.CultureData">
+            <summary>
+            Gets the culture specific data for the definition.
+            </summary>
+            <remarks>
+                Data may use the key <see cref="P:System.Globalization.CultureInfo.InvariantCulture"/> to store default cultural data not specific to a culture.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Definition`2.Clone">
+            <summary>
+            Creates a new copy of the <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2"/>.
+            </summary>
+            <returns>A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.Definition`2"/> instance.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Definition`2.CopyObject``1(``0)">
+            <summary>
+            Makes a copy of the object.
+            </summary>
+            <typeparam name="TObject">The type of the object being copied.</typeparam>
+            <param name="ob">The object to copy.</param>
+            <returns>A new instance of the object which is a full copy of the object.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria">
+            <summary>
+            Criteria for identifying a definition without specifying its version.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria.#ctor(System.String,Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="moniker">The moniker for the definition.</param>
+            <param name="typeKey">The type key for the definition.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria.Moniker">
+            <summary>
+            Gets or sets the moniker for the definition.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria.TypeKey">
+            <summary>
+            Gets or sets the type key for the definition.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria.Version">
+            <summary>
+            Gets or sets the version of the definition.
+            </summary>
+            <remarks>If set to null, assume the latest version of the definition.</remarks>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionCriteria.Culture">
+            <summary>
+            Gets or sets the culture of the definition to retrieve.
+            </summary>
+            <remarks>If set to CultureInfo.InvariantCulture, retrieve all cultures the definition has.</remarks>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope">
+            <summary>
+            A definition that has been converted for transport over the web.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope.#ctor(Sitecore.Xdb.ReferenceData.Core.DefinitionKey,System.DateTime)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The key used to identify the definition.</param>
+            <param name="lastModified">The time stamp when the definition was last modified.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope.CommonData">
+            <summary>
+            Gets the data for the common data for the definition to be stored.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope.CultureData">
+            <summary>
+            Gets the data for the culture specific data for the definition to be stored.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope.DataTypeRevision">
+            <summary>
+            Gets the revision for the types used for the data properties.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope.Clone">
+            <summary>
+            Creates a new copy of the <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope"/>.
+            </summary>
+            <returns>A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionEnvelope"/> instance.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.DefinitionKey">
+            <summary>
+            Identifies a single definition in the data store.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionKey.#ctor(System.String,Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey,System.Int16)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="moniker">The identifier for the definition.</param>
+            <param name="typeKey">The identifier for the type of the definition.</param>
+            <param name="version">The version number of the definition.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionKey.Moniker">
+            <summary>
+            Gets the identifier for the definition.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionKey.Version">
+            <summary>
+            Gets or sets the version number of the definition.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionKey.TypeKey">
+            <summary>
+            Gets the ID of the definition type for the definition.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionKey.Equals(System.Object)">
+            <summary>
+            Determines if two instance are the same value.
+            </summary>
+            <param name="obj">The other instance to test against.</param>
+            <returns>True if the instances are the same value.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionKey.GetHashCode">
+            <summary>
+            Generates a hash code based on the value of this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionKey.ToString">
+            <summary>
+            Generates a string representation of the object.
+            </summary>
+            <returns>The string representation of the object.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionKey.Clone">
+            <summary>
+            Creates a new copy of the <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionKey"/>.
+            </summary>
+            <returns>A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionKey"/> instance.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord">
+            <summary>
+            A definition that has been converted for storage in the data layer.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord.#ctor(Sitecore.Xdb.ReferenceData.Core.DefinitionKey,System.DateTime,System.Collections.Generic.IReadOnlyCollection{System.Byte},Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The key for the definition.</param>
+            <param name="lastModified">The time stamp when the definition was last modified.</param>
+            <param name="commonData">The data for the common data for the definition to be stored.</param>
+            <param name="cultureData">The data for the culture specific data for the definition to be stored.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord.#ctor(Sitecore.Xdb.ReferenceData.Core.DefinitionKey,System.DateTime,System.Collections.Generic.IReadOnlyCollection{System.Byte},Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary,System.Int16)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="key">The key for the definition.</param>
+            <param name="lastModified">The time stamp when the definition was last modified.</param>
+            <param name="commonData">The data for the common data for the definition to be stored.</param>
+            <param name="cultureData">The data for the culture specific data for the definition to be stored.</param>
+            <param name="typeRevision">The revision for the types used for the data properties.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord.InstanceId">
+            <summary>
+            Gets the temporary identifier of this instance assigned for the duration of an operation.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord.CommonData">
+            <summary>
+            Gets the data for the common data for the definition to be stored.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord.CultureData">
+            <summary>
+            Gets the data for the culture specific data for the definition to be stored.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord.DataTypeRevision">
+            <summary>
+            Gets the revision for the types used for the data properties.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord.Clone">
+            <summary>
+            Creates a new copy of the <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord"/>.
+            </summary>
+            <returns>A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionRecord"/> instance.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey">
+            <summary>
+            Identifies a definition type in the data store.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey.#ctor(System.Guid)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="id">The identifier for the definition type.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey.Id">
+            <summary>
+            Gets the identifier for the definition type.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey.Equals(System.Object)">
+            <summary>
+            Determines if two instance are the same value.
+            </summary>
+            <param name="obj">The other instance to test against.</param>
+            <returns>True if the instances are the same value.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey.GetHashCode">
+            <summary>
+            Generates a hash code based on the value of this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey.ToString">
+            <summary>
+            Generates a string representation of the object.
+            </summary>
+            <returns>The string representation of the object.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey.Clone">
+            <summary>
+            Creates a new copy of the <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey"/>.
+            </summary>
+            <returns>A new <see cref="T:Sitecore.Xdb.ReferenceData.Core.DefinitionTypeKey"/> instance.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.Extensions.DictionaryExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Extensions.DictionaryExtensions.AddRangeWithClone(System.Collections.Generic.Dictionary{System.Globalization.CultureInfo,System.Byte[]},System.Collections.Generic.Dictionary{System.Globalization.CultureInfo,System.Byte[]})">
+            <summary>
+            Adds a range of entries from an existing dictionary.
+            </summary>
+            <param name="target">The dictionary to add the entries to.</param>
+            <param name="source">The dictionary containing the entries to clone.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Extensions.DictionaryExtensions.AddRangeWithClone(System.Collections.Generic.Dictionary{System.Globalization.CultureInfo,System.Byte[]},Sitecore.Xdb.ReferenceData.Core.Collections.ReadOnlyCultureDataDictionary)">
+            <summary>
+            Adds a range of entries from an existing dictionary.
+            </summary>
+            <param name="target">The dictionary to add the entries to.</param>
+            <param name="source">The dictionary containing the entries to clone.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.Extensions.DictionaryExtensions.AddRangeWithClone(System.Collections.Generic.Dictionary{System.Globalization.CultureInfo,System.Byte[]},Sitecore.Xdb.ReferenceData.Core.Collections.CultureDataDictionary)">
+            <summary>
+            Adds a range of entries from an existing dictionary.
+            </summary>
+            <param name="target">The dictionary to add the entries to.</param>
+            <param name="source">The dictionary containing the entries to clone.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.ResultSet`1">
+            <summary>
+            Holds a set of paged results, one page at a time.
+            </summary>
+            <typeparam name="TDefinition">The type of the definition in the results.</typeparam>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.ResultSet`1.#ctor(System.Int32,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="total">The total number of results.</param>
+            <param name="pageNumber">The page number for this page of results.</param>
+            <param name="pageSize">The size of a single page.</param>
+            <param name="definitions">The definitions for the current page of results.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.ResultSet`1.Total">
+            <summary>
+            Gets the total number of results.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.ResultSet`1.PageNumber">
+            <summary>
+            Gets the page number for this page of results.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.ResultSet`1.PageSize">
+            <summary>
+            Gets the size of a single page.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.ReferenceData.Core.ResultSet`1.Definitions">
+            <summary>
+            Gets the definitions for the current page of results.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.ReferenceData.Core.ValidatorExtensions">
+            <summary>
+            Extensions for the Sitecore.Framework.Conditions library.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.ReferenceData.Core.ValidatorExtensions.IsUtc(Sitecore.Framework.Conditions.ConditionValidator{System.DateTime})">
+            <summary>
+            Checks that the given value is DateTimeKind.Utc.
+            </summary>
+            <param name="validator">The <see cref="T:Sitecore.Framework.Conditions.ConditionValidator`1"/> that holds the value that has to be checked.</param>
+            <returns>The specified <paramref name="validator"/> instance.</returns>
+        </member>
+    </members>
+</doc>

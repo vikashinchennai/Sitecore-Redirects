@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26020.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{ED32117B-8681-4C97-AFB9-86C24570F7AB}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Sitecore.Kernel.dll = Dependencies\Sitecore.Kernel.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Redirects", "Sitecore.Feature.Redirects\Sitecore.Feature.Redirects.csproj", "{AC2DC2CE-FF9C-4F38-841C-96FF7C8DA672}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.Fields", "Sitecore.Foundation.Fields\Sitecore.Foundation.Fields.csproj", "{D230FE44-AAEC-43CA-84FE-8001DDDC25F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC2DC2CE-FF9C-4F38-841C-96FF7C8DA672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC2DC2CE-FF9C-4F38-841C-96FF7C8DA672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC2DC2CE-FF9C-4F38-841C-96FF7C8DA672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC2DC2CE-FF9C-4F38-841C-96FF7C8DA672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D230FE44-AAEC-43CA-84FE-8001DDDC25F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D230FE44-AAEC-43CA-84FE-8001DDDC25F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D230FE44-AAEC-43CA-84FE-8001DDDC25F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D230FE44-AAEC-43CA-84FE-8001DDDC25F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86C02ACA-13C7-486C-9643-571925F9CE5D}
+	EndGlobalSection
+EndGlobal

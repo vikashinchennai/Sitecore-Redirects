@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Framework.Rules.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="M:Sitecore.Framework.Rules.FactIdentifier`1.#ctor">
+            <summary>Only to be used by serialization libraries.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.FactProviderExtensions.Resolve``1(Sitecore.Framework.Rules.IFactProvider,System.String)">
+            <summary>Returns an instance of a fact of the specified Type, and optional Role.</summary>
+            <typeparam name="T">The type of fact resolved.</typeparam>
+            <param name="provider">The current provider.</param>
+            <param name="roleName">An optional role name that the fact belongs to.</param>
+            <returns>The Fact value.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.FactResolver`1.#ctor(System.String)">
+            <summary>
+            Creates a fact resolver with an optional role.
+            </summary>
+            <param name="factRole">An optional role that the fact plays in the system.</param>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.FactResolver`1.Resolve(Sitecore.Framework.Rules.IFactProvider)">
+            <summary>When overriden, provides the fact value.</summary>
+            <param name="factProvider">
+            The fact provider in the current scope, to be used if this resolver is 
+            dependent on any other facts.
+            </param>
+            <returns>The fact.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IFactIdentifier">
+            <summary>The identity of a Fact in the system.</summary>
+        </member>
+        <member name="P:Sitecore.Framework.Rules.IFactIdentifier.FactType">
+            <summary>The type of the Fact.</summary>
+        </member>
+        <member name="P:Sitecore.Framework.Rules.IFactIdentifier.FactRole">
+            <summary>An optional role that the fact plays in the system.</summary>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IFactProvider">
+            <summary>A mechanism for obtaining fact values available in the system.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IFactProvider.Resolve(Sitecore.Framework.Rules.IFactIdentifier)">
+            <summary>
+            Returns an instance of a fact that corresponds to the Type and Role specified in
+            the identifier.
+            </summary>
+            <param name="identifier">The identity of the fact that is to be returned.</param>
+            <returns>A fact instance of the correct type, or null if no fact can be yielded.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IFactResolver">
+            <summary>
+            Defines how a fact of a given type is made available to entities
+            in rule Conditions and Actions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IFactResolver.Resolve(Sitecore.Framework.Rules.IFactProvider)">
+            <summary>Returns an instance of a fact of the type defined by the FactType property of the resolver.</summary>
+            <param name="factProvider">Provides access to other facts available in the system.</param>
+            <returns>A fact instance, of the type declared by the FactType property of the resolver.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IFactResolver`1">
+            <summary>
+            Defines how a fact of a given type is made available to entities
+            in rule Conditions and Actions.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IFactResolver`1.Resolve(Sitecore.Framework.Rules.IFactProvider)">
+            <summary>Returns an instance of a fact of the type defined by the FactType property of the resolver.</summary>
+            <param name="factProvider">Provides access to other facts available in the system.</param>
+            <returns>A fact instance, of the type declared by the FactType property of the resolver.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IRuleEngine">
+            <summary>A rule engine is used to execute one or more rules.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleEngine.Run(System.Collections.Generic.IEnumerable{Sitecore.Framework.Rules.IRule},System.Collections.Generic.IEnumerable{Sitecore.Framework.Rules.IFactResolver})">
+            <summary>
+            Executes the collection of rules provided and returns the results of the conditions
+            evaluated for each of the rules.
+            </summary>
+            <param name="rules">One or more rules to execute.</param>
+            <param name="scopedResolvers">
+            0 or more resolvers to use just for this execution.  Any resolvers
+            specified will have precedence over any resolvers already registered in the system.
+            </param>
+            <returns>A collection of condition results corresponding to the order of the rules that were supplied.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IRuleExecutionContext">
+            <summary>The context of the execution of a set of rules.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleExecutionContext.Fact(Sitecore.Framework.Rules.IFactIdentifier)">
+            <summary>Returns a fact currently in the system that matches the supplied identifier.</summary>
+            <param name="identifier">The identity of the fact that is to be returned.</param>
+            <returns>An instance of a Fact.</returns>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.RuleExecutionContextExtensions.Fact``1(Sitecore.Framework.Rules.IRuleExecutionContext,System.String)">
+            <summary>Returns a fact currently in the system that matches the specified type and role.</summary>
+            <typeparam name="T">The type of fact returned.</typeparam>
+            <param name="context">The current context.</param>
+            <param name="roleName">An optional role that the returned fact will correspond to.</param>
+            <returns>The fact value.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IAction">
+            <summary>An action that is fired when a rule is executed.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IAction.Execute(Sitecore.Framework.Rules.IRuleExecutionContext)">
+            <summary>The implementation of the action behaviour.</summary>
+            <param name="context">The context of the execution for which the action is being fired.</param>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IBinaryCondition">
+            <summary>
+            An ICondition that takes two ICondition operands, and a boolean IBinaryOperator
+            that will operate on those operands to evaluate it's result.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IBinaryOperator`2">
+            <summary>An operator that performs an operation on two operands.</summary>
+            <typeparam name="TLeft">The type of the left hand operand.</typeparam>
+            <typeparam name="TRight">The type of the right hand operand.</typeparam>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IBinaryOperator`2.Evaluate(`0,`1)">
+            <summary>Performs the operation against the two specified operands.</summary>
+            <param name="leftOperand">The left hand operand.</param>
+            <param name="rightOperand">The right hand operand.</param>
+            <returns>The result of the operation.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.ICondition">
+            <summary>A condition that is evaluated when a rule is executed.</summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.ICondition.Evaluate(Sitecore.Framework.Rules.IRuleExecutionContext)">
+            <summary>Determines the result of the condition.</summary>
+            <param name="context">The context of the execution for which the condition is being evaluated.</param>
+            <returns>True if the condition passed, false otherwise.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IMappableRuleEntity">
+            <summary>Denotes a node type in the Rule model can me mapped to an Id when authored, then
+            manifested into an alternate type at the point a rule is executed.</summary>
+        </member>
+        <member name="P:Sitecore.Framework.Rules.IRule.ThenActions">
+            <summary>0 or more actions that are fired when the rule is executed and the Condition evaluates to True.</summary>
+        </member>
+        <member name="P:Sitecore.Framework.Rules.IRule.ElseActions">
+            <summary>0 or more actions that are fired when the rule is executed and the Condition evaluates to False.</summary>
+        </member>
+        <member name="P:Sitecore.Framework.Rules.IRule.Condition">
+            <summary>Evaluated when the rule is executed to yield the result of the rule, and to determine which
+            events to fire.</summary>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IRuleValue`1">
+            <summary>Encapsulates a mechanism for providing a value in a rule condition expression.</summary>
+            <typeparam name="T">The type of the value that is provided.</typeparam>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IRuleValue`1.Yield(Sitecore.Framework.Rules.IRuleExecutionContext)">
+            <summary>Returns a value of the given type.</summary>
+            <param name="context">The context of the rule currently being executed.</param>
+            <returns>The value.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IUnaryCondition">
+            <summary>
+            An ICondition that takes a single operand, and an operator that will evaluate 
+            the operand.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.IUnaryOperator`1">
+            <summary>An operator that performs an operation on a single operand.</summary>
+            <typeparam name="T">The type of the operand.</typeparam>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.IUnaryOperator`1.Evaluate(`0)">
+            <summary>Performs the operation against the given operand.</summary>
+            <param name="operand">The operand.</param>
+            <returns>The result of the operation.</returns>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.EntityIdentifierAttribute">
+            <summary>
+            Defines metadata for a rule entity type, for use in the Rules framework and UI.  Consisting of a required Identifier and
+            an optional list of category names.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Framework.Rules.EntityIdentifierAttribute.#ctor(System.String)">
+            <summary>
+            Defines metadata for a rule entity type, for use in the Rules framework and UI.  Consisting of a required Identifier and
+            an optional list of category names.
+            </summary>
+            <param name="identifier">
+            The mapping Identifier for this entity.  Either this defines a new unique identifier,
+            or an identifier of an existing entity in the system to be replaced.  If defining a new entity, this should be a logical
+            name that uniquely identifies the entity; e.g. MyCompany.MyProject.Conditions.MyCondition.
+            </param>
+        </member>
+        <member name="P:Sitecore.Framework.Rules.EntityIdentifierAttribute.Identifier">
+            <summary>
+            The mapping Identifier for this entity.  Either this defines a new unique identifier,
+            or an identifier of an existing entity to be replaced.
+            </summary>
+            <remarks>This is optional; if not defined, the full name of the class is used as the identifier.</remarks>
+        </member>
+    </members>
+</doc>

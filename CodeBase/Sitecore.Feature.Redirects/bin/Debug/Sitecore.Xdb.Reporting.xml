@@ -1,0 +1,1502 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Xdb.Reporting</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Xdb.Reporting.ApiKeyReportDataProvider">
+            <summary>
+            The Report Data Provider, which checks Reporting Api key and authenticates request.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ApiKeyReportDataProvider.#ctor(Sitecore.Xdb.Reporting.IReportingAuthenticationChecker)">
+            <summary>
+            Creates instance of <see cref="T:Sitecore.Xdb.Reporting.ApiKeyReportDataProvider"/>
+            </summary>
+            <param name="checker">Checker to determine whether a request to reporting service is authenticated</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="checker"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ApiKeyReportDataProvider.GetData(System.String,Sitecore.Xdb.Reporting.ReportDataQuery,Sitecore.Xdb.Reporting.CachingPolicy)">
+            <summary>
+            Retrieves and returns data for the specified query, according to the
+              provided caching policy.
+            </summary>
+            <param name="dataSourceName">
+            Name of the data source to query.
+            </param>
+            <param name="query">
+            The query to return data for.
+            </param>
+            <param name="cachingPolicy">
+            Caching policy to use when retrieving data.
+            </param>
+            <returns>
+            The response object, containing results of query execution.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if there is no data source with the provided name.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ApiKeyReportDataProvider.SetAuthenticationFailedResponse">
+            <summary>
+            Sets authentication failed response.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.CachingPolicy">
+            <summary>
+            Defines caching policy options.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.CachingPolicy.WithCacheDisabled">
+            <summary>
+            Gets the instance of CachingPolicy object with cache disabled.
+            </summary>
+            <value>
+            The CachingPolicy with disabled cache.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.CachingPolicy.NoCache">
+            <summary>
+            Gets or sets a flag requesting the provider to bypass the cache.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.CachingPolicy.CacheOnly">
+            <summary>
+            Gets or sets a flag requesting the provider to return information only from the cache.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.CachingPolicy.IfModifiedSince">
+            <summary>
+            Gets or sets the date/time value to check whether the report data in the cache has been modified since that moment, expressed as UTC.
+            </summary>
+            <value>
+            The date/time value to check whether the report data in the cache has been modified since that moment, expressed as UTC.
+            </value>
+            <remarks><c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.</remarks>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.CachingPolicy.ExpirationPeriod">
+            <summary>
+            Gets or sets the expiration period for the policy.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Caching.ReportDataCache">
+            <summary>
+            Base class for cache implementations for <see cref="T:Sitecore.Xdb.Reporting.ReportDataProvider"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCache.#ctor(System.Int64,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Caching.ReportDataCache"/> class.
+            </summary>
+            <param name="cacheSize">
+            The cache size.
+            </param>
+            <param name="defaultExpirationPeriod">
+            The default cache expiration period.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCache.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Caching.ReportDataCache"/> class.
+            </summary>
+            <param name="cacheSize">
+            The cache size string.
+            </param>
+            <param name="defaultExpirationPeriod">
+            The default sliding expiration period string.
+            </param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Caching.ReportDataCache.CacheSize">
+            <summary>
+            Gets or sets the cache size.
+            </summary>
+            <value>
+            The cache size.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Caching.ReportDataCache.DefaultExpirationPeriod">
+            <summary>
+            Gets or sets the default sliding expiration period.
+            </summary>
+            <value>
+            The default sliding expiration period.
+            </value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCache.GetCachedData(System.String)">
+            <summary>
+            Retrieves the report data from the cache, identified by the given key.
+            </summary>
+            <param name="key">The key of the query.</param>
+            <returns>An instance of <see cref="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse"/> encapsulating the data retrieved.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCache.PutDataToCache(System.String,System.Data.DataTable,System.TimeSpan)">
+            <summary>
+            Puts a data set into cache with the given key.
+            </summary>
+            <param name="key">Cache key to store the data set under.</param>
+            <param name="data">Data set to store in the cache.</param>
+            <param name="cacheExpiration">Expiration period for the data set.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCache.PutDataToCache(System.String,System.Data.DataTable)">
+            <summary>
+            Puts a data set into cache with the given key.
+            </summary>
+            <param name="key">Cache key to store the data set under.</param>
+            <param name="data">Data set to store in the cache.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheEntry">
+            <summary>
+            Represents a cache entry for report data.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCacheEntry.#ctor(System.Data.DataTable)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheEntry"/> class.
+            </summary>
+            <param name="data">Data to be added to cache.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Caching.ReportDataCacheEntry.LastModified">
+            <summary>
+            Timestamp of when cache entry was created or last modified, expressed as UTC.
+            </summary>
+            <remarks><c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.</remarks>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Caching.ReportDataCacheEntry.Data">
+            <summary>
+            Data to be stored in cache.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory">
+            <summary>
+            Caches report data query results in memory.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory.DefaultCacheSize">
+            <summary>
+            The default cache size.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory.DefaultExpirationInMinutes">
+            <summary>
+            The default expiration in minutes.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory"/> class.
+            </summary>
+            <param name="cacheSize">
+            The cache Size.
+            </param>
+            <param name="defaultSlidingExpirationPeriod">
+            The default Sliding Expiration Period.
+            </param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory.Cache">
+            <summary>
+            Gets the cache.
+            </summary>
+            <value>
+            The cache.
+            </value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory.GetCachedData(System.String)">
+            <summary>
+            Retrieves the report data from the cache, identified by the given key.
+            </summary>
+            <param name="key">The key of the query.</param>
+            <returns>An instance of <see cref="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse"/> encapsulating the data retrieved.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory.PutDataToCache(System.String,System.Data.DataTable,System.TimeSpan)">
+            <summary>
+            Puts a data set into cache with the given key.
+            </summary>
+            <param name="key">Cache key to store the data set under.</param>
+            <param name="data">Data set to store in the cache.</param>
+            <param name="cacheExpiration">Expiration period for the data set.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCacheInMemory.PutDataToCache(System.String,System.Data.DataTable)">
+            <summary>
+            Puts a data set into cache with the given key.
+            </summary>
+            <param name="key">Cache key to store the data set under.</param>
+            <param name="data">Data set to store in the cache.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse">
+            <summary>
+            Encapsulates a response from the data cache.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse._data">
+            <summary>
+            The data of cache response.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse.#ctor(System.Data.DataTable)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse"/> class.
+            </summary>
+            <param name="data">
+            Data retrieved from cache.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse.#ctor(System.Data.DataTable,System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse"/> class.
+            </summary>
+            <param name="data">
+            Data retrieved from cache.
+            </param>
+            <param name="lastModified">
+            Date when data was last modified or added to cache, expressed as UTC.
+            <c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.
+            </param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse.LastModified">
+            <summary>
+            Date time when the cached resource was last modified, expressed as UTC.
+            </summary>
+            <value>
+            Date time when the cached resource was last modified, expressed as UTC.
+            </value>
+            <remarks><c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.</remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Caching.ReportDataCacheResponse.GetData">
+            <summary>
+            Retrieves the response.
+            </summary>
+            <returns>Cached response data.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ConnectionStrings">
+            <summary>The connection strings.</summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ConnectionStrings.Collection">
+            <summary>
+            Gets the connection string to "analytics" database.
+            </summary>
+            <value>The connection string to "analytics" database as defined in the configuration.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ConnectionStrings.Reporting">
+            <summary>
+            Gets the connection string to "reporting" database. Uses "analytics" connection string as a fallback value.
+            </summary>
+            <value>The connection string to "reporting" database as defined in the configuration.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ConnectionStrings.AnalyticsSettings">
+            <summary>
+            Gets the analytics connection string section.
+            </summary>
+            <value>An instance of <see cref="T:System.Configuration.ConnectionStringSettings"/> class.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ConnectionStrings.ReportingSettings">
+            <summary>
+            Gets the reporting connection string section.
+            </summary>
+            <value>An instance of <see cref="T:System.Configuration.ConnectionStringSettings"/> class.</value>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource">
+            <summary>
+            Base class for all data sources based on C# functions.
+            Derived classes should define a set of functions with the following prototype: <see cref="T:System.Data.DataTable"/> Function(<see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> query);
+            The functions will be accessible via their name specified in the <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> object.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource._knownFunctions">
+            <summary>
+            A cache of known functions to avoid calling reflection too frequently.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource._mutex">
+            <summary>
+            A mutex object for multithreaded access to <see cref="F:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource._knownFunctions"/>.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource._type">
+            <summary>
+            Reference to this type.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource.#ctor">
+            <summary>
+            Initializes <see cref="T:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource.GetData(Sitecore.Xdb.Reporting.ReportDataQuery)">
+            <summary>
+            Executes the specified query and returns the results in a tabular format.
+            </summary>
+            <param name="query">An instance of <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> class containing the query to execute.</param>
+            <returns>An instance of <see cref="T:System.Data.DataTable"/> class containing the results of executing the query.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource.GetFunction(System.String)">
+            <summary>
+            Gets function from the type by its name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource.GetFunctionFromCache(System.String)">
+            <summary>
+            Retrieves function reference from local class cache.
+            </summary>
+            <param name="name">Name of the function to retrieve.</param>
+            <returns>A reference to the function or <c>null</c> if the function is not in the cache.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource.GetFunctionFromType(System.String)">
+            <summary>
+            Gets the function with the specified name from the current type.
+            </summary>
+            <param name="name">Name of the function to retrieve.</param>
+            <returns>A reference to the function in the current type with the given name.</returns>
+            <exception cref="T:System.ApplicationException">When the function cannot be found.</exception>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource.AddFunctionToCache(System.String,System.Func{Sitecore.Xdb.Reporting.ReportDataQuery,System.Data.DataTable})">
+            <summary>
+            Registers the function reference in the cache with the given name.
+            </summary>
+            <param name="name">Name of the function.</param>
+            <param name="result">Reference to the function.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.FunctionReportDataSource.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Datasources.ItemReportDataSource">
+            <summary>
+              Implements reporting data source for Sitecore items.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Datasources.ItemReportDataSource.DefinitionDatabaseName">
+            <summary>
+              Gets or sets the name of the definition database.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.ItemReportDataSource.GetData(Sitecore.Xdb.Reporting.ReportDataQuery)">
+            <summary>
+              Executes the query specified in the provided item and returns the
+              results in a tabular format.
+            </summary>
+            <param name="query">
+              An instance of <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery" /> class containing the id
+              or path to the item.
+            </param>
+            <returns>
+              An instance of <see cref="T:System.Data.DataTable" /> class containing the results
+              of executing the query.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.ItemReportDataSource.GetFilter(Sitecore.Xdb.Reporting.Filters.FilterEntry)">
+            <summary>
+            Instantiate the datasource filter instance.
+            </summary>
+            <param name="reportFilter">The datasource filter.</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException">Filters cannot be assigned on ItemReportDataSource</exception>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Datasources.ProviderDependentReportDataSource">
+            <summary>
+            A base class for data sources that depend on other datasources in the same report data provider.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Datasources.ProviderDependentReportDataSource._reportDataProvider">
+            <summary>
+            Internal reference to the provider that contains the data source.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Datasources.ProviderDependentReportDataSource.Provider">
+            <summary>
+            Returns a reference to the containing provider.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.ProviderDependentReportDataSource.ConnectToProvider(Sitecore.Xdb.Reporting.ReportDataProviderBase)">
+            <summary>
+            Connects the data source to the provider. This method is invoked from <see cref="M:Sitecore.Xdb.Reporting.ReportDataProvider.RegisterDataSource(System.String,Sitecore.Xdb.Reporting.ReportDataSource)"/>.
+            </summary>
+            <param name="provider">Reference to the provider where the data source is being registered.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Cannot register the same data source with multiple providers.
+            </exception>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy">
+            <summary>
+            Implements a remote reporting data source to enable a separate reporting server.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy._remoteDataSource">
+            <summary>
+            The remote data source.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy"/> class.
+            </summary>
+            <param name="remoteDataSourceName">
+            </param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy.RemoteDataSourceName">
+            <summary>
+            Specifies the datasource name to be executed remotely.
+            </summary>
+            <value>
+            The remote data source name.
+            </value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy.GetData(Sitecore.Xdb.Reporting.ReportDataQuery)">
+            <summary>
+            Executes the reporting query on a remote end point.
+            </summary>
+            <param name="query">
+            An instance of <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> class containing reporting query.
+            </param>
+            <returns>
+            An instance of <see cref="T:System.Data.DataTable"/> class containing the results
+              of executing the query.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy.GetPath(System.String)">
+            <summary>
+            The get path.
+            </summary>
+            <param name="xpath">
+            The xpath.
+            </param>
+            <returns>
+            The configuration patch<see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxyHandler">
+            <summary>
+            Implements a HTTP handler that can be used to execute <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> on
+              another Sitcore instance.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxyHandler.IsReusable">
+            <summary>
+            Gets a value indicating whether another request can use the current <see cref="T:System.Web.IHttpHandler"/> instance.
+            </summary>
+            <value>
+            <c>true</c> if the current instance can be reused to handle other requests; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxyHandler.ProcessRequest(System.Web.HttpContext)">
+            <summary>
+            Processes requests made to the current handler.
+            </summary>
+            <param name="context">
+            The <see cref="T:System.Web.HttpContext"/> object for the current request.
+            </param>
+            <remarks>
+            This method processes request and serializes the returned data
+              table into the response stream. If an exception is thrown in this process, it is caught and
+              serialized into the response stream.
+            </remarks>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxyHandler.ExecuteProvider(System.String,Sitecore.Xdb.Reporting.ReportDataQuery)">
+            <summary>
+            The execute provider.
+            </summary>
+            <param name="source">
+            The source.
+            </param>
+            <param name="query">
+            The query.
+            </param>
+            <returns>
+            The result data table<see cref="T:System.Data.DataTable"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem">
+            <summary>A strongly-typed wrapper for items based on "Vendor Specific Filter" template.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.TemplateID">
+            <summary>Template ID of "Vendor Specific Filter" template.</summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.#ctor(Sitecore.Data.Items.Item)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem"/> class.
+            </summary>
+            <param name="item">The inner item.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.ConstructorParameters">
+            <summary>
+            Gets or sets the constructor parameters.
+            </summary>
+            <value>The value of "ConstructorParameters" field.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.FilteringKey">
+            <summary>
+            Gets or sets the filtering key.
+            </summary>
+            <value>The value of "FilteringKey field.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>The value of "Type" field.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.FilterEntry">
+            <summary>
+            Gets the filter entry.
+            </summary>
+            <value>The value of "FilterEntry" field.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.IsDeployed">
+            <summary>
+            Gets a value indicating whether the item is in the final workflow state.
+            </summary>
+            <value>The is deployed.</value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.Create(Sitecore.Data.Items.Item)">
+            <summary>
+            Static method to create an instance of <see cref="T:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem"/> class.
+            </summary>
+            <param name="item">The inner item.</param>
+            <returns>The instance of <see cref="T:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem"/></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.op_Implicit(Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem)~Sitecore.Data.Items.Item">
+            <summary>
+            Casts an instance of <see cref="T:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem"/> class to <see cref="T:Sitecore.Data.Items.Item"/> class.
+            </summary>
+            <param name="item">The <see cref="T:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem"/> item to cast.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.op_Explicit(Sitecore.Data.Items.Item)~Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem">
+            <summary>
+            Casts an instance of <see cref="T:Sitecore.Data.Items.Item"/> class to <see cref="T:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem"/> class.
+            </summary>
+            <param name="item">The <see cref="T:Sitecore.Data.Items.Item"/> to cast.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.FieldIDs">
+            <summary>
+            Identifiers of the fields in "Vendor Specific Filter" template.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.FieldIDs.ConstructorParameters">
+            <summary>Identifier of "ConstructorParameters"/> field.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.FieldIDs.FilteringKey">
+            <summary>Identifier of "FilteringKey"/> field.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.FieldIDs.Type">
+            <summary>Identifier of "Type"/> field.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem.FieldIDs.FilterEntry">
+            <summary>Identifier of "FilterEntry"/> field.</summary>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Filters.DataSourceFilter">
+            <summary>
+            The data source filter.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.DataSourceFilter.#ctor(System.String,Sitecore.Xdb.Reporting.Filters.FilterEntry)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Filters.DataSourceFilter"/> class.
+            </summary>
+            <param name="filteringKey">
+            The column name.
+            </param>
+            <param name="filterEntry">
+            The filter Entry.
+            </param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Filters.DataSourceFilter.FilterEntry">
+            <summary>
+            Gets the filter entry object. We operate with this instance on ReportFactory level.
+            </summary>
+            <value>
+            The filter entry.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Filters.DataSourceFilter.FilteringKey">
+            <summary>
+            Gets or sets the Filtering Key.
+            </summary>
+            <value>
+            The column name.
+            </value>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Filters.FilterEntry">
+            <summary>The filter entry.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Filters.FilterEntry._values">
+            <summary>The values.</summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.FilterEntry.#ctor(System.Guid)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Filters.FilterEntry" /> class.
+            </summary>
+            <param name="id">The identification of the filter, is used for mapping to actual vendor specific filter.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Filters.FilterEntry.Id">
+            <summary>The filter.</summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Filters.FilterEntry.Values">
+            <summary>
+              Gets the values that were chosen by customers.
+            </summary>
+            <value>
+              The values used to filter data.
+            </value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.FilterEntry.AddValue(System.String)">
+            <summary>
+              The add value.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Filters.IDataSourceFilterFactory">
+            <summary>
+            The SqlDataSourceFilterMapper interface.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.IDataSourceFilterFactory.GetFilter(Sitecore.Xdb.Reporting.Filters.FilterEntry)">
+            <summary>
+            The get filter.
+            </summary>
+            <param name="filterEntry">
+            The filter entry.
+            </param>
+            <returns>
+            The <see cref="T:Sitecore.Xdb.Reporting.Filters.DataSourceFilter"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory">
+            <summary>
+            The item based sql data source filter factory.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory"/> class.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory.#ctor(Sitecore.Data.Database)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory"/> class.
+            </summary>
+            <param name="database">
+            The database.
+            </param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory.FiltersPath">
+            <summary>
+            The filters path.
+            </summary>
+            <value>
+            The filters path.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory.Database">
+            <summary>
+            Gets or sets the database.
+            </summary>
+            <value>
+            The database.
+            </value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory.GetFilter(Sitecore.Xdb.Reporting.Filters.FilterEntry)">
+            <summary>
+            The get filter.
+            </summary>
+            <param name="filterEntry">
+            The filter entry.
+            </param>
+            <returns>
+            The <see cref="T:Sitecore.Xdb.Reporting.Filters.DataSourceFilter"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.ItemBasedFiltersFactory.CreateFilter(Sitecore.Xdb.Reporting.Data.Items.VendorSpecificFilterItem,Sitecore.Xdb.Reporting.Filters.FilterEntry)">
+            <summary>
+            Creates the filter from a database definition item.
+            </summary>
+            <param name="filterItem">
+            The filter definition item.
+            </param>
+            <param name="filterEntry">
+            The filter Entry.
+            </param>
+            <returns>
+            A <see cref="T:Sitecore.Xdb.Reporting.Filters.DataSourceFilter"/> instance.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Filters.SqlStatement">
+            <summary>The sql statement.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Filters.SqlStatement.Caret">
+            <summary>The caret.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Filters.SqlStatement._canInject">
+            <summary>
+            The can inject flag.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Filters.SqlStatement._head">
+            <summary>The first part of the statement, before the insertion caret.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Filters.SqlStatement._tail">
+            <summary>The second part of the statement.</summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.SqlStatement.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Filters.SqlStatement"/> class.</summary>
+            <param name="sqlCommand">The sql command.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.SqlStatement.Inject(System.String)">
+            <summary>Injects a statement at a caret position.</summary>
+            <param name="sql">The sql substatement to inject.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Filters.SqlStatement.ToString">
+            <summary>Returns a <see cref="T:System.String"/> that represents this instance.</summary>
+            <returns>A <see cref="T:System.String"/> that represents this instance.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.HttpApiKeyReportDataProvider">
+            <summary>
+            The <see cref="T:Sitecore.Xdb.Reporting.ApiKeyReportDataProvider"/>, which checks Reporting Api key and authenticates request using <see cref="T:System.Web.HttpContext"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.HttpApiKeyReportDataProvider.#ctor(Sitecore.Xdb.Reporting.IReportingAuthenticationChecker)">
+            <summary>
+            Creates instance of <see cref="T:Sitecore.Xdb.Reporting.HttpApiKeyReportDataProvider"/>
+            </summary>
+            <param name="checker">Checker to determine whether a request to reporting service is authenticated</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="checker"/> is <b>null</b>.</exception>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.HttpApiKeyReportDataProvider.SetAuthenticationFailedResponse">
+            <summary>
+            Ends request and sets response status code to Forbidden.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker">
+            <summary>
+            Checks whether current request is authenticated using HTTP header.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.HeaderName">
+            <summary>
+            Gets a name of the header which contains key from a client.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.ConnectionStringName">
+            <summary>
+            Gets a name of the connection string which contains correct value for the key.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.Logger">
+            <summary>
+            Gets an instance of a logger to log failures.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.#ctor(System.String,System.String,Sitecore.Abstractions.BaseLog)">
+            <summary>
+            Creates an instance of <see cref="T:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker"/>
+            </summary>
+            <param name="headerName">Name of the header which contains key from a client.</param>
+            <param name="connectionStringName">Name of the connection string which contains correct value for the key.</param>
+            <param name="logger">The instance of a logger to log failures, if requested.</param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="headerName"/>,<paramref name="connectionStringName"/>, or <paramref name="logger"/> is <c>null</c>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="headerName"/> or <paramref name="connectionStringName"/> is empty.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.IsAuthenticated">
+            <summary>
+            Checks whether the request is authenticated. 
+            </summary>
+            <returns><c>true</c> if request is authenticated. Otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.GetHeaderValue">
+            <summary>
+            Gets the value of the header using name in <see cref="P:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.HeaderName"/>.
+            </summary>
+            <returns>The value of the header.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.GetApiKey">
+            <summary>
+            Gets API key from the connection string defined in <see cref="P:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.ConnectionStringName"/>.
+            </summary>
+            <returns>The connection string value of the connection string defined in <see cref="P:Sitecore.Xdb.Reporting.HttpHeaderAuthenticationChecker.ConnectionStringName"/>.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.IReportingAuthenticationChecker">
+            <summary>
+            Defines a contract to check whether a request to reporting service is authenticated.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.IReportingAuthenticationChecker.IsAuthenticated">
+            <summary>
+            Checks whether the request is authenticated. 
+            </summary>
+            <returns><b>true</b> if request is authenticated. Otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ItemBasedReportingQuery">
+            <summary>
+            A query to be executed against the reporting database that reads the SQL from an item.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ItemBasedReportingQuery.#ctor(Sitecore.Data.ID,Sitecore.Xdb.Reporting.ReportDataProviderBase,Sitecore.Xdb.Reporting.CachingPolicy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ItemBasedReportingQuery"/> class.
+            </summary>
+            <param name="queryItemId">The ID of the query item.</param>
+            <param name="reportProvider">The report provider to execute queries against.</param>
+            <param name="cachingPolicy">The <see cref="T:Sitecore.Xdb.Reporting.CachingPolicy"/> to use for caching data retrieved through this query.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ItemBasedReportingQuery.QueryItemId">
+            <summary>
+            Gets or sets the ID of the query item.
+            </summary>
+            <value>The ID of the query item.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ItemBasedReportingQuery.Query">
+            <summary>
+            Gets the query to execute against the reporting provider.
+            </summary>
+            <value>The query text.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ItemBasedReportingQuery.QueryDataSource">
+            <summary>
+            Gets the data source to execute the query against.
+            </summary>
+            <value>The name of the data source.</value>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs">
+            <summary>
+              The pipeline arguments for registering reporting data source.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs._dataProvider">
+            <summary>
+              The reporting data provider.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs.#ctor(Sitecore.Xdb.Reporting.ReportDataProviderBase)">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs"/> class.
+            </summary>
+            <param name="dataProvider">
+              The reporting data provider to register a data source in.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs"/> class.
+            </summary>
+            <param name="info">The information.</param>
+            <param name="context">The context.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs.DataProvider">
+            <summary>
+              Gets the reporting data provider.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Gets the object data.
+            </summary>
+            <param name="info">The information.</param>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceProcessor">
+            <summary>
+              The base pipeline processor class for registering a reporting data source.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceProcessor.dataSources">
+            <summary>
+            The data sources.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceProcessor.AddDatasource(System.String,Sitecore.Xdb.Reporting.ReportDataSource)">
+            <summary>
+            Add data source
+            </summary>
+            <param name="key">
+            The key.
+            </param>
+            <param name="datasource">
+            Data source object
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceProcessor.Process(Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceEventArgs)">
+            <summary>
+            The process.
+            </summary>
+            <param name="args">
+            The args.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Pipelines.RegisterReportingDataSource.RegisterReportingDataSourceProcessor.GetConnectionString(System.String)">
+            <summary>
+            Retrieves the connection string from the config.
+            </summary>
+            <param name="connectionStringName">
+            The connection string name.
+            </param>
+            <returns>
+            The connection string defined by the connectionStringName.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ReportDataProvider">
+            <summary>
+            Data retrieval API for reporting functionalities.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.ReportDataProvider._dataSources">
+            <summary>
+            The collection of available data sources in the provider.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.ReportDataProvider._remoteEnabled">
+            <summary>
+            Indicates if remote execution of reporting is enabled.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.ReportDataProvider._cacheProvider">
+            <summary>
+            The cache provider.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.ReportDataProvider._initialized">
+            <summary>
+            Contains a value indicating whether the initialization pipeline has been executed for this instance of the provider.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ReportDataProvider"/> class.  The <see cref="P:Sitecore.Xdb.Reporting.ReportDataProvider.RemoteEnabled"/> property is set by reading the configuration node reporting/remote[@enabled='true|false'].
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ReportDataProvider"/> class allowing you to specify if remote reporting is enabled.
+            </summary>
+            <param name="enableRemoteReporting">
+            True is execution of remote reporting data sources is enabled, False otherwise.
+            </param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportDataProvider.InitializationPipelineName">
+            <summary>
+            Gets or sets the name of initialization pipeline for this provider.
+            The pipeline should be used for initialization steps which cannot be achieved through normal IoC container.
+            </summary>
+            <value>Name of the pipeline in Sitecore configuration (part of core pipelines, default domain).</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportDataProvider.RemoteEnabled">
+            <summary>
+            Gets a value indicating whether datasources supporting remote execution should be executed remotely.
+            </summary>
+            <value>
+            The remote enabled.
+            </value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.GetData(System.String,Sitecore.Xdb.Reporting.ReportDataQuery,Sitecore.Xdb.Reporting.CachingPolicy)">
+            <summary>
+            Retrieves and returns data for the specified query, according to the
+              provided caching policy.
+            </summary>
+            <param name="dataSourceName">
+            Name of the data source to query.
+            </param>
+            <param name="query">
+            The query to return data for.
+            </param>
+            <param name="cachingPolicy">
+            Caching policy to use when retrieving data.
+            </param>
+            <returns>
+            The response object, containing results of query execution.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if there is no data source with the provided name.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.RegisterDataSource(System.String,Sitecore.Xdb.Reporting.ReportDataSource)">
+            <summary>
+            Registers a data source under provided name.
+            </summary>
+            <param name="dataSourceName">
+            Name of the data source.
+            </param>
+            <param name="dataSource">
+            Reference to the data source object.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.Initialize">
+            <summary>
+            Performs one-time initialization steps of the provider which could not be achieved through dependency injection.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.EnsureInitialized">
+            <summary>
+            Implements one-time initialization of the provider.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.InitializeCacheProvider">
+            <summary>
+            Initializes cache provider.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.AddQueryResultToCache(Sitecore.Xdb.Reporting.ReportDataQuery,System.Data.DataTable,System.TimeSpan)">
+            <summary>
+            The add query result to cache.
+            </summary>
+            <param name="query">
+            The query.
+            </param>
+            <param name="queryResult">
+            The query result.
+            </param>
+            <param name="expirationPeriod">
+            The cache expiration period.
+            </param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.ExecuteQueryWithCache(Sitecore.Xdb.Reporting.ReportDataQuery,Sitecore.Xdb.Reporting.ReportDataSource,Sitecore.Xdb.Reporting.CachingPolicy)">
+            <summary>
+            The execute query with cache. Does not support IfModifiedSince property of cachingPolicy.
+            </summary>
+            <param name="query">
+            The query.
+            </param>
+            <param name="dataSource">
+            The data source.
+            </param>
+            <param name="cachingPolicy">
+            The caching policy.
+            </param>
+            <returns>
+            The <see cref="T:System.Data.DataTable"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProvider.GetCachedDataForQuery(Sitecore.Xdb.Reporting.ReportDataQuery,System.Func{System.Data.DataTable},System.Nullable{System.DateTime})">
+            <summary>
+            The get cached data for query.
+            </summary>
+            <param name="query">
+            The query.
+            </param>
+            <param name="ifNotAvailableInCache">
+            Function to execute if data is not present in cache.
+            </param>
+            <param name="ifModifiedSince">
+            Cached value is returned if data has been modified before ifModifiedSince date, expressed as UTC. <c>DateTime.Kind</c> should be <c>DateTimeKind.Utc</c>.
+            </param>
+            <returns>
+            The <see cref="T:System.Data.DataTable"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ReportDataProviderBase">
+            <summary>
+              Data retrieval API for reporting functionalities.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProviderBase.GetData(System.String,Sitecore.Xdb.Reporting.ReportDataQuery,Sitecore.Xdb.Reporting.CachingPolicy)">
+            <summary>
+              Retrieves and returns data for the specified query, according to the
+              provided caching policy.
+            </summary>
+            <param name="dataSourceName">
+              Name of the data source to query.
+            </param>
+            <param name="query">
+              The query to return data for.
+            </param>
+            <param name="cachingPolicy">
+              Caching policy to use when retrieving data.
+            </param>
+            <returns>
+              The response object, containing results of query execution.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">
+              Thrown if there is no data source with the provided name.
+            </exception>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataProviderBase.RegisterDataSource(System.String,Sitecore.Xdb.Reporting.ReportDataSource)">
+            <summary>
+              Registers a data source under provided name.
+            </summary>
+            <param name="dataSourceName">
+              Name of the data source.
+            </param>
+            <param name="dataSource">
+              Reference to the data source object.
+            </param>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ReportDataQuery">
+            <summary>
+            Base class for reporting data queries.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.ReportDataQuery._parameters">
+            <summary>
+            Internal dictionary of parameters to the query.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataQuery.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> class with default values.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataQuery.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> class from the specified query.
+            </summary>
+            <param name="query">Text of the query to be represented in the object.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataQuery.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> class from the specified query and parameters.
+            </summary>
+            <param name="query">Text of the query to be represented in the object.</param>
+            <param name="parameters">A dictionary of parameters to pass to the underlying data source along with the query text.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataQuery.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IEnumerable{Sitecore.Xdb.Reporting.Filters.FilterEntry})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/> class from the specified query and parameters.
+            </summary>
+            <param name="query">Text of the query to be represented in the object.</param>
+            <param name="parameters">A dictionary of parameters to pass to the underlying data source along with the query text.</param>
+            <param name="filters">The filters set.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportDataQuery.Filters">
+            <summary>
+            Gets or sets the filters to be used with datasource.
+            </summary>
+            <value>
+            The filters.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportDataQuery.Parameters">
+            <summary>
+            A dictionary of parameters supplied with the query.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportDataQuery.Query">
+            <summary>
+            Gets or sets text of the query to the <see cref="T:Sitecore.Xdb.Reporting.ReportDataSource"/> data source.
+            The query text may have parameter placeholders which will be replaced with values from the <see cref="P:Sitecore.Xdb.Reporting.ReportDataQuery.Parameters"/> dictionary.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataQuery.GetCacheKey">
+            <summary>
+            Calculates and returns a unique string key for this query which can be used in e.g. a data cache.
+            </summary>
+            <returns>Unique key for current report data query.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ReportDataResponse">
+            <summary>
+              Encapsulates a response from the <see cref="T:Sitecore.Xdb.Reporting.ReportDataProviderBase"/>.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataResponse.#ctor(System.Func{System.Data.DataTable})">
+            <summary>
+              Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ReportDataResponse"/> class.
+            </summary>
+            <param name="loadDataTableCallback">
+            Function to load the data table when requested.
+            </param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportDataResponse.NotModified">
+            <summary>
+              Gets or sets a value indicating whether the report data has not been modified since the date/time passed in the caching policy.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataResponse.GetDataTable">
+            <summary>
+              Retrieves and returns the data table.
+            </summary>
+            <returns>
+              An instance of <see cref="T:System.Data.DataTable"/> class.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ReportDataSerializer">
+            <summary>
+            Serialization utility for the <see cref="T:Sitecore.Xdb.Reporting.Datasources.Remote.RemoteReportDataSourceProxy"/>
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataSerializer.SerializeQuery(System.IO.Stream,System.String,Sitecore.Xdb.Reporting.ReportDataQuery)">
+            <summary>
+            Serializes a <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/>
+            </summary>
+            <param name="stream"></param>
+            <param name="source"></param>
+            <param name="query"></param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataSerializer.SerializeResponse(System.IO.Stream,System.Object)">
+            <summary>
+            Serializes a response to be sent to the caller of the remote reporting server
+            </summary>
+            <param name="stream"></param>
+            <param name="response"></param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataSerializer.DeserializeResponse(System.IO.Stream)">
+            <summary>
+            Deserializes a response from a remote reporting server
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataSerializer.DeserializeQuery(System.IO.Stream,System.String@)">
+            <summary>
+            Deserializes a <see cref="T:Sitecore.Xdb.Reporting.ReportDataQuery"/>.
+            </summary>
+            <param name="stream"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ReportDataSource">
+            <summary>
+            The report data source.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportDataSource.FiltersFactory">
+            <summary>
+            Gets or sets the filters factory.
+            </summary>
+            <value>
+            The filters factory.
+            </value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportDataSource.SupportsRemoteExecution">
+            <summary>
+            Specifies if the datasource can be executed using the ReportDataProviderProxy
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataSource.GetData(Sitecore.Xdb.Reporting.ReportDataQuery)">
+            <summary>
+            The get data.
+            </summary>
+            <param name="query">
+            The query.
+            </param>
+            <returns>
+            The <see cref="T:System.Data.DataTable"/>.
+            </returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportDataSource.GetFilter(Sitecore.Xdb.Reporting.Filters.FilterEntry)">
+            <summary>
+            The get filter.
+            </summary>
+            <param name="filterEntry">
+            The report's filter.
+            </param>
+            <returns>
+            The <see cref="T:Sitecore.Xdb.Reporting.Filters.DataSourceFilter"/>.
+            </returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.ReportingQueryBase">
+            <summary>
+            Base class for queries executed against the reporting database.
+            </summary>
+            <remarks>Caching is to be handled at the report provider level.</remarks>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.ReportingQueryBase.CachingPolicy">
+            <summary>The <see cref="F:Sitecore.Xdb.Reporting.ReportingQueryBase.CachingPolicy"/> to use for caching data retrieved through this query.</summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.ReportingQueryBase.ReportProvider">
+            <summary>The <see cref="T:Sitecore.Xdb.Reporting.ReportDataProviderBase"/> to execute the query against.</summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportingQueryBase.#ctor(Sitecore.Xdb.Reporting.ReportDataProviderBase,Sitecore.Xdb.Reporting.CachingPolicy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.ReportingQueryBase"/> class.
+            </summary>
+            <param name="reportProvider">The report provider to execute queries against.</param>
+            <param name="cachingPolicy">The <see cref="F:Sitecore.Xdb.Reporting.ReportingQueryBase.CachingPolicy"/> to use for caching data retrieved through this query.</param>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportingQueryBase.Query">
+            <summary>Gets the query to execute against the reporting provider.</summary>
+            <value>The query text.</value>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.ReportingQueryBase.QueryDataSource">
+            <summary>Gets the data source to execute the query against.</summary>
+            <value>The name of the data source.</value>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportingQueryBase.Execute">
+            <summary>
+            Executes the query against the reporting database.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.ReportingQueryBase.ExecuteQuery(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Execute the query and retrieve the raw results.
+            </summary>
+            <param name="parameters">The parameters to execute the query with.</param>
+            <returns>A <see cref="T:System.Data.DataTable"/> containing the results of the query.</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions">
+            <summary>
+            Defines utilities to transform data tables.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions.Project(System.Data.DataTable,System.String[])">
+            <summary>
+            Projects specific columns from the data table.
+            </summary>
+            <param name="originalTable">Table to process.</param>
+            <param name="columnNames">Names of the columns to project into the resulting table.</param>
+            <returns>A table that contains a projection of the specified columns from the original table.</returns>
+            <exception cref="T:System.ArgumentException">A column name is missing in the original table</exception>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions.Filter(System.Data.DataTable,System.Func{System.Data.DataRow,System.Boolean})">
+            <summary>
+            Filters rows in the data table using a predicate.
+            </summary>
+            <param name="originalTable">Table to process.</param>
+            <param name="predicate">Predicate that decides which rows to return from the table.</param>
+            <returns>A table that contains only the rows for which the predicate returns <c>true</c>.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions.BuildLookup(System.Data.DataTable,System.Func{System.Data.DataRow,System.Object})">
+            <summary>
+            Builds a lookup object for the specified data table.
+            </summary>
+            <param name="table">Table to create lookup object for.</param>
+            <param name="getPrimaryKey">Function that obtains keys for the lookup object from the data table.</param>
+            <returns>A dictionary of rows from the data table that is organized by the keys.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions.Join(System.Data.DataTable,Sitecore.Xdb.Reporting.Transformations.JoinOperation,System.Func{System.Data.DataRow,System.Object},System.Data.DataTable,System.Func{System.Data.DataRow,System.Object})">
+            <summary>
+            Joins the data table with the specified lookup object. Removes duplicate columns.
+            </summary>
+            <param name="leftTable">Left table in the join operation.</param>
+            <param name="joinOperation"></param>
+            <param name="getLeftKey">Function to obtain key value for the left table.</param>
+            <param name="rightTable">Right table in the join operation</param>
+            <param name="getRightKey">Function to obtain key value for the right table</param>
+            <returns>A data table that is the result of the join operation for the original data table and the lookup object.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions.OrderBy(System.Data.DataTable,System.String[])">
+            <summary>
+            Sorts rows in the data table by the specified columns.
+            </summary>
+            <param name="table">The table that should be sorted.</param>
+            <param name="columnNames">Names of the columns to order by.</param>
+            <returns>A data table where rows are ordered by the values in the specified columns.</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions.Aggregate(System.Data.DataTable,System.Collections.Generic.IEnumerable{System.String},Sitecore.Xdb.Reporting.Transformations.IAggregatedColumn[])">
+            <summary>
+            Aggregates rows in a sorted data table grouping them by key columns and performing specified aggregation operations.
+            </summary>
+            <param name="originalTable">Table to be processed in the operation.</param>
+            <param name="keyColumns">The collection of key columns for the operation.</param>
+            <param name="aggregatedColumns">The collection of aggregated columns for the operation.</param>
+            <returns>An aggregated data table grouped by specified columns and with specified aggregations</returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions.BuildAggregatedRowData(System.Object[],Sitecore.Xdb.Reporting.Transformations.IAggregatedColumn[])">
+            <summary>
+            Builds item array for the new row in the aggregated table.
+            </summary>
+            <param name="keyValues"></param>
+            <param name="aggregatedColumns"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.DataTableExtensions.ConcatenateArrays``1(``0[],``0[])">
+            <summary>
+            Concatenates two arrays.
+            </summary>
+            <param name="first">Array that should come first in the result</param>
+            <param name="second">Array the should come second in the result</param>
+            <returns>An new array instance that has contains the elements of the first array followed by all the elements of the second array</returns>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Transformations.IAggregatedColumn">
+            <summary>
+            Defines interface for aggregated column objects in the group by method.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Transformations.IAggregatedColumn.ColumnName">
+            <summary>
+            Returns the column name in the resulting table.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Transformations.IAggregatedColumn.DataType">
+            <summary>
+            Returns the column type in the resulting table.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Transformations.IAggregatedColumn.Value">
+            <summary>
+            Returns the aggregated value.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.IAggregatedColumn.Accumulate(System.Data.DataRow)">
+            <summary>
+            Accumulates information from one row.
+            </summary>
+            <param name="row">Row to analyze.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.IAggregatedColumn.Reset">
+            <summary>
+            Resets the internal state of the aggregator.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Transformations.JoinOperation">
+            <summary>
+            Defines possible join operations.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Transformations.JoinOperation.InnerJoin">
+            <summary>
+            Performs an inner join operation where only the rows returned where keys on the left side have matching keys on the right side.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Transformations.JoinOperation.LeftOuterJoin">
+            <summary>
+            Performs a left outer join operation where all rows from the left side are returned, and <c>null</c> values are returned for right-side columns where there is no matching key.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn">
+            <summary>
+            Implements SUM aggregation function.
+            </summary>
+        </member>
+        <member name="F:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn._accumulator">
+            <summary>
+            The accumulator.
+            </summary>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn.#ctor(System.String,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn"/> class.
+            </summary>
+            <param name="columnName">Name of the column to aggregate.</param>
+            <param name="dataType">Type of the column.</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn.Accumulate(System.Data.DataRow)">
+            <summary>
+            Accumulates information from one row.
+            </summary>
+            <param name="row">Row to analyze</param>
+        </member>
+        <member name="M:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn.Reset">
+            <summary>
+            Resets the internal state of the aggregator.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn.ColumnName">
+            <summary>
+            Returns the column name in the resulting table.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn.DataType">
+            <summary>
+            Returns the column type in the resulting table.
+            </summary>
+        </member>
+        <member name="P:Sitecore.Xdb.Reporting.Transformations.SumAggregatedColumn.Value">
+            <summary>
+            Returns the aggregated value.
+            </summary>
+        </member>
+    </members>
+</doc>

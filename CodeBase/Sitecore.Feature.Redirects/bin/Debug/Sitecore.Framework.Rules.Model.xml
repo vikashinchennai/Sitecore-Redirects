@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sitecore.Framework.Rules.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Sitecore.Framework.Rules.Identifiers.Core">
+            <summary>
+            Contains the Rule Identfiers for the Rule Model entities provided by the
+            Rules framework itself.
+            </summary>
+            <remarks>
+            To define your own Identifiers, please follow the convention of creating
+            a class inside the Sitecore.Framework.Rules.Identifiers namespace to unambiguously
+            describe the company, project and entity types.  e.g. Sitecore.Framework.Rules.Identifiers.MyCompany.MyProject.Actions.MyAction.
+            This will aid consumers to discover all the identifiers available in the system easily.
+            </remarks>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.Identifiers.Core.Conditions">
+            <summary>
+            Contains the Rule Identifiers for the ICondition entities provided by the 
+            Rules framework itself.
+            </summary>
+        </member>
+        <member name="T:Sitecore.Framework.Rules.Identifiers.Core.Operators">
+            <summary>
+            Contains the Rule Identifiers for the unary and binary operator entities provided by the 
+            Rules framework itself.
+            </summary>
+        </member>
+    </members>
+</doc>
